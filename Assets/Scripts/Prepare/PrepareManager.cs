@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrepareUIManager : MonoBehaviour
+public class PrepareManager : MonoBehaviour
 {
-    private PrepareUIManager instance;
+    private PrepareManager instance;
 
-    public PrepareUIManager Instance
+    public PrepareManager Instance
     {
         get { return instance; }
     }
 
     private void Awake()
     {
-        if (instance == null)
-        {
+        if (instance == null) 
+        { 
             instance = this;
         }
     }
