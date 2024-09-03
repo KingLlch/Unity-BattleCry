@@ -4,18 +4,26 @@ using UnityEngine;
 
 public class PrepareUIManager : MonoBehaviour
 {
-    private PrepareUIManager instance;
+    private static PrepareUIManager _instance;
 
-    public PrepareUIManager Instance
+    public static PrepareUIManager Instance
     {
-        get { return instance; }
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<PrepareUIManager>();
+            }
+
+            return _instance;
+        }
     }
 
     private void Awake()
     {
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = this;
+            _instance = this;
         }
     }
 }

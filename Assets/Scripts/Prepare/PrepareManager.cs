@@ -4,18 +4,38 @@ using UnityEngine;
 
 public class PrepareManager : MonoBehaviour
 {
-    private PrepareManager instance;
+    public Army Army = new Army();
 
-    public PrepareManager Instance
+    private static PrepareManager _instance;
+
+    public static PrepareManager Instance
     {
-        get { return instance; }
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<PrepareManager>();
+            }
+
+            return _instance;
+        }
     }
 
     private void Awake()
     {
-        if (instance == null) 
+        if (_instance == null) 
         { 
-            instance = this;
+            _instance = this;
         }
+    }
+
+    private void Start()
+    {
+
+    }
+
+    public void AddUnitToArmy(Unit unit, CellUI cell)
+    {
+        Army.AddUnit(unit, cell) ;
     }
 }

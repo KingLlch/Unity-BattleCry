@@ -1,15 +1,66 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Army
 {
-    public List<Row> ThisArmy = new List<Row>(5);
+    public List<Row> Rows { get; private set; }
+
+    public Army()
+    {
+        Rows = new List<Row>(5);
+        for (int i = 0; i < 5; i++)
+        {
+            Rows.Add(new Row());
+        }
+    }
+
+    public void AddUnit(Unit unit, CellUI cell)
+    {
+        int rowIndex = cell.transform.parent.parent.GetComponent<RowUI>().IndexRow;
+        int columnIndex = cell.transform.parent.GetComponent<ColumnUI>().IndexColumn;
+        int unitIndex = cell.transform.GetComponent<CellUI>().IndexCell;
+
+        Rows[rowIndex].AddUnit(columnIndex, unitIndex, unit);
+    }
 }
 
 public class Row
 {
-    public List<Unit> Column1 = new List<Unit>(6);
-    public List<Unit> Column2 = new List<Unit>(6);
-    public List<Unit> Column3 = new List<Unit>(6);
+    public List<Column> Columns;
+
+    public Row()
+    {
+        Columns = new List<Column>(3);
+        for (int i = 0; i < 3; i++)
+        {
+            Columns.Add(new Column());
+        }
+    }
+
+    public void AddUnit(int columnIndex, int unitIndex, Unit unit)
+    {
+        Columns[columnIndex].AddUnit(unitIndex, unit);
+    }
 }
+
+public class Column
+{
+    public List<Unit> Units;
+
+    public Column()
+    {
+        Units = new List<Unit>(6);
+        for (int i = 0; i < 6; i++)
+        {
+            Units.Add(null);
+        }
+    }
+
+    public void AddUnit(int index, Unit unit)
+    {
+        Units[index] = unit;
+    }
+}
+
