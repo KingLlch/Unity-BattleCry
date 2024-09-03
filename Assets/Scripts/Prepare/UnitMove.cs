@@ -41,7 +41,7 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         if (!IsDraggable) return;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-        if (!pointer.pointerCurrentRaycast.gameObject.GetComponent<Cell>())
+        if (!pointer.pointerCurrentRaycast.gameObject.GetComponent<CellUI>())
         {
             transform.SetParent(CurrentParentTransform);
             transform.SetSiblingIndex(StartSiblingIndex);

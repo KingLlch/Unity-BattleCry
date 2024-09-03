@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Cell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
+public class CellUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler
 {
     public void OnDrop(PointerEventData pointer)
     {
