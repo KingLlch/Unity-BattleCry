@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3706020295722628269}
+  - component: {fileID: 7573369192098789821}
   - component: {fileID: 335895569552185080}
   - component: {fileID: 5470654667913148431}
   - component: {fileID: 5734394551988360495}
+  - component: {fileID: -3724435253614547213}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -39,6 +41,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7573369192098789821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5970744504276471157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &335895569552185080
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -60,7 +92,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UnitSprite: {fileID: 0}
-  Description: {fileID: 0}
 --- !u!114 &5734394551988360495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +104,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ef22c8cfa859d40af3b538cd394f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsDraggable: 0
+  IsDraggable: 1
+--- !u!225 &-3724435253614547213
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5970744504276471157}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7484418516337932254
 GameObject:
   m_ObjectHideFlags: 0

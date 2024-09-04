@@ -23,8 +23,8 @@ public class PrepareManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_instance == null) 
-        { 
+        if (_instance == null)
+        {
             _instance = this;
         }
     }
@@ -36,6 +36,20 @@ public class PrepareManager : MonoBehaviour
 
     public void AddUnitToArmy(Unit unit, CellUI cell)
     {
-        Army.AddUnit(unit, cell) ;
+        Army.AddUnit(unit, cell);
     }
+
+    public void DeleteUnit()
+    {
+
+    }
+}
+
+public enum ItemType
+{
+    Race = 0,
+    Weapon = 1,
+    Armor = 2,
+    Shield = 3,
+    Special = 4
 }

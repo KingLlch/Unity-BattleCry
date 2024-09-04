@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler
 {
-    public bool IsDraggable;
+    public bool IsDraggable = true;
+    public bool IsInArmy = false;
+    public Unit ThisUnit;
 
     private Camera _mainCamera;
     private Vector3 _offset;
@@ -17,6 +16,7 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private void Awake()
     {
         _mainCamera = Camera.main;
+        ThisUnit = transform.GetComponent<Unit>();
     }
 
     public void OnBeginDrag(PointerEventData pointer)
@@ -27,13 +27,15 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         CurrentParentTransform = transform.parent;
         StartSiblingIndex = transform.GetSiblingIndex();
         GetComponent<CanvasGroup>().blocksRaycasts = false;
+        transform.SetParent(PrepareUIManager.Instance.TopView.transform);
+        PrepareUIManager.Instance.IsDrug = true;
     }
 
     public void OnDrag(PointerEventData pointer)
     {
         if (!IsDraggable) return;
 
-        transform.position = (_mainCamera.ScreenToWorldPoint(new Vector3(pointer.position.x, pointer.position.y, 0)) + _offset);
+        transform.position = (_mainCamera.ScreenToWorldPoint(new Vector3(pointer.position.x + 100, pointer.position.y, 0)) + _offset);
     }
 
     public void OnEndDrag(PointerEventData pointer)
@@ -41,16 +43,24 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         if (!IsDraggable) return;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-        if (!pointer.pointerCurrentRaycast.gameObject.GetComponent<CellUI>())
+        if (!IsInArmy)
         {
             transform.SetParent(CurrentParentTransform);
             transform.SetSiblingIndex(StartSiblingIndex);
         }
+
+        else
+        {
+            ThisUnit.cell.unit = null;
+            Destroy(gameObject);
+        }
+
+        PrepareUIManager.Instance.IsDrug = false;
     }
 
     public void OnPointerEnter(PointerEventData pointer)
     {
-        Description.Instance.ShowDescription(transform.GetComponent<Unit>() ,pointer.position);
+        Description.Instance.ShowDescription(transform.GetComponent<Unit>(), _mainCamera.ScreenToWorldPoint(new Vector3(pointer.position.x, pointer.position.y, 0)));
     }
 
     public void OnPointerExit(PointerEventData pointer)

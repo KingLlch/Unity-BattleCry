@@ -6,13 +6,5 @@ public class ColumnUI : MonoBehaviour
 {
     public int IndexColumn;
 
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
+    public List<GameObject> Cells;
 }

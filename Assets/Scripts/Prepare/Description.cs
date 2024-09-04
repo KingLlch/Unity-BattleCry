@@ -58,41 +58,44 @@ public class Description : MonoBehaviour
 
     public void ShowDescription(Unit unit, Vector3 position)
     {
+        if (PrepareUIManager.Instance.IsDrug)
+            return;
+
         Points.text = unit.unit.Points.ToString();
 
         Health.text = unit.unit.Health + " / " + unit.unit.MaxHealth;
 
-        PierceDamage.text = unit.unit.PierceDamage.ToString();
-        SlashDamage.text = unit.unit.SlashDamage.ToString();
-        BluntDamage.text = unit.unit.BluntDamage.ToString();
-        FireDamage.text = unit.unit.FireDamage.ToString();
-        IceDamage.text = unit.unit.IceDamage.ToString();
-        EarthDamage.text = unit.unit.EarthDamage.ToString();
-        PoisonDamage.text = unit.unit.PoisonDamage.ToString();
-        WaterDamage.text = unit.unit.WaterDamage.ToString();
-        LightDamage.text = unit.unit.LightDamage.ToString();
-        DarknessDamage.text = unit.unit.DarknessDamage.ToString();
+        PierceDamage.text = unit.unit.Damages.PierceDamage.ToString();
+        SlashDamage.text = unit.unit.Damages.SlashDamage.ToString();
+        BluntDamage.text = unit.unit.Damages.BluntDamage.ToString();
+        FireDamage.text = unit.unit.Damages.FireDamage.ToString();
+        IceDamage.text = unit.unit.Damages.IceDamage.ToString();
+        EarthDamage.text = unit.unit.Damages.EarthDamage.ToString();
+        PoisonDamage.text = unit.unit.Damages.PoisonDamage.ToString();
+        WaterDamage.text = unit.unit.Damages.WaterDamage.ToString();
+        LightDamage.text = unit.unit.Damages.LightDamage.ToString();
+        DarknessDamage.text = unit.unit.Damages.DarknessDamage.ToString();
 
-        PierceResist.text = unit.unit.PierceResist.ToString();
-        SlashResist.text = unit.unit.SlashResist.ToString();
-        BluntResist.text = unit.unit.BluntResist.ToString();
-        FireResist.text = unit.unit.FireResist.ToString();
-        IceResist.text = unit.unit.IceResist.ToString();
-        EarthResist.text = unit.unit.EarthResist.ToString();
-        PoisonResist.text = unit.unit.PoisonResist.ToString();
-        WaterResist.text = unit.unit.WaterResist.ToString();
-        LightResist.text = unit.unit.LightResist.ToString();
-        DarknessResist.text = unit.unit.DarknessResist.ToString();
+        PierceResist.text = unit.unit.Resists.PierceResist.ToString();
+        SlashResist.text = unit.unit.Resists.SlashResist.ToString();
+        BluntResist.text = unit.unit.Resists.BluntResist.ToString();
+        FireResist.text = unit.unit.Resists.FireResist.ToString();
+        IceResist.text = unit.unit.Resists.IceResist.ToString();
+        EarthResist.text = unit.unit.Resists.EarthResist.ToString();
+        PoisonResist.text = unit.unit.Resists.PoisonResist.ToString();
+        WaterResist.text = unit.unit.Resists.WaterResist.ToString();
+        LightResist.text = unit.unit.Resists.LightResist.ToString();
+        DarknessResist.text = unit.unit.Resists.DarknessResist.ToString();
 
         AttackTime.text = unit.unit.AttackTime.ToString();
 
-        DescriptionGameObject.transform.position = position + new Vector3(120, 0, 0);
+        DescriptionGameObject.transform.localPosition = position + new Vector3(170 - Screen.width / 2, 0 - Screen.height / 2, 0) ;
         DescriptionGameObject.SetActive(true);
     }
 
     public void ChangePositionDescription(Vector3 position)
     {
-        DescriptionGameObject.transform.position = position + new Vector3(120, 0,0);
+        DescriptionGameObject.transform.localPosition = position + new Vector3(170 - Screen.width / 2, 0 - Screen.height / 2, 0);
     }
 
     public void HideDescription()
