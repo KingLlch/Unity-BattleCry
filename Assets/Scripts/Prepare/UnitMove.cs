@@ -4,7 +4,7 @@ using System.Reflection;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler
 {
     public bool IsDraggable;
 
@@ -46,5 +46,20 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
             transform.SetParent(CurrentParentTransform);
             transform.SetSiblingIndex(StartSiblingIndex);
         }
+    }
+
+    public void OnPointerEnter(PointerEventData pointer)
+    {
+        Description.Instance.ShowDescription(transform.GetComponent<Unit>() ,pointer.position);
+    }
+
+    public void OnPointerExit(PointerEventData pointer)
+    {
+        Description.Instance.HideDescription();
+    }
+
+    public void OnPointerMove(PointerEventData pointer)
+    {
+        Description.Instance.ChangePositionDescription(pointer.position);
     }
 }

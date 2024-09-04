@@ -1,38 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    [HideInInspector] public int Points;
-    [HideInInspector] public string Name;
+    public UnitCharacteristic unit = new UnitCharacteristic();
 
-    [HideInInspector] public string Race;
-    [HideInInspector] public string Weapon;
-    [HideInInspector] public string Armor;
-    [HideInInspector] public string Shield;
-    [HideInInspector] public string Special;
+    public Sprite UnitSprite;
+}
 
-    [HideInInspector] public int MaxHealth;
-    [HideInInspector] public int Health;
+public class UnitCharacteristic
+{
+    public int Points;
+    public string Name;
 
-    [HideInInspector] public int PierceDamage;
-    [HideInInspector] public int SlashDamage;
-    [HideInInspector] public int BluntDamage;
-    [HideInInspector] public int FireDamage;
-    [HideInInspector] public int IceDamage;
-    [HideInInspector] public int EarthDamage;
-    [HideInInspector] public int WaterDamage;
-    [HideInInspector] public int LightDamage;
-    [HideInInspector] public int DarknessDamage;
+    public string Race;
+    public string Weapon;
+    public string Armor;
+    public string Shield;
+    public string Special;
 
-    [HideInInspector] public int PierceResist;
-    [HideInInspector] public int SlashResist;
-    [HideInInspector] public int BluntResist;
-    [HideInInspector] public int FireResist;
-    [HideInInspector] public int IceResist;
-    [HideInInspector] public int EarthResist;
-    [HideInInspector] public int WaterResist;
-    [HideInInspector] public int LightResist;
-    [HideInInspector] public int DarknessResist;
+    public int MaxHealth;
+    public int Health;
+
+    public int PierceDamage;
+    public int SlashDamage;
+    public int BluntDamage;
+    public int FireDamage;
+    public int IceDamage;
+    public int EarthDamage;
+    public int PoisonDamage;
+    public int WaterDamage;
+    public int LightDamage;
+    public int DarknessDamage;
+
+    public int PierceResist;
+    public int SlashResist;
+    public int BluntResist;
+    public int FireResist;
+    public int IceResist;
+    public int EarthResist;
+    public int PoisonResist;
+    public int WaterResist;
+    public int LightResist;
+    public int DarknessResist;
+
+    public float AttackTime;
+    public int AttackRange;
+    public bool IsMeleeAttack;
 }
