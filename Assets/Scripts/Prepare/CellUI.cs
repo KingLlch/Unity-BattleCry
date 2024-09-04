@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,10 +10,15 @@ public class CellUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     {
         if (pointer.pointerDrag == null) return;
 
-        if(unit != pointer.pointerDrag.GetComponent<Unit>())
+        if (unit == null || (unit.unitCharacteristics.Name != pointer.pointerDrag.GetComponent<Unit>().unitCharacteristics.Name))
         {
             PrepareManager.Instance.AddUnitToArmy(pointer.pointerDrag.GetComponent<Unit>(), this);
             PrepareUIManager.Instance.AddUnitToArmyUI(pointer.pointerDrag.GetComponent<Unit>(), this);
+        }
+
+        else
+        {
+            Debug.Log("=");
         }
     }
 

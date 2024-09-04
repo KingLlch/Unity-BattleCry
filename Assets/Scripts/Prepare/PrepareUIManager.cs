@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,13 +39,12 @@ public class PrepareUIManager : MonoBehaviour
         int columnIndex = cell.transform.parent.GetComponent<ColumnUI>().IndexColumn;
         int unitIndex = cell.transform.GetComponent<CellUI>().IndexCell;
 
-        Unit newUnit = Instantiate(unit,Vector3.zero,Quaternion.identity, Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform);
+        Unit newUnit = Instantiate(unit, Vector3.zero, Quaternion.identity, Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform);
 
         cell.unit = newUnit;
-        unit.cell = cell;
 
         Centralize(newUnit.GetComponent<RectTransform>());
-        newUnit.GetComponent<UnitMove>().IsInArmy = true;
+        newUnit.GetComponent<UnitMove>().ThisUnit.IsInArmy = true;
         newUnit.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 

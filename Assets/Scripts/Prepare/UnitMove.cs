@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler
 {
     public bool IsDraggable = true;
-    public bool IsInArmy = false;
     public Unit ThisUnit;
 
     private Camera _mainCamera;
@@ -43,7 +42,7 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         if (!IsDraggable) return;
         GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-        if (!IsInArmy)
+        if (!ThisUnit.IsInArmy)
         {
             transform.SetParent(CurrentParentTransform);
             transform.SetSiblingIndex(StartSiblingIndex);
@@ -51,7 +50,7 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
         else
         {
-            ThisUnit.cell.unit = null;
+            CurrentParentTransform.GetComponent<CellUI>().unit = null;
             Destroy(gameObject);
         }
 

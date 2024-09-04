@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Unit : MonoBehaviour
 {
-    public CellUI cell;
+    public bool IsInArmy = false;
 
-    public UnitCharacteristic unit = new UnitCharacteristic();
+    public UnitCharacteristics unitCharacteristics = new UnitCharacteristics();
 
     public Sprite UnitSprite;
 }
 
-public class UnitCharacteristic
+public class UnitCharacteristics
 {
     public int Points;
     public string Name;

@@ -61,33 +61,33 @@ public class Description : MonoBehaviour
         if (PrepareUIManager.Instance.IsDrug)
             return;
 
-        Points.text = unit.unit.Points.ToString();
+        Points.text = unit.unitCharacteristics.Points.ToString();
 
-        Health.text = unit.unit.Health + " / " + unit.unit.MaxHealth;
+        Health.text = unit.unitCharacteristics.Health + " / " + unit.unitCharacteristics.MaxHealth;
 
-        PierceDamage.text = unit.unit.Damages.PierceDamage.ToString();
-        SlashDamage.text = unit.unit.Damages.SlashDamage.ToString();
-        BluntDamage.text = unit.unit.Damages.BluntDamage.ToString();
-        FireDamage.text = unit.unit.Damages.FireDamage.ToString();
-        IceDamage.text = unit.unit.Damages.IceDamage.ToString();
-        EarthDamage.text = unit.unit.Damages.EarthDamage.ToString();
-        PoisonDamage.text = unit.unit.Damages.PoisonDamage.ToString();
-        WaterDamage.text = unit.unit.Damages.WaterDamage.ToString();
-        LightDamage.text = unit.unit.Damages.LightDamage.ToString();
-        DarknessDamage.text = unit.unit.Damages.DarknessDamage.ToString();
+        PierceDamage.text = unit.unitCharacteristics.Damages.PierceDamage.ToString();
+        SlashDamage.text = unit.unitCharacteristics.Damages.SlashDamage.ToString();
+        BluntDamage.text = unit.unitCharacteristics.Damages.BluntDamage.ToString();
+        FireDamage.text = unit.unitCharacteristics.Damages.FireDamage.ToString();
+        IceDamage.text = unit.unitCharacteristics.Damages.IceDamage.ToString();
+        EarthDamage.text = unit.unitCharacteristics.Damages.EarthDamage.ToString();
+        PoisonDamage.text = unit.unitCharacteristics.Damages.PoisonDamage.ToString();
+        WaterDamage.text = unit.unitCharacteristics.Damages.WaterDamage.ToString();
+        LightDamage.text = unit.unitCharacteristics.Damages.LightDamage.ToString();
+        DarknessDamage.text = unit.unitCharacteristics.Damages.DarknessDamage.ToString();
 
-        PierceResist.text = unit.unit.Resists.PierceResist.ToString();
-        SlashResist.text = unit.unit.Resists.SlashResist.ToString();
-        BluntResist.text = unit.unit.Resists.BluntResist.ToString();
-        FireResist.text = unit.unit.Resists.FireResist.ToString();
-        IceResist.text = unit.unit.Resists.IceResist.ToString();
-        EarthResist.text = unit.unit.Resists.EarthResist.ToString();
-        PoisonResist.text = unit.unit.Resists.PoisonResist.ToString();
-        WaterResist.text = unit.unit.Resists.WaterResist.ToString();
-        LightResist.text = unit.unit.Resists.LightResist.ToString();
-        DarknessResist.text = unit.unit.Resists.DarknessResist.ToString();
+        PierceResist.text = unit.unitCharacteristics.Resists.PierceResist.ToString();
+        SlashResist.text = unit.unitCharacteristics.Resists.SlashResist.ToString();
+        BluntResist.text = unit.unitCharacteristics.Resists.BluntResist.ToString();
+        FireResist.text = unit.unitCharacteristics.Resists.FireResist.ToString();
+        IceResist.text = unit.unitCharacteristics.Resists.IceResist.ToString();
+        EarthResist.text = unit.unitCharacteristics.Resists.EarthResist.ToString();
+        PoisonResist.text = unit.unitCharacteristics.Resists.PoisonResist.ToString();
+        WaterResist.text = unit.unitCharacteristics.Resists.WaterResist.ToString();
+        LightResist.text = unit.unitCharacteristics.Resists.LightResist.ToString();
+        DarknessResist.text = unit.unitCharacteristics.Resists.DarknessResist.ToString();
 
-        AttackTime.text = unit.unit.AttackTime.ToString();
+        AttackTime.text = unit.unitCharacteristics.AttackTime.ToString();
 
         DescriptionGameObject.transform.localPosition = position + new Vector3(170 - Screen.width / 2, 0 - Screen.height / 2, 0) ;
         DescriptionGameObject.SetActive(true);
