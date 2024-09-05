@@ -1,11 +1,13 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ItemInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler, IPointerClickHandler
 {
-    public Item ThisItem = new Item();
+    public Item ThisItem;
 
+    public TextMeshProUGUI Value;
     public Image Image;
 
     private Camera _mainCamera;
@@ -32,6 +34,6 @@ public class ItemInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-
+        CreateUnit.Instance.AddItem(ThisItem);
     }
 }

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct Base
+public class Base
 {
     public string Name;
     public string Description;
@@ -13,14 +13,14 @@ public struct Base
     public int Health;
 }
 
-public struct Weapon
+public class Weapon
 {
     public float AttackTime;
     public int AttackRange;
     public bool IsMeleeAttack;
 }
 
-public struct Damages
+public class Damages
 {
     public int PierceDamage;
     public int SlashDamage;
@@ -34,7 +34,7 @@ public struct Damages
     public int DarknessDamage;
 }
 
-public struct Resists
+public class Resists
 {
     public int PierceResist;
     public int SlashResist;
@@ -48,12 +48,14 @@ public struct Resists
     public int DarknessResist;
 }
 
-public struct Item
+public class Item
 {
     public Base Base;
     public Weapon Weapon;
     public Resists Resists;
     public Damages Damages;
+
+    public int Value;
 
     public Item(string name, ItemType type, int points, int health, string spritePath, string description = "desc",
             float attackTime = 1, int attackRange = 1, bool isMeleeAttack = true,
@@ -104,6 +106,8 @@ public struct Item
             LightResist = lightResist,
             DarknessResist = darknessResist
         };
+
+        Value = 10;
     }
 }
 
@@ -114,14 +118,14 @@ public static class ItemsList
     public static List<Item> AllItems = new List<Item>();
 }
 
-public class ItemManager: MonoBehaviour
+public class ItemManager : MonoBehaviour
 {
     private void Awake()
     {
-        ItemsList.AllRace.Add(new Item("Human",ItemType.Race, 5, 5,"Sprites/Items/Human", bluntDamage:1, bluntResist:1));
+        ItemsList.AllRace.Add(new Item("Human", ItemType.Race, 5, 5, "Sprites/Items/Human", bluntDamage: 1, bluntResist: 1));
 
         ItemsList.AllRace.Add(new Item("Skeleton", ItemType.Race, 2, 3, "Sprites/Items/Skeleton", slashDamage: 1, bluntResist: -1));
 
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, 5, 2, "Sprites/Items/Human", poisonResist:3));
+        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, 5, 2, "Sprites/Items/Human", poisonResist: 3));
     }
 }

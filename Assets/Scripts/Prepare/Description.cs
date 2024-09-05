@@ -63,7 +63,7 @@ public class Description : MonoBehaviour
 
         for (int i = 0; i < Damages.Length; i++)
         {
-            if((int)damagefields[i].GetValue(damages) != 0)
+            if ((int)damagefields[i].GetValue(damages) != 0)
             {
                 DamagesGameObjects[i].SetActive(true);
                 Damages[i].gameObject.SetActive(true);
@@ -82,7 +82,7 @@ public class Description : MonoBehaviour
 
         for (int i = 0; i < Damages.Length; i++)
         {
-            if((int)resistfields[i].GetValue(resists) != 0)
+            if ((int)resistfields[i].GetValue(resists) != 0)
             {
                 ResistsGameObjects[i].SetActive(true);
                 Resists[i].gameObject.SetActive(true);
@@ -98,7 +98,7 @@ public class Description : MonoBehaviour
         AttackInterval.text = unit.unitCharacteristics.AttackTime.ToString();
         AttackRange.text = unit.unitCharacteristics.AttackRange.ToString();
 
-        DescriptionGameObject.transform.localPosition = position + new Vector3(170 - Screen.width / 2, 0 - Screen.height / 2, 0) ;
+        DescriptionGameObject.transform.localPosition = position + new Vector3(170 - Screen.width / 2, 0 - Screen.height / 2, 0);
         DescriptionGameObject.SetActive(true);
     }
 

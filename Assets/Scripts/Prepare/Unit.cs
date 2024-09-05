@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ public class Unit : MonoBehaviour
 
     public UnitCharacteristics unitCharacteristics = new UnitCharacteristics();
 
+    public TextMeshProUGUI Value;
     public Image UnitImage;
 }
 
