@@ -14,11 +14,17 @@ public class UnitCharacteristics
     public int Points;
     public string Name;
 
-    public string Race;
-    public string Weapon;
-    public string Armor;
-    public string Shield;
-    public string Special;
+    public string RaceName;
+    public string WeaponName;
+    public string ArmorName;
+    public string ShieldName;
+    public string SpecialName;
+
+    public Item Race;
+    public Item Weapon;
+    public Item Armor;
+    public Item Shield;
+    public Item Special;
 
     public int MaxHealth;
     public int Health;

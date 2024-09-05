@@ -55,7 +55,7 @@ public struct Item
     public Damages Damages;
 
     public Item(string name, ItemType type, int points, int health, string spritePath,
-            float attackTime, int attackRange, bool isMeleeAttack,
+            float attackTime = 1, int attackRange = 1, bool isMeleeAttack = true,
             int pierceDamage = 0, int slashDamage = 0, int bluntDamage = 0, int fireDamage = 0, int iceDamage = 0, int earthDamage = 0, int poisonDamage = 0, int waterDamage = 0, int lightDamage = 0, int darknessDamage = 0,
             int pierceResist = 0, int slashResist = 0, int bluntResist = 0, int fireResist = 0, int iceResist = 0, int earthResist = 0, int poisonResist = 0, int waterResist = 0, int lightResist = 0, int darknessResist = 0)
     {
@@ -107,6 +107,8 @@ public struct Item
 
 public static class ItemsList
 {
+    public static List<Item> AllRace = new List<Item>();
+
     public static List<Item> AllItems = new List<Item>();
 }
 
@@ -114,10 +116,10 @@ public class ItemManager: MonoBehaviour
 {
     private void Awake()
     {
-        ItemsList.AllItems.Add(new Item("g",ItemType.Race,0,0,"Sprites/Items/name1",0,0,true));
+        ItemsList.AllRace.Add(new Item("Human",ItemType.Race, 5, 5,"Sprites/Items/Human", bluntDamage:1, bluntResist:1));
 
-        ItemsList.AllItems.Add(new Item("t", ItemType.Weapon, 0, 0, "Sprites/Items/name2", 0, 0, true));
+        ItemsList.AllRace.Add(new Item("Skeleton", ItemType.Race, 2, 3, "Sprites/Items/Skeleton", slashDamage: 1, bluntResist: -1));
 
-        ItemsList.AllItems.Add(new Item("r", ItemType.Shield, 0, 0, "Sprites/Items/name3", 0, 0, true));
+        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, 5, 2, "Sprites/Items/Human", poisonResist:3));
     }
 }

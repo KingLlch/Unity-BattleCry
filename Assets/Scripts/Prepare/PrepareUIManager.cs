@@ -48,15 +48,15 @@ public class PrepareUIManager : MonoBehaviour
         newUnit.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
-    public void CreatenewUnit()
+    public void CreateNewUnit()
     {
         CreateUnitPanel.SetActive(true);
     }
 
-    public void EditUnit()
+    public void EditUnit(Unit editUnit)
     {
         CreateUnitPanel.SetActive(true);
-        CreateUnit.Instance.LoadUnit();
+        CreateUnit.Instance.LoadUnit(editUnit);
     }
 
     public void DeleteUnit()

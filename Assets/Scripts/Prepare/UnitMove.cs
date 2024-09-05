@@ -59,7 +59,7 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     public void OnPointerEnter(PointerEventData pointer)
     {
-        Description.Instance.ShowDescription(transform.GetComponent<Unit>(), _mainCamera.ScreenToWorldPoint(new Vector3(pointer.position.x, pointer.position.y, 0)));
+        Description.Instance.ShowDescriptionUnit(transform.GetComponent<Unit>(), _mainCamera.ScreenToWorldPoint(new Vector3(pointer.position.x, pointer.position.y, 0)));
     }
 
     public void OnPointerExit(PointerEventData pointer)

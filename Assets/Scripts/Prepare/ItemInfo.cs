@@ -1,12 +1,34 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ItemInfo : MonoBehaviour
+public class ItemInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler, IPointerClickHandler
 {
-    public Base Base = new Base();
+    public Item ThisItem = new Item();
 
-    public Damages Damages = new Damages();
+    private Camera _mainCamera;
 
-    public Resists Resists = new Resists();
+    private void Awake()
+    {
+        _mainCamera = Camera.main;
+    }
 
-    public Weapon Weapon = new Weapon();
+    public void OnPointerEnter(PointerEventData pointer)
+    {
+        Description.Instance.ShowDescriptionItem(ThisItem, _mainCamera.ScreenToWorldPoint(new Vector3(pointer.position.x, pointer.position.y, 0)));
+    }
+
+    public void OnPointerExit(PointerEventData pointer)
+    {
+        Description.Instance.HideDescription();
+    }
+
+    public void OnPointerMove(PointerEventData pointer)
+    {
+        Description.Instance.ChangePositionDescription(pointer.position);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+
+    }
 }

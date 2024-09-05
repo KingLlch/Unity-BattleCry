@@ -1,5 +1,8 @@
 using TMPro;
 using UnityEngine;
+using System.Reflection;
+using System;
+using static UnityEditor.Progress;
 
 public class Description : MonoBehaviour
 {
@@ -20,9 +23,15 @@ public class Description : MonoBehaviour
 
     public GameObject DescriptionGameObject;
 
+
+    public TextMeshProUGUI Name;
+
     public TextMeshProUGUI Points;
 
     public TextMeshProUGUI Health;
+
+    public TextMeshProUGUI[] Damages;
+    public TextMeshProUGUI[] Resists;
 
     public TextMeshProUGUI PierceDamage;
     public TextMeshProUGUI SlashDamage;
@@ -56,40 +65,92 @@ public class Description : MonoBehaviour
         }
     }
 
-    public void ShowDescription(Unit unit, Vector3 position)
+    public void ShowDescriptionUnit(Unit unit, Vector3 position)
     {
         if (PrepareUIManager.Instance.IsDrug)
             return;
+
+        Name.text = unit.unitCharacteristics.Name.ToString();
 
         Points.text = unit.unitCharacteristics.Points.ToString();
 
         Health.text = unit.unitCharacteristics.Health + " / " + unit.unitCharacteristics.MaxHealth;
 
-        PierceDamage.text = unit.unitCharacteristics.Damages.PierceDamage.ToString();
-        SlashDamage.text = unit.unitCharacteristics.Damages.SlashDamage.ToString();
-        BluntDamage.text = unit.unitCharacteristics.Damages.BluntDamage.ToString();
-        FireDamage.text = unit.unitCharacteristics.Damages.FireDamage.ToString();
-        IceDamage.text = unit.unitCharacteristics.Damages.IceDamage.ToString();
-        EarthDamage.text = unit.unitCharacteristics.Damages.EarthDamage.ToString();
-        PoisonDamage.text = unit.unitCharacteristics.Damages.PoisonDamage.ToString();
-        WaterDamage.text = unit.unitCharacteristics.Damages.WaterDamage.ToString();
-        LightDamage.text = unit.unitCharacteristics.Damages.LightDamage.ToString();
-        DarknessDamage.text = unit.unitCharacteristics.Damages.DarknessDamage.ToString();
+        Damages damages = unit.unitCharacteristics.Damages;
+        Type damageType = damages.GetType();
+        FieldInfo[] damagefields = damageType.GetFields();
 
-        PierceResist.text = unit.unitCharacteristics.Resists.PierceResist.ToString();
-        SlashResist.text = unit.unitCharacteristics.Resists.SlashResist.ToString();
-        BluntResist.text = unit.unitCharacteristics.Resists.BluntResist.ToString();
-        FireResist.text = unit.unitCharacteristics.Resists.FireResist.ToString();
-        IceResist.text = unit.unitCharacteristics.Resists.IceResist.ToString();
-        EarthResist.text = unit.unitCharacteristics.Resists.EarthResist.ToString();
-        PoisonResist.text = unit.unitCharacteristics.Resists.PoisonResist.ToString();
-        WaterResist.text = unit.unitCharacteristics.Resists.WaterResist.ToString();
-        LightResist.text = unit.unitCharacteristics.Resists.LightResist.ToString();
-        DarknessResist.text = unit.unitCharacteristics.Resists.DarknessResist.ToString();
+        for (int i = 0; i < Damages.Length; i++)
+        {
+            if((int)damagefields[i].GetValue(damages) != 0)
+            {
+                Damages[i].transform.parent.gameObject.SetActive(true);
+                Damages[i].text = ((int)damagefields[i].GetValue(damages)).ToString();
+            }
+            else
+                Damages[i].transform.parent.gameObject.SetActive(false);
+        }
+
+        Resists resists = unit.unitCharacteristics.Resists;
+        Type resistType = resists.GetType();
+        FieldInfo[] resistfields = resistType.GetFields();
+
+        for (int i = 0; i < Damages.Length; i++)
+        {
+            if((int)resistfields[i].GetValue(resists) != 0)
+            {
+                Resists[i].transform.parent.gameObject.SetActive(true);
+                Resists[i].text = ((int)resistfields[i].GetValue(resists)).ToString();
+            }
+            else
+                Resists[i].transform.parent.gameObject.SetActive(false);
+        }
 
         AttackTime.text = unit.unitCharacteristics.AttackTime.ToString();
 
         DescriptionGameObject.transform.localPosition = position + new Vector3(170 - Screen.width / 2, 0 - Screen.height / 2, 0) ;
+        DescriptionGameObject.SetActive(true);
+    }
+
+    public void ShowDescriptionItem(Item item, Vector3 position)
+    {
+        Name.text = item.Base.Name.ToString();
+
+        Points.text = item.Base.Points.ToString();
+
+        Health.text = item.Base.Health.ToString();
+
+        Damages damages = item.Damages;
+        Type damageType = damages.GetType();
+        FieldInfo[] damagefields = damageType.GetFields();
+
+        for (int i = 0; i < Damages.Length; i++)
+        {
+            if ((int)damagefields[i].GetValue(damages) != 0)
+            {
+                Damages[i].transform.parent.gameObject.SetActive(true);
+                Damages[i].text = ((int)damagefields[i].GetValue(damages)).ToString();
+            }
+            else
+                Damages[i].transform.parent.gameObject.SetActive(false);
+        }
+
+        Resists resists = item.Resists;
+        Type resistType = resists.GetType();
+        FieldInfo[] resistfields = resistType.GetFields();
+
+        for (int i = 0; i < Damages.Length; i++)
+        {
+            if ((int)resistfields[i].GetValue(resists) != 0)
+            {
+                Resists[i].transform.parent.gameObject.SetActive(true);
+                Resists[i].text = ((int)resistfields[i].GetValue(resists)).ToString();
+            }
+            else
+                Resists[i].transform.parent.gameObject.SetActive(false);
+        }
+
+        DescriptionGameObject.transform.localPosition = position + new Vector3(170 - Screen.width / 2, 0 - Screen.height / 2, 0);
         DescriptionGameObject.SetActive(true);
     }
 
