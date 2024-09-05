@@ -4,6 +4,7 @@ using UnityEngine;
 public struct Base
 {
     public string Name;
+    public string Description;
 
     public ItemType Type;
     public Sprite Sprite;
@@ -54,7 +55,7 @@ public struct Item
     public Resists Resists;
     public Damages Damages;
 
-    public Item(string name, ItemType type, int points, int health, string spritePath,
+    public Item(string name, ItemType type, int points, int health, string spritePath, string description = "desc",
             float attackTime = 1, int attackRange = 1, bool isMeleeAttack = true,
             int pierceDamage = 0, int slashDamage = 0, int bluntDamage = 0, int fireDamage = 0, int iceDamage = 0, int earthDamage = 0, int poisonDamage = 0, int waterDamage = 0, int lightDamage = 0, int darknessDamage = 0,
             int pierceResist = 0, int slashResist = 0, int bluntResist = 0, int fireResist = 0, int iceResist = 0, int earthResist = 0, int poisonResist = 0, int waterResist = 0, int lightResist = 0, int darknessResist = 0)
@@ -62,6 +63,7 @@ public struct Item
         Base = new Base
         {
             Name = name,
+            Description = description,
             Type = type,
             Points = points,
             Health = health,

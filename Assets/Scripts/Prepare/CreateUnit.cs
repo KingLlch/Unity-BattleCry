@@ -1,3 +1,6 @@
+using System;
+using System.Reflection;
+using TMPro;
 using UnityEngine;
 
 public class CreateUnit : MonoBehaviour
@@ -27,12 +30,23 @@ public class CreateUnit : MonoBehaviour
 
     public Unit createUnit;
 
-    public GameObject RacesGrid;
-    public GameObject ItemsGrid;
+    public TextMeshProUGUI Name;
+    public TextMeshProUGUI Points;
 
-    public GameObject UnitsGrid;
+    public TextMeshProUGUI Health;
 
-    public GameObject ItemPrefab;
+    public TextMeshProUGUI AttackRange;
+    public TextMeshProUGUI AttackInterval;
+
+    public GameObject[] DamagesGameObjects;
+    public TextMeshProUGUI[] Damages;
+
+    public GameObject[] ResistsGameObjects;
+    public TextMeshProUGUI[] Resists;
+
+    public Transform RacesGrid;
+    public Transform ItemsGrid;
+
     public GameObject UnitPrefab;
 
     private void Awake()
@@ -41,24 +55,71 @@ public class CreateUnit : MonoBehaviour
         {
             _instance = this;
         }
+    }
 
-        foreach (Item race in ItemsList.AllRace)
+    public void ChangeName(string name)
+    {
+        Name.text = name;
+    }
+
+    public void AddItem()
+    {
+        ChangeUI(createUnit);
+    }
+
+    public void ChangeUI(Unit unit)
+    {
+        Points.text = unit.unitCharacteristics.Points.ToString();  
+        Health.text = unit.unitCharacteristics.Health + " / " + unit.unitCharacteristics.MaxHealth;
+
+        Damages damages = unit.unitCharacteristics.Damages;
+        Type damageType = damages.GetType();
+        FieldInfo[] damagefields = damageType.GetFields();
+
+        for (int i = 0; i < Damages.Length; i++)
         {
-            ItemInfo newItem = Instantiate(ItemPrefab, Vector2.zero,Quaternion.identity, RacesGrid.transform).GetComponent<ItemInfo>();
-            newItem.ThisItem = race;
+            if ((int)damagefields[i].GetValue(damages) != 0)
+            {
+                DamagesGameObjects[i].SetActive(true);
+                Damages[i].gameObject.SetActive(true);
+                Damages[i].text = ((int)damagefields[i].GetValue(damages)).ToString();
+            }
+            else
+            {
+                Damages[i].gameObject.SetActive(false);
+                DamagesGameObjects[i].SetActive(false);
+            }
         }
 
-        foreach (Item item in ItemsList.AllItems)
+        Resists resists = unit.unitCharacteristics.Resists;
+        Type resistType = resists.GetType();
+        FieldInfo[] resistfields = resistType.GetFields();
+
+        for (int i = 0; i < Damages.Length; i++)
         {
-            ItemInfo newItem = Instantiate(ItemPrefab, Vector2.zero, Quaternion.identity, RacesGrid.transform).GetComponent<ItemInfo>();
-            newItem.ThisItem = item;
+            if ((int)resistfields[i].GetValue(resists) != 0)
+            {
+                ResistsGameObjects[i].SetActive(true);
+                Resists[i].gameObject.SetActive(true);
+                Resists[i].text = ((int)resistfields[i].GetValue(resists)).ToString();
+            }
+            else
+            {
+                Resists[i].gameObject.SetActive(false);
+                ResistsGameObjects[i].SetActive(false);
+            }
         }
+
+        AttackInterval.text = unit.unitCharacteristics.AttackTime.ToString();
+        AttackRange.text = unit.unitCharacteristics.AttackRange.ToString();
     }
 
     public void CreateNewUnit()
     {
-        Unit newUnit = Instantiate(UnitPrefab, Vector2.zero, Quaternion.identity, UnitsGrid.transform).GetComponent<Unit>();
+        Unit newUnit = Instantiate(UnitPrefab, Vector2.zero, Quaternion.identity, PrepareUIManager.Instance.UnitParent).GetComponent<Unit>();
         newUnit = createUnit;
+        newUnit.UnitImage.sprite = createUnit.UnitImage.sprite;
+        newUnit.GetComponent<RectTransform>().localPosition = Vector3.zero;
         CloseCreateUnitPanel();
     }
 

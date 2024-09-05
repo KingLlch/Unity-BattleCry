@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -200,31 +200,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794362876f704754a8a089523813c84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 0
-  Name: 
-  Description: 
-  MaxHealth: 0
-  Health: 0
-  PierceDamage: 0
-  SlashDamage: 0
-  BluntDamage: 0
-  FireDamage: 0
-  IceDamage: 0
-  EarthDamage: 0
-  PoisonDamage: 0
-  WaterDamage: 0
-  LightDamage: 0
-  DarknessDamage: 0
-  PierceResist: 0
-  SlashResist: 0
-  BluntResist: 0
-  FireResist: 0
-  IceResist: 0
-  EarthResist: 0
-  PoisonResist: 0
-  WaterResist: 0
-  LightResist: 0
-  DarknessResist: 0
-  AttackTime: 0
-  AttackRange: 0
-  IsMeleeAttack: 0
+  Image: {fileID: 4018364205678151971}

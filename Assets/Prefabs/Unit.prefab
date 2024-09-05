@@ -91,7 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b717618d3439e6a469b1b5bf18778066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitSprite: {fileID: 0}
+  IsInArmy: 0
+  UnitImage: {fileID: 2566601343634650867}
 --- !u!114 &5734394551988360495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsDraggable: 1
+  ThisUnit: {fileID: 5470654667913148431}
 --- !u!225 &-3724435253614547213
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -175,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9716981, g: 0.26125845, b: 0.26125845, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

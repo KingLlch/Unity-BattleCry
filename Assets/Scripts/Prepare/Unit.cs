@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Unit : MonoBehaviour
 {
@@ -6,19 +7,19 @@ public class Unit : MonoBehaviour
 
     public UnitCharacteristics unitCharacteristics = new UnitCharacteristics();
 
-    public Sprite UnitSprite;
+    public Image UnitImage;
 }
 
 public class UnitCharacteristics
 {
+    public string Name = "NUnit";
     public int Points;
-    public string Name;
 
-    public string RaceName;
-    public string WeaponName;
-    public string ArmorName;
-    public string ShieldName;
-    public string SpecialName;
+    public string RaceName = "RaceName";
+    public string WeaponName = "WeaponName";
+    public string ArmorName = "ArmorName";
+    public string ShieldName = "ShieldName";
+    public string SpecialName = "SpecialName";
 
     public Item Race;
     public Item Weapon;

@@ -1,8 +1,8 @@
-using TMPro;
-using UnityEngine;
-using System.Reflection;
 using System;
-using static UnityEditor.Progress;
+using System.Reflection;
+using TMPro;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class Description : MonoBehaviour
 {
@@ -23,39 +23,21 @@ public class Description : MonoBehaviour
 
     public GameObject DescriptionGameObject;
 
-
     public TextMeshProUGUI Name;
+    public TextMeshProUGUI ItemName;
 
     public TextMeshProUGUI Points;
 
     public TextMeshProUGUI Health;
 
+    public GameObject[] DamagesGameObjects;
     public TextMeshProUGUI[] Damages;
+
+    public GameObject[] ResistsGameObjects;
     public TextMeshProUGUI[] Resists;
 
-    public TextMeshProUGUI PierceDamage;
-    public TextMeshProUGUI SlashDamage;
-    public TextMeshProUGUI BluntDamage;
-    public TextMeshProUGUI FireDamage;
-    public TextMeshProUGUI IceDamage;
-    public TextMeshProUGUI EarthDamage;
-    public TextMeshProUGUI PoisonDamage;
-    public TextMeshProUGUI WaterDamage;
-    public TextMeshProUGUI LightDamage;
-    public TextMeshProUGUI DarknessDamage;
-
-    public TextMeshProUGUI PierceResist;
-    public TextMeshProUGUI SlashResist;
-    public TextMeshProUGUI BluntResist;
-    public TextMeshProUGUI FireResist;
-    public TextMeshProUGUI IceResist;
-    public TextMeshProUGUI EarthResist;
-    public TextMeshProUGUI PoisonResist;
-    public TextMeshProUGUI WaterResist;
-    public TextMeshProUGUI LightResist;
-    public TextMeshProUGUI DarknessResist;
-
-    public TextMeshProUGUI AttackTime;
+    public TextMeshProUGUI AttackInterval;
+    public TextMeshProUGUI AttackRange;
 
     private void Awake()
     {
@@ -71,9 +53,8 @@ public class Description : MonoBehaviour
             return;
 
         Name.text = unit.unitCharacteristics.Name.ToString();
-
+        ItemName.text = unit.unitCharacteristics.RaceName + "\n" + unit.unitCharacteristics.WeaponName + "\n" + unit.unitCharacteristics.ArmorName + "\n" + unit.unitCharacteristics.ShieldName + "\n" + unit.unitCharacteristics.SpecialName;
         Points.text = unit.unitCharacteristics.Points.ToString();
-
         Health.text = unit.unitCharacteristics.Health + " / " + unit.unitCharacteristics.MaxHealth;
 
         Damages damages = unit.unitCharacteristics.Damages;
@@ -84,11 +65,15 @@ public class Description : MonoBehaviour
         {
             if((int)damagefields[i].GetValue(damages) != 0)
             {
-                Damages[i].transform.parent.gameObject.SetActive(true);
+                DamagesGameObjects[i].SetActive(true);
+                Damages[i].gameObject.SetActive(true);
                 Damages[i].text = ((int)damagefields[i].GetValue(damages)).ToString();
             }
             else
-                Damages[i].transform.parent.gameObject.SetActive(false);
+            {
+                Damages[i].gameObject.SetActive(false);
+                DamagesGameObjects[i].SetActive(false);
+            }
         }
 
         Resists resists = unit.unitCharacteristics.Resists;
@@ -99,14 +84,19 @@ public class Description : MonoBehaviour
         {
             if((int)resistfields[i].GetValue(resists) != 0)
             {
-                Resists[i].transform.parent.gameObject.SetActive(true);
+                ResistsGameObjects[i].SetActive(true);
+                Resists[i].gameObject.SetActive(true);
                 Resists[i].text = ((int)resistfields[i].GetValue(resists)).ToString();
             }
             else
-                Resists[i].transform.parent.gameObject.SetActive(false);
+            {
+                Resists[i].gameObject.SetActive(false);
+                ResistsGameObjects[i].SetActive(false);
+            }
         }
 
-        AttackTime.text = unit.unitCharacteristics.AttackTime.ToString();
+        AttackInterval.text = unit.unitCharacteristics.AttackTime.ToString();
+        AttackRange.text = unit.unitCharacteristics.AttackRange.ToString();
 
         DescriptionGameObject.transform.localPosition = position + new Vector3(170 - Screen.width / 2, 0 - Screen.height / 2, 0) ;
         DescriptionGameObject.SetActive(true);
@@ -115,9 +105,8 @@ public class Description : MonoBehaviour
     public void ShowDescriptionItem(Item item, Vector3 position)
     {
         Name.text = item.Base.Name.ToString();
-
+        ItemName.text = item.Base.Description.ToString();
         Points.text = item.Base.Points.ToString();
-
         Health.text = item.Base.Health.ToString();
 
         Damages damages = item.Damages;
@@ -128,11 +117,15 @@ public class Description : MonoBehaviour
         {
             if ((int)damagefields[i].GetValue(damages) != 0)
             {
-                Damages[i].transform.parent.gameObject.SetActive(true);
+                DamagesGameObjects[i].SetActive(true);
+                Damages[i].gameObject.SetActive(true);
                 Damages[i].text = ((int)damagefields[i].GetValue(damages)).ToString();
             }
             else
-                Damages[i].transform.parent.gameObject.SetActive(false);
+            {
+                Damages[i].gameObject.SetActive(false);
+                DamagesGameObjects[i].SetActive(false);
+            }
         }
 
         Resists resists = item.Resists;
@@ -143,11 +136,15 @@ public class Description : MonoBehaviour
         {
             if ((int)resistfields[i].GetValue(resists) != 0)
             {
-                Resists[i].transform.parent.gameObject.SetActive(true);
+                ResistsGameObjects[i].SetActive(true);
+                Resists[i].gameObject.SetActive(true);
                 Resists[i].text = ((int)resistfields[i].GetValue(resists)).ToString();
             }
             else
-                Resists[i].transform.parent.gameObject.SetActive(false);
+            {
+                Resists[i].gameObject.SetActive(false);
+                ResistsGameObjects[i].SetActive(false);
+            }
         }
 
         DescriptionGameObject.transform.localPosition = position + new Vector3(170 - Screen.width / 2, 0 - Screen.height / 2, 0);

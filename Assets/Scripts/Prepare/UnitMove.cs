@@ -15,7 +15,6 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private void Awake()
     {
         _mainCamera = Camera.main;
-        ThisUnit = transform.GetComponent<Unit>();
     }
 
     public void OnBeginDrag(PointerEventData pointer)

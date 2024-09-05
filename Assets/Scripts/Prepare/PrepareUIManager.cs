@@ -21,6 +21,8 @@ public class PrepareUIManager : MonoBehaviour
     public GameObject CreateUnitPanel;
     public GameObject TopView;
 
+    public Transform UnitParent;
+
     public List<GameObject> Rows;
 
     public bool IsDrug;
