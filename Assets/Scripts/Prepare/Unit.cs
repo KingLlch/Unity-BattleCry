@@ -14,6 +14,8 @@ public class Unit : MonoBehaviour
 
 public class UnitCharacteristics
 {
+    public int Value = 1;
+
     public string Name = "NUnit";
     public int Points;
 
