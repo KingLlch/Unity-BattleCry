@@ -104,6 +104,9 @@ public class Description : MonoBehaviour
 
     public void ShowDescriptionItem(Item item, Vector3 position)
     {
+        if (item == null)
+            return;
+
         Name.text = item.Base.Name.ToString();
         ItemName.text = item.Base.Description.ToString();
         Points.text = item.Base.Points.ToString();
