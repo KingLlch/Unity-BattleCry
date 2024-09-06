@@ -65,66 +65,122 @@ public class CreateUnit : MonoBehaviour
         Name.text = name;
     }
 
-    public void AddItem(Item item)
+    public void AddItem(ItemInfo itemInfo)
     {
         createUnit.unitCharacteristics.Value = 1;
+        ChangeItemValueUI();
 
-        if (item.Base.Type == ItemType.Race && item.Value > 0 && (Race.ThisItem == null || Race.ThisItem.Base.Name != item.Base.Name))
+        if (itemInfo.ThisItem.Base.Type == ItemType.Race && itemInfo.ThisItem.Value > 0 && (Race.ThisItem == null || Race.ThisItem.Base.Name != itemInfo.ThisItem.Base.Name))
         {
             if (Race.ThisItem != null)
             {
                 ChangeStats(Race.ThisItem, false);
             }
 
-            Race.Image.sprite = item.Base.Sprite;
-            Race.ThisItem = item;
+            Race.Image.sprite = itemInfo.ThisItem.Base.Sprite;
+            Race = itemInfo;
+            ChangeStats(itemInfo.ThisItem, true);
+            ChangeUI(createUnit);
         }
 
-        else if (item.Base.Type == ItemType.Weapon && item.Value > 0 && (Weapon.ThisItem == null || Weapon.ThisItem.Base.Name != item.Base.Name))
+        else if (itemInfo.ThisItem.Base.Type == ItemType.Weapon && itemInfo.ThisItem.Value > 0 && (Weapon.ThisItem == null || Weapon.ThisItem.Base.Name != itemInfo.ThisItem.Base.Name))
         {
             if (Weapon.ThisItem != null)
             {
                 ChangeStats(Weapon.ThisItem, false);
             }
 
-            Weapon.Image.sprite = item.Base.Sprite;
-            Weapon.ThisItem = item;
+            Weapon.Image.sprite = itemInfo.ThisItem.Base.Sprite;
+            Weapon = itemInfo;
+            ChangeStats(itemInfo.ThisItem, true);
+            ChangeUI(createUnit);
         }
 
-        else if (item.Base.Type == ItemType.Armor && item.Value > 0 && (Armor.ThisItem == null || Armor.ThisItem.Base.Name != item.Base.Name))
+        else if (itemInfo.ThisItem.Base.Type == ItemType.Armor && itemInfo.ThisItem.Value > 0 && (Armor.ThisItem == null || Armor.ThisItem.Base.Name != itemInfo.ThisItem.Base.Name))
         {
             if (Armor.ThisItem != null)
             {
                 ChangeStats(Armor.ThisItem, false);
             }
 
-            Armor.Image.sprite = item.Base.Sprite;
-            Armor.ThisItem = item;
+            Armor.Image.sprite = itemInfo.ThisItem.Base.Sprite;
+            Armor = itemInfo;
+            ChangeStats(itemInfo.ThisItem, true);
+            ChangeUI(createUnit);
         }
 
-        else if (item.Base.Type == ItemType.Shield && item.Value > 0 && (Shield.ThisItem == null || Shield.ThisItem.Base.Name != item.Base.Name))
+        else if (itemInfo.ThisItem.Base.Type == ItemType.Shield && itemInfo.ThisItem.Value > 0 && (Shield.ThisItem == null || Shield.ThisItem.Base.Name != itemInfo.ThisItem.Base.Name))
         {
             if (Shield.ThisItem != null)
             {
                 ChangeStats(Shield.ThisItem, false);
             }
 
-            Shield.Image.sprite = item.Base.Sprite;
-            Shield.ThisItem = item;
+            Shield.Image.sprite = itemInfo.ThisItem.Base.Sprite;
+            Shield = itemInfo;
+            ChangeStats(itemInfo.ThisItem, true);
+            ChangeUI(createUnit);
         }
 
-        else if (item.Base.Type == ItemType.Special && item.Value > 0 && (Special.ThisItem == null || Special.ThisItem.Base.Name != item.Base.Name))
+        else if (itemInfo.ThisItem.Base.Type == ItemType.Special && itemInfo.ThisItem.Value > 0 && (Special.ThisItem == null || Special.ThisItem.Base.Name != itemInfo.ThisItem.Base.Name))
         {
             if (Special.ThisItem != null)
             {
                 ChangeStats(Special.ThisItem, false);
             }
 
-            Special.Image.sprite = item.Base.Sprite;
-            Special.ThisItem = item;
+            Special.Image.sprite = itemInfo.ThisItem.Base.Sprite;
+            Special = itemInfo;
+            ChangeStats(itemInfo.ThisItem, true);
+            ChangeUI(createUnit);
+        }
+    }
+
+    private void ChangeItemValueUI()
+    {
+        Race.Value.text = createUnit.unitCharacteristics.Value.ToString();
+        Weapon.Value.text = createUnit.unitCharacteristics.Value.ToString();
+        Armor.Value.text = createUnit.unitCharacteristics.Value.ToString();
+        Shield.Value.text = createUnit.unitCharacteristics.Value.ToString();
+        Special.Value.text = createUnit.unitCharacteristics.Value.ToString();
+    }
+
+    public void RemoveItem(ItemInfo itemInfo)
+    {
+        if (Race.ThisItem != null && itemInfo.ThisItem.Base.Type == ItemType.Race)
+        {
+            ChangeStats(Race.ThisItem, false);
+            Race.ThisItem = null;
+            Race.Image.sprite = null;
         }
 
-        ChangeStats(item, true);
+        if (Weapon.ThisItem != null && itemInfo.ThisItem.Base.Type == ItemType.Weapon)
+        {
+            ChangeStats(Weapon.ThisItem, false);
+            Weapon.ThisItem = null;
+            Weapon.Image.sprite = null;
+        }
+
+        if (Armor.ThisItem != null && itemInfo.ThisItem.Base.Type == ItemType.Armor)
+        {
+            ChangeStats(Armor.ThisItem, false);
+            Armor.ThisItem = null;
+            Armor.Image.sprite = null;
+        }
+
+        if (Shield.ThisItem != null && itemInfo.ThisItem.Base.Type == ItemType.Shield)
+        {
+            ChangeStats(Shield.ThisItem, false);
+            Shield.ThisItem = null;
+            Shield.Image.sprite = null;
+        }
+        if (Special.ThisItem != null && itemInfo.ThisItem.Base.Type == ItemType.Special)
+        {
+            ChangeStats(Special.ThisItem, false);
+            Special.ThisItem = null;
+            Special.Image.sprite = null;
+        }
+
         ChangeUI(createUnit);
     }
 
@@ -132,7 +188,6 @@ public class CreateUnit : MonoBehaviour
     {
         if (isAdd)
         {
-
             createUnit.unitCharacteristics.Points += item.Base.Points;
             createUnit.unitCharacteristics.Health += item.Base.Health;
             createUnit.unitCharacteristics.MaxHealth += item.Base.Health;
@@ -272,64 +327,19 @@ public class CreateUnit : MonoBehaviour
         AttackRange.text = unit.unitCharacteristics.AttackRange.ToString();
     }
 
-    public void ClearRace()
-    {
-        if (Race.ThisItem != null)
-        {
-            ChangeStats(Race.ThisItem, false);
-            Race.ThisItem = null;
-        }
-    }
-
-    public void ClearWeapon()
-    {
-        if (Weapon.ThisItem != null)
-        {
-            ChangeStats(Weapon.ThisItem, false);
-            Weapon.ThisItem = null;
-        }
-    }
-
-    public void ClearArmor()
-    {
-        if (Armor.ThisItem != null)
-        {
-            ChangeStats(Armor.ThisItem, false);
-            Armor.ThisItem = null;
-        }
-    }
-
-    public void ClearShield()
-    {
-        if (Shield.ThisItem != null)
-        {
-            ChangeStats(Shield.ThisItem, false);
-            Shield.ThisItem = null;
-        }
-    }
-
-    public void ClearSpecial()
-    {
-        if (Special.ThisItem != null)
-        {
-            ChangeStats(Special.ThisItem, false);
-            Special.ThisItem = null;
-        }
-    }
-
     public void AllItems()
     {
         foreach (Transform item in ItemsGrid.transform)
         {
             item.gameObject.SetActive(true);
-        }  
+        }
     }
 
     public void WeaponItems()
     {
         foreach (Transform item in ItemsGrid.transform)
         {
-            if(item.GetComponent<ItemInfo>().ThisItem.Base.Type == ItemType.Weapon)
+            if (item.GetComponent<ItemInfo>().ThisItem.Base.Type == ItemType.Weapon)
                 item.gameObject.SetActive(true);
             else
                 item.gameObject.SetActive(false);
@@ -371,20 +381,21 @@ public class CreateUnit : MonoBehaviour
 
     public void AddValue()
     {
-        if ((Race == null || Race.ThisItem.Value > createUnit.unitCharacteristics.Value) && 
-            (Weapon == null || Weapon.ThisItem.Value > createUnit.unitCharacteristics.Value) && 
-            (Armor == null || Armor.ThisItem.Value > createUnit.unitCharacteristics.Value) && 
-            (Shield == null || Shield.ThisItem.Value > createUnit.unitCharacteristics.Value) && 
-            (Special == null || Special.ThisItem.Value > createUnit.unitCharacteristics.Value))
+        if ((Race.ThisItem == null || Race.ThisItem.Value > createUnit.unitCharacteristics.Value) &&
+            (Weapon.ThisItem == null || Weapon.ThisItem.Value > createUnit.unitCharacteristics.Value) &&
+            (Armor.ThisItem == null || Armor.ThisItem.Value > createUnit.unitCharacteristics.Value) &&
+            (Shield.ThisItem == null || Shield.ThisItem.Value > createUnit.unitCharacteristics.Value) &&
+            (Special.ThisItem == null || Special.ThisItem.Value > createUnit.unitCharacteristics.Value))
         {
             createUnit.unitCharacteristics.Value++;
             Value.text = createUnit.unitCharacteristics.Value.ToString();
+            ChangeItemValueUI();
         }
     }
 
     public void RemoveValue()
     {
-        if(createUnit.unitCharacteristics.Value > 1)
+        if (createUnit.unitCharacteristics.Value > 1)
         {
             createUnit.unitCharacteristics.Value--;
             Value.text = createUnit.unitCharacteristics.Value.ToString();
@@ -423,7 +434,7 @@ public class CreateUnit : MonoBehaviour
         }
 
         Unit newUnit = Instantiate(UnitPrefab, Vector2.zero, Quaternion.identity, PrepareUIManager.Instance.UnitParent).GetComponent<Unit>();
-        newUnit.unitCharacteristics = createUnit.unitCharacteristics;
+        newUnit.unitCharacteristics = createUnit.unitCharacteristics.Copy();
         newUnit.UnitImage.sprite = createUnit.UnitImage.sprite;
         newUnit.GetComponent<RectTransform>().localPosition = Vector3.zero;
         CloseCreateUnitPanel();
@@ -437,39 +448,38 @@ public class CreateUnit : MonoBehaviour
 
     public void ClearCreateUnit()
     {
-        Race.ThisItem = null;
-        Race.Image = null;
+        createUnit.unitCharacteristics = new UnitCharacteristics();
+        ClearUI();
+    }
 
-        Weapon.ThisItem = null;
-        Weapon.Image = null;
-        Armor.ThisItem = null;
-        Armor.Image = null;
-        Shield.ThisItem = null;
-        Shield.Image = null;
-        Special.ThisItem = null;
-        Special.Image = null;
+    private void ClearUI()
+    {
+        Race.ThisItem = Weapon.ThisItem = Armor.ThisItem = Shield.ThisItem = Special.ThisItem = null;
+        Race.Image.sprite = Weapon.Image.sprite = Armor.Image.sprite = Shield.Image.sprite = Special.Image.sprite = null;
 
-        createUnit = new Unit();
+        Health.text = "0/0";
+        Points.text = "0";
+        AttackInterval.text = "0.0s";
+        AttackRange.text = null;
+
+        for (int i = 0; i < Damages.Length; i++)
+        {
+            Damages[i].gameObject.SetActive(false);
+            DamagesGameObjects[i].SetActive(false);
+            Resists[i].gameObject.SetActive(false);
+            ResistsGameObjects[i].SetActive(false);
+        }
     }
 
     public void LoadUnit(Unit loadUnit)
     {
         createUnit = loadUnit;
 
-        Race.ThisItem = loadUnit.unitCharacteristics.Race;
-
-        Weapon.ThisItem = loadUnit.unitCharacteristics.Weapon;
-        Armor.ThisItem = loadUnit.unitCharacteristics.Armor;
-        Shield.ThisItem = loadUnit.unitCharacteristics.Shield;
-        Special.ThisItem = loadUnit.unitCharacteristics.Special;
+        Race.ThisItem = Weapon.ThisItem = Armor.ThisItem = Shield.ThisItem = Special.ThisItem = loadUnit.unitCharacteristics.Race;
     }
 
     public void DeleteUnit(Unit deleteUnit)
     {
-        Race.ThisItem.Value += deleteUnit.unitCharacteristics.Value;
-        Weapon.ThisItem.Value += deleteUnit.unitCharacteristics.Value;
-        Armor.ThisItem.Value += deleteUnit.unitCharacteristics.Value;
-        Shield.ThisItem.Value += deleteUnit.unitCharacteristics.Value;
-        Special.ThisItem.Value += deleteUnit.unitCharacteristics.Value;
+        Race.ThisItem.Value += Weapon.ThisItem.Value += Armor.ThisItem.Value += Shield.ThisItem.Value += Special.ThisItem.Value += deleteUnit.unitCharacteristics.Value;
     }
 }

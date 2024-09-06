@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ItemInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler, IPointerClickHandler
 {
     public Item ThisItem;
+    public bool IsInUnit;
 
     public TextMeshProUGUI Value;
     public Image Image;
@@ -34,6 +35,9 @@ public class ItemInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        CreateUnit.Instance.AddItem(ThisItem);
+        if (!IsInUnit)
+            CreateUnit.Instance.AddItem(this);
+        else
+            CreateUnit.Instance.RemoveItem(this);
     }
 }

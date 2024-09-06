@@ -41,4 +41,13 @@ public class UnitCharacteristics
     public float AttackTime;
     public int AttackRange;
     public bool IsMeleeAttack;
+
+    public UnitCharacteristics Copy()
+    {
+        UnitCharacteristics copy = (UnitCharacteristics)this.MemberwiseClone();
+        copy.Damages = this.Damages.Copy();
+        copy.Resists = this.Resists.Copy();
+
+        return copy;
+    }
 }

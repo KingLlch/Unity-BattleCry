@@ -32,6 +32,12 @@ public class Damages
     public int WaterDamage;
     public int LightDamage;
     public int DarknessDamage;
+
+    public Damages Copy()
+    {
+        Damages copy = (Damages)this.MemberwiseClone();
+        return copy;
+    }
 }
 
 public class Resists
@@ -46,6 +52,12 @@ public class Resists
     public int WaterResist;
     public int LightResist;
     public int DarknessResist;
+
+    public Resists Copy()
+    {
+        Resists copy = (Resists)this.MemberwiseClone();
+        return copy;
+    }
 }
 
 public class Item
