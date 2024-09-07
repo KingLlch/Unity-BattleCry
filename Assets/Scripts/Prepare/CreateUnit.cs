@@ -22,12 +22,19 @@ public class CreateUnit : MonoBehaviour
         }
     }
 
-    public ItemInfo Race;
+    public GameObject createUnitGameObject;
 
+    public ItemInfo Race;
     public ItemInfo Weapon;
     public ItemInfo Armor;
     public ItemInfo Shield;
     public ItemInfo Special;
+
+    private ItemInfo RaceLink;
+    private ItemInfo WeaponLink;
+    private ItemInfo ArmorLink;
+    private ItemInfo ShieldLink;
+    private ItemInfo SpecialLink;
 
     public Unit createUnit;
 
@@ -81,6 +88,7 @@ public class CreateUnit : MonoBehaviour
             }
 
             Race.ThisItem = itemInfo.ThisItem.Copy();
+            RaceLink = itemInfo;
             Race.Image.sprite = itemInfo.ThisItem.Base.Sprite;
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
@@ -94,6 +102,7 @@ public class CreateUnit : MonoBehaviour
             }
 
             Weapon.ThisItem = itemInfo.ThisItem.Copy();
+            WeaponLink = itemInfo;
             Weapon.Image.sprite = itemInfo.ThisItem.Base.Sprite;
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
@@ -107,6 +116,7 @@ public class CreateUnit : MonoBehaviour
             }
 
             Armor.ThisItem = itemInfo.ThisItem.Copy();
+            ArmorLink = itemInfo;
             Armor.Image.sprite = itemInfo.ThisItem.Base.Sprite;
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
@@ -120,6 +130,7 @@ public class CreateUnit : MonoBehaviour
             }
 
             Shield.ThisItem = itemInfo.ThisItem.Copy();
+            ShieldLink = itemInfo;
             Shield.Image.sprite = itemInfo.ThisItem.Base.Sprite;
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
@@ -133,6 +144,7 @@ public class CreateUnit : MonoBehaviour
             }
 
             Special.ThisItem = itemInfo.ThisItem.Copy();
+            SpecialLink = itemInfo;
             Special.Image.sprite = itemInfo.ThisItem.Base.Sprite;
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
@@ -411,8 +423,8 @@ public class CreateUnit : MonoBehaviour
         if (Race.ThisItem != null)
         {
             createUnit.unitCharacteristics.RaceName = Race.ThisItem.Base.Name;
-            Race.ThisItem.Base.Value -= createUnit.unitCharacteristics.Value;
-            Race.Value.text = Race.ThisItem.Base.Value.ToString();
+            RaceLink.ThisItem.Base.Value -= createUnit.unitCharacteristics.Value;
+            RaceLink.Value.text = RaceLink.ThisItem.Base.Value.ToString();
         }
         else
             return;
@@ -420,26 +432,26 @@ public class CreateUnit : MonoBehaviour
         if (Weapon.ThisItem != null)
         {
             createUnit.unitCharacteristics.WeaponName = Weapon.ThisItem.Base.Name;
-            Weapon.ThisItem.Base.Value -= createUnit.unitCharacteristics.Value;
-            Weapon.Value.text = Weapon.ThisItem.Base.Value.ToString();
+            WeaponLink.ThisItem.Base.Value -= createUnit.unitCharacteristics.Value;
+            WeaponLink.Value.text = WeaponLink.ThisItem.Base.Value.ToString();
         }
         if (Armor.ThisItem != null)
         {
             createUnit.unitCharacteristics.ArmorName = Armor.ThisItem.Base.Name;
-            Armor.ThisItem.Base.Value -= createUnit.unitCharacteristics.Value;
-            Armor.Value.text = Armor.ThisItem.Base.Value.ToString();
+            ArmorLink.ThisItem.Base.Value -= createUnit.unitCharacteristics.Value;
+            ArmorLink.Value.text = ArmorLink.ThisItem.Base.Value.ToString();
         }
         if (Shield.ThisItem != null)
         {
             createUnit.unitCharacteristics.ShieldName = Shield.ThisItem.Base.Name;
-            Shield.ThisItem.Base.Value -= createUnit.unitCharacteristics.Value;
-            Shield.Value.text = Shield.ThisItem.Base.Value.ToString();
+            ShieldLink.ThisItem.Base.Value -= createUnit.unitCharacteristics.Value;
+            ShieldLink.Value.text = ShieldLink.ThisItem.Base.Value.ToString();
         }
         if (Special.ThisItem != null)
         {
             createUnit.unitCharacteristics.SpecialName = Special.ThisItem.Base.Name;
-            Special.ThisItem.Base.Value -= createUnit.unitCharacteristics.Value;
-            Special.Value.text = Special.ThisItem.Base.Value.ToString();
+            SpecialLink.ThisItem.Base.Value -= createUnit.unitCharacteristics.Value;
+            SpecialLink.Value.text = SpecialLink.ThisItem.Base.Value.ToString();
         }
 
         Unit newUnit = Instantiate(UnitPrefab, Vector2.zero, Quaternion.identity, PrepareUIManager.Instance.UnitParent).GetComponent<Unit>();
@@ -453,20 +465,21 @@ public class CreateUnit : MonoBehaviour
     public void CloseCreateUnitPanel()
     {
         ClearCreateUnit();
-        gameObject.SetActive(false);
+        createUnitGameObject.SetActive(false);
     }
 
     public void ClearCreateUnit()
     {
         createUnit.unitCharacteristics = new UnitCharacteristics();
+        Race.ThisItem = Weapon.ThisItem = Armor.ThisItem = Shield.ThisItem = Special.ThisItem = null;
+        Race.Image.sprite = Weapon.Image.sprite = Armor.Image.sprite = Shield.Image.sprite = Special.Image.sprite = null;
+        RaceLink = WeaponLink = ArmorLink = ShieldLink = SpecialLink = null;
         ClearUI();
     }
 
     private void ClearUI()
     {
-        Race.ThisItem = Weapon.ThisItem = Armor.ThisItem = Shield.ThisItem = Special.ThisItem = null;
-        Race.Image.sprite = Weapon.Image.sprite = Armor.Image.sprite = Shield.Image.sprite = Special.Image.sprite = null;
-
+        Value.text = "1";
         Health.text = "0/0";
         Points.text = "0";
         AttackInterval.text = "0.0s";
@@ -481,15 +494,27 @@ public class CreateUnit : MonoBehaviour
         }
     }
 
-    public void LoadUnit(Unit loadUnit)
+    public void EditUnit(Unit loadUnit)
     {
-        createUnit = loadUnit;
+        createUnit.unitCharacteristics = loadUnit.unitCharacteristics.Copy();
+        ChangeUI(loadUnit);
 
-        Race.ThisItem = Weapon.ThisItem = Armor.ThisItem = Shield.ThisItem = Special.ThisItem = loadUnit.unitCharacteristics.Race;
+        Race.ThisItem = loadUnit.unitCharacteristics.Race;
+        Weapon.ThisItem = loadUnit.unitCharacteristics.Weapon;
+        Armor.ThisItem = loadUnit.unitCharacteristics.Armor;
+        Shield.ThisItem = loadUnit.unitCharacteristics.Shield;
+        Special.ThisItem = loadUnit.unitCharacteristics.Special;
     }
 
     public void DeleteUnit(Unit deleteUnit)
     {
-        Race.ThisItem.Base.Value += Weapon.ThisItem.Base.Value += Armor.ThisItem.Base.Value += Shield.ThisItem.Base.Value += Special.ThisItem.Base.Value += deleteUnit.unitCharacteristics.Value;
+        RaceLink.ThisItem.Base.Value += WeaponLink.ThisItem.Base.Value += ArmorLink.ThisItem.Base.Value += ShieldLink.ThisItem.Base.Value += SpecialLink.ThisItem.Base.Value += deleteUnit.unitCharacteristics.Value;
+
+        RaceLink.Value.text = RaceLink.ThisItem.Base.Value.ToString();
+        WeaponLink.Value.text = WeaponLink.ThisItem.Base.Value.ToString();
+        ArmorLink.Value.text = ArmorLink.ThisItem.Base.Value.ToString();
+        ShieldLink.Value.text = ShieldLink.ThisItem.Base.Value.ToString();
+        SpecialLink.Value.text = SpecialLink.ThisItem.Base.Value.ToString();
     }
+
 }

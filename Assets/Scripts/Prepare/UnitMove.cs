@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler
+public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler, IPointerClickHandler
 {
     public bool IsDraggable = true;
     public Unit ThisUnit;
@@ -69,5 +69,15 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public void OnPointerMove(PointerEventData pointer)
     {
         Description.Instance.ChangePositionDescription(pointer.position);
+    }
+
+    public void OnPointerClick(PointerEventData pointer)
+    {
+        if(PrepareManager.Instance.ChosenUnit == ThisUnit)
+        {
+            PrepareManager.Instance.ChoseUnit(null);
+        }
+        else
+            PrepareManager.Instance.ChoseUnit(ThisUnit);
     }
 }

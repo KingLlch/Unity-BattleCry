@@ -10,20 +10,21 @@ public class Unit : MonoBehaviour
 
     public TextMeshProUGUI Value;
     public Image UnitImage;
+    public Image UnitImageEdge;
 }
 
 public class UnitCharacteristics
 {
     public int Value = 1;
 
-    public string Name = "NUnit";
+    public string Name = "N Unit";
     public int Points;
 
-    public string RaceName = "";
-    public string WeaponName = "";
-    public string ArmorName = "";
-    public string ShieldName = "";
-    public string SpecialName = "";
+    public string RaceName = " ";
+    public string WeaponName = " ";
+    public string ArmorName = " ";
+    public string ShieldName = " ";
+    public string SpecialName = "  ";
 
     public Item Race;
     public Item Weapon;

@@ -55,25 +55,24 @@ public class PrepareUIManager : MonoBehaviour
         CreateUnitPanel.SetActive(true);
     }
 
-    public void EditUnit(Unit editUnit)
+    public void EditUnit()
     {
         CreateUnitPanel.SetActive(true);
-        CreateUnit.Instance.LoadUnit(editUnit);
+
+        if (PrepareManager.Instance.ChosenUnit == null)
+        {
+            return;
+        }
+
+        PrepareManager.Instance.EditUnit();
     }
 
     public void DeleteUnit()
     {
+        if (PrepareManager.Instance.ChosenUnit == null)
+            return;
+
         PrepareManager.Instance.DeleteUnit();
-    }
-
-    public void VisualRenameArmy()
-    {
-
-    }
-
-    public void VisualResetArmy()
-    {
-
     }
 
     private void Centralize(RectTransform rectTransform)

@@ -156,10 +156,29 @@ public class ItemManager : MonoBehaviour
 {
     private void Awake()
     {
-        ItemsList.AllRace.Add(new Item("Human", ItemType.Race, 5, 5, "Sprites/Items/Human", bluntDamage: 1, bluntResist: 1));
 
+        //Races
+        ItemsList.AllRace.Add(new Item("Human", ItemType.Race, 5, 5, "Sprites/Items/Human", bluntDamage: 1, bluntResist: 1));
+        ItemsList.AllRace.Add(new Item("Human", ItemType.Race, 5, 5, "Sprites/Items/Human", bluntDamage: 1, bluntResist: 1));
+        ItemsList.AllRace.Add(new Item("Skeleton", ItemType.Race, 2, 3, "Sprites/Items/Skeleton", slashDamage: 1, bluntResist: -1));
+        ItemsList.AllRace.Add(new Item("Human", ItemType.Race, 5, 5, "Sprites/Items/Human", bluntDamage: 1, bluntResist: 1));
+        ItemsList.AllRace.Add(new Item("Skeleton", ItemType.Race, 2, 3, "Sprites/Items/Skeleton", slashDamage: 1, bluntResist: -1));
+        ItemsList.AllRace.Add(new Item("Human", ItemType.Race, 5, 5, "Sprites/Items/Human", bluntDamage: 1, bluntResist: 1));
+        ItemsList.AllRace.Add(new Item("Skeleton", ItemType.Race, 2, 3, "Sprites/Items/Skeleton", slashDamage: 1, bluntResist: -1));
+        ItemsList.AllRace.Add(new Item("Human", ItemType.Race, 5, 5, "Sprites/Items/Human", bluntDamage: 1, bluntResist: 1));
+        ItemsList.AllRace.Add(new Item("Skeleton", ItemType.Race, 2, 3, "Sprites/Items/Skeleton", slashDamage: 1, bluntResist: -1));
         ItemsList.AllRace.Add(new Item("Skeleton", ItemType.Race, 2, 3, "Sprites/Items/Skeleton", slashDamage: 1, bluntResist: -1));
 
+        //Weapon
+        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, 5, 2, "Sprites/Items/Human", poisonResist: 3));
+
+        //Armor
+        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, 5, 2, "Sprites/Items/Human", poisonResist: 3));
+
+        //Shield
+        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, 5, 2, "Sprites/Items/Human", poisonResist: 3));
+
+        //Special
         ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, 5, 2, "Sprites/Items/Human", poisonResist: 3));
     }
 }

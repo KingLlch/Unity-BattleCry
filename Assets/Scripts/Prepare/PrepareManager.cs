@@ -1,9 +1,8 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PrepareManager : MonoBehaviour
 {
-    public Army Army = new Army();
-
     private static PrepareManager _instance;
 
     public static PrepareManager Instance
@@ -18,6 +17,9 @@ public class PrepareManager : MonoBehaviour
             return _instance;
         }
     }
+
+    public Army Army = new Army();
+    public Unit ChosenUnit = new Unit();
 
     private void Awake()
     {
@@ -37,9 +39,25 @@ public class PrepareManager : MonoBehaviour
         Army.AddUnit(unit, cell);
     }
 
+    public void ChoseUnit(Unit chosenUnit)
+    {
+        if(ChosenUnit != null)
+        {
+            ChosenUnit.UnitImageEdge.color = Color.white;
+        }
+
+        ChosenUnit = chosenUnit;
+        ChosenUnit.UnitImageEdge.color = Color.red;
+    }
+
     public void DeleteUnit()
     {
+        CreateUnit.Instance.DeleteUnit(ChosenUnit);
+    }
 
+    public void EditUnit()
+    {
+        CreateUnit.Instance.EditUnit(ChosenUnit);
     }
 }
 
