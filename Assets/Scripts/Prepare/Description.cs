@@ -1,8 +1,8 @@
 using System;
 using System.Reflection;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Description : MonoBehaviour
 {
@@ -22,6 +22,8 @@ public class Description : MonoBehaviour
     }
 
     public GameObject DescriptionGameObject;
+
+    public Image ImageDescription;
 
     public TextMeshProUGUI Name;
     public TextMeshProUGUI ItemName;
@@ -51,6 +53,8 @@ public class Description : MonoBehaviour
     {
         if (PrepareUIManager.Instance.IsDrug)
             return;
+
+        ImageDescription.sprite = unit.UnitImage.sprite;
 
         Name.text = unit.unitCharacteristics.Name.ToString();
         ItemName.text = unit.unitCharacteristics.RaceName + "\n" + unit.unitCharacteristics.WeaponName + "\n" + unit.unitCharacteristics.ArmorName + "\n" + unit.unitCharacteristics.ShieldName + "\n" + unit.unitCharacteristics.SpecialName;
@@ -106,6 +110,8 @@ public class Description : MonoBehaviour
     {
         if (item == null)
             return;
+
+        ImageDescription.sprite = item.Base.Sprite;
 
         Name.text = item.Base.Name.ToString();
         ItemName.text = item.Base.Description.ToString();

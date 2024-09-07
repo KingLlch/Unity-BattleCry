@@ -18,6 +18,13 @@ public class ItemInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         _mainCamera = Camera.main;
     }
 
+    public ItemInfo Copy()
+    {
+        ItemInfo copy = (ItemInfo)this.MemberwiseClone(); ;
+        copy.ThisItem = ThisItem.Copy();
+        return copy;
+    }
+
     public void OnPointerEnter(PointerEventData pointer)
     {
         Description.Instance.ShowDescriptionItem(ThisItem, _mainCamera.ScreenToWorldPoint(new Vector3(pointer.position.x, pointer.position.y, 0)));

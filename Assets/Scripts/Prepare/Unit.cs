@@ -19,11 +19,11 @@ public class UnitCharacteristics
     public string Name = "NUnit";
     public int Points;
 
-    public string RaceName = "RaceName";
-    public string WeaponName = "WeaponName";
-    public string ArmorName = "ArmorName";
-    public string ShieldName = "ShieldName";
-    public string SpecialName = "SpecialName";
+    public string RaceName = "";
+    public string WeaponName = "";
+    public string ArmorName = "";
+    public string ShieldName = "";
+    public string SpecialName = "";
 
     public Item Race;
     public Item Weapon;

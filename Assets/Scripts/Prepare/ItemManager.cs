@@ -11,6 +11,14 @@ public class Base
 
     public int Points;
     public int Health;
+
+    public int Value;
+
+    public Base Copy()
+    {
+        Base copy = (Base)this.MemberwiseClone();
+        return copy;
+    }
 }
 
 public class Weapon
@@ -18,6 +26,12 @@ public class Weapon
     public float AttackTime;
     public int AttackRange;
     public bool IsMeleeAttack;
+
+    public Weapon Copy()
+    {
+        Weapon copy = (Weapon)this.MemberwiseClone();
+        return copy;
+    }
 }
 
 public class Damages
@@ -67,8 +81,6 @@ public class Item
     public Resists Resists;
     public Damages Damages;
 
-    public int Value;
-
     public Item(string name, ItemType type, int points, int health, string spritePath, string description = "desc",
             float attackTime = 1, int attackRange = 1, bool isMeleeAttack = true,
             int pierceDamage = 0, int slashDamage = 0, int bluntDamage = 0, int fireDamage = 0, int iceDamage = 0, int earthDamage = 0, int poisonDamage = 0, int waterDamage = 0, int lightDamage = 0, int darknessDamage = 0,
@@ -81,7 +93,8 @@ public class Item
             Type = type,
             Points = points,
             Health = health,
-            Sprite = Resources.Load<Sprite>(spritePath)
+            Sprite = Resources.Load<Sprite>(spritePath),
+            Value = 10
         };
 
         Weapon = new Weapon
@@ -118,8 +131,17 @@ public class Item
             LightResist = lightResist,
             DarknessResist = darknessResist
         };
+    }
 
-        Value = 10;
+    public Item Copy()
+    {
+        Item copy = (Item)this.MemberwiseClone();
+        copy.Base = this.Base.Copy();
+        copy.Weapon = this.Weapon.Copy();
+        copy.Damages = this.Damages.Copy();
+        copy.Resists = this.Resists.Copy();
+
+        return copy;
     }
 }
 
