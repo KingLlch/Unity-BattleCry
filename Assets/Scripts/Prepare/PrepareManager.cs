@@ -46,26 +46,12 @@ public class PrepareManager : MonoBehaviour
             ChosenUnit.UnitImageEdge.color = Color.white;
         }
 
-        ChosenUnit = chosenUnit;
-        ChosenUnit.UnitImageEdge.color = Color.red;
+        if (chosenUnit != null)
+        {
+            ChosenUnit = chosenUnit;
+            ChosenUnit.UnitImageEdge.color = Color.red;
+        }
+        else
+            ChosenUnit = null;
     }
-
-    public void DeleteUnit()
-    {
-        CreateUnit.Instance.DeleteUnit(ChosenUnit);
-    }
-
-    public void EditUnit()
-    {
-        CreateUnit.Instance.EditUnit(ChosenUnit);
-    }
-}
-
-public enum ItemType
-{
-    Race = 0,
-    Weapon = 1,
-    Armor = 2,
-    Shield = 3,
-    Special = 4
 }

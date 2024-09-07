@@ -52,7 +52,8 @@ public class PrepareUIManager : MonoBehaviour
 
     public void CreateNewUnit()
     {
-        CreateUnitPanel.SetActive(true);
+        CreateUnitPanel.SetActive(true); 
+        CreateUnit.Instance.IsEditUnit = false;
     }
 
     public void EditUnit()
@@ -64,7 +65,8 @@ public class PrepareUIManager : MonoBehaviour
             return;
         }
 
-        PrepareManager.Instance.EditUnit();
+        CreateUnit.Instance.EditUnit(PrepareManager.Instance.ChosenUnit);
+        CreateUnit.Instance.IsEditUnit = true;
     }
 
     public void DeleteUnit()
@@ -72,7 +74,7 @@ public class PrepareUIManager : MonoBehaviour
         if (PrepareManager.Instance.ChosenUnit == null)
             return;
 
-        PrepareManager.Instance.DeleteUnit();
+        CreateUnit.Instance.DeleteUnit(PrepareManager.Instance.ChosenUnit);
     }
 
     private void Centralize(RectTransform rectTransform)

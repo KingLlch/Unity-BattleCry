@@ -6,7 +6,7 @@ public class Unit : MonoBehaviour
 {
     public bool IsInArmy = false;
 
-    public UnitCharacteristics unitCharacteristics = new UnitCharacteristics();
+    public UnitCharacteristics unitCharacteristics = new();
 
     public TextMeshProUGUI Value;
     public Image UnitImage;
@@ -32,12 +32,18 @@ public class UnitCharacteristics
     public Item Shield;
     public Item Special;
 
+    public ItemInfo RaceLink;
+    public ItemInfo WeaponLink;
+    public ItemInfo ArmorLink;
+    public ItemInfo ShieldLink;
+    public ItemInfo SpecialLink;
+
     public int MaxHealth;
     public int Health;
 
-    public Damages Damages = new Damages();
+    public Damages Damages = new();
 
-    public Resists Resists = new Resists();
+    public Resists Resists = new();
 
     public float AttackTime;
     public int AttackRange;
@@ -45,9 +51,21 @@ public class UnitCharacteristics
 
     public UnitCharacteristics Copy()
     {
-        UnitCharacteristics copy = (UnitCharacteristics)this.MemberwiseClone();
-        copy.Damages = this.Damages.Copy();
-        copy.Resists = this.Resists.Copy();
+        UnitCharacteristics copy = (UnitCharacteristics)MemberwiseClone();
+
+        if (Race != null)
+            copy.Race = Race.Copy();
+        if (Weapon != null)
+            copy.Weapon = Weapon.Copy();
+        if (Armor != null)
+            copy.Armor = Armor.Copy();
+        if (Shield != null)
+            copy.Shield = Shield.Copy();
+        if (Special != null)
+            copy.Special = Special.Copy();
+
+        copy.Damages = Damages.Copy();
+        copy.Resists = Resists.Copy();
 
         return copy;
     }
