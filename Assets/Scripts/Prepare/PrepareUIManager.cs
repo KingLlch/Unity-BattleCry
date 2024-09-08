@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PrepareUIManager : MonoBehaviour
 {
@@ -22,6 +25,11 @@ public class PrepareUIManager : MonoBehaviour
     public GameObject TopView;
 
     public Transform UnitParent;
+    public InputField NameArmyInputField;
+    public TextMeshProUGUI NameArmy;
+
+    public TextMeshProUGUI ArmyPointsRemaning;
+
 
     public List<GameObject> Rows;
 
@@ -53,6 +61,8 @@ public class PrepareUIManager : MonoBehaviour
         Centralize(newUnit.GetComponent<RectTransform>());
         newUnit.IsInArmy = true;
         newUnit.GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+        ArmyPointsRemaning.text = (1000 - PrepareManager.Instance.Army.Points).ToString();
     }
 
     public void UnitInArmyUI(Unit unit)
@@ -85,6 +95,36 @@ public class PrepareUIManager : MonoBehaviour
             return;
 
         CreateUnit.Instance.DeleteUnit(PrepareManager.Instance.ChosenUnit);
+    }
+
+    public void EnableChangeNameArmy()
+    {
+        NameArmyInputField.enabled = true;
+    }
+
+    public void ChangeNameArmy(string name)
+    {
+        NameArmy.text = name;
+        PrepareManager.Instance.Army.Name = name;
+        NameArmyInputField.enabled = false;
+    }
+
+    public void ResetArmy()
+    {
+        foreach (GameObject row in Rows)
+        {
+            foreach (GameObject column in row.GetComponent<RowUI>().Columns)
+            {
+                foreach (GameObject cell in column.GetComponent<ColumnUI>().Cells)
+                {
+                    if(cell.GetComponent<CellUI>().unit != null)
+                    {
+                        cell.GetComponent<CellUI>().unit = null;
+                        Destroy(cell.GetComponentInChildren<Unit>().gameObject);
+                    }
+                }
+            } 
+        }
     }
 
     private void Centralize(RectTransform rectTransform)

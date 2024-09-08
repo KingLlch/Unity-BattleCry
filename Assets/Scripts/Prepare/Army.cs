@@ -3,6 +3,8 @@ using System.Collections.Generic;
 public class Army
 {
     public List<Row> Rows;
+    public string Name;
+    public int Points;
 
     public Army()
     {
@@ -18,6 +20,8 @@ public class Army
         int rowIndex = cell.transform.parent.parent.GetComponent<RowUI>().IndexRow;
         int columnIndex = cell.transform.parent.GetComponent<ColumnUI>().IndexColumn;
         int unitIndex = cell.transform.GetComponent<CellUI>().IndexCell;
+
+        Points += unit.unitCharacteristics.Points;
 
         Rows[rowIndex].AddUnit(columnIndex, unitIndex, unit);
     }

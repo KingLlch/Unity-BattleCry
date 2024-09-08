@@ -34,6 +34,18 @@ public class PrepareManager : MonoBehaviour
 
     }
 
+    public void SaveArmy()
+    {
+        //PlayerPrefs.S
+        PlayerPrefs.Save();
+    }
+
+    public void ResetArmy()
+    {
+        Army = new Army();
+        PrepareUIManager.Instance.ResetArmy();
+    }
+
     public void AddUnitToArmy(Unit unit, CellUI cell)
     {
         Army.AddUnit(unit, cell);
