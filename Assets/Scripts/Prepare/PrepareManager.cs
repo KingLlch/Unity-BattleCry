@@ -52,6 +52,8 @@ public class PrepareManager : MonoBehaviour
             ChosenUnit.UnitImageEdge.color = Color.red;
         }
         else
+        {
             ChosenUnit = null;
+        }
     }
 }

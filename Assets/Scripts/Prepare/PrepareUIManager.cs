@@ -43,11 +43,22 @@ public class PrepareUIManager : MonoBehaviour
 
         Unit newUnit = Instantiate(unit, Vector3.zero, Quaternion.identity, Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform);
 
+        newUnit.unitCharacteristics = unit.unitCharacteristics;
+        newUnit.UnitImage.sprite = unit.UnitImage.sprite;
+
+        UnitInArmyUI(newUnit);
+
         cell.unit = newUnit;
 
         Centralize(newUnit.GetComponent<RectTransform>());
-        newUnit.GetComponent<UnitMove>().ThisUnit.IsInArmy = true;
+        newUnit.IsInArmy = true;
         newUnit.GetComponent<CanvasGroup>().blocksRaycasts = true;
+    }
+
+    public void UnitInArmyUI(Unit unit)
+    {
+        unit.Value.gameObject.SetActive(false);
+        unit.UnitImageEdge.gameObject.SetActive(false);
     }
 
     public void CreateNewUnit()
@@ -58,13 +69,12 @@ public class PrepareUIManager : MonoBehaviour
 
     public void EditUnit()
     {
-        CreateUnitPanel.SetActive(true);
-
         if (PrepareManager.Instance.ChosenUnit == null)
         {
             return;
         }
 
+        CreateUnitPanel.SetActive(true);
         CreateUnit.Instance.EditUnit(PrepareManager.Instance.ChosenUnit);
         CreateUnit.Instance.IsEditUnit = true;
     }

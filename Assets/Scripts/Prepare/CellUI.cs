@@ -18,7 +18,7 @@ public class CellUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
 
         else
         {
-            Debug.Log("=");
+
         }
     }
 

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class Army
 {
-    public List<Row> Rows { get; private set; }
+    public List<Row> Rows;
 
     public Army()
     {
@@ -26,6 +26,7 @@ public class Army
 public class Row
 {
     public List<Column> Columns;
+    public SpeedRow SpeedRow;
 
     public Row()
     {
@@ -59,5 +60,12 @@ public class Column
     {
         Units[index] = unit;
     }
+}
+
+public enum SpeedRow
+{
+    SlowPace= 0,
+    Pace = 1,
+    Run = 2
 }
 
