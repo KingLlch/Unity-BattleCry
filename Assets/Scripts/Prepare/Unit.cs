@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Unit : MonoBehaviour
 {
     public bool IsInArmy = false;
+    public Unit MainUnitLink;
 
     public UnitCharacteristics unitCharacteristics = new();
 

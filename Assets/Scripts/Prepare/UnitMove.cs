@@ -49,6 +49,8 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
         else
         {
+            PrepareManager.Instance.RemoveUnitFromArmy(ThisUnit, CurrentParentTransform.GetComponent<CellUI>());
+            PrepareUIManager.Instance.ChangeArmyPoints();
             CurrentParentTransform.GetComponent<CellUI>().unit = null;
             Destroy(gameObject);
         }

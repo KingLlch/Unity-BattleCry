@@ -25,7 +25,7 @@ public class PrepareUIManager : MonoBehaviour
     public GameObject TopView;
 
     public Transform UnitParent;
-    public InputField NameArmyInputField;
+    public TMP_InputField NameArmyInputField;
     public TextMeshProUGUI NameArmy;
 
     public TextMeshProUGUI ArmyPointsRemaning;
@@ -53,6 +53,7 @@ public class PrepareUIManager : MonoBehaviour
 
         newUnit.unitCharacteristics = unit.unitCharacteristics;
         newUnit.UnitImage.sprite = unit.UnitImage.sprite;
+        newUnit.MainUnitLink = unit;
 
         UnitInArmyUI(newUnit);
 
@@ -62,6 +63,11 @@ public class PrepareUIManager : MonoBehaviour
         newUnit.IsInArmy = true;
         newUnit.GetComponent<CanvasGroup>().blocksRaycasts = true;
 
+        ChangeArmyPoints();
+    }
+
+    public void ChangeArmyPoints()
+    {
         ArmyPointsRemaning.text = (1000 - PrepareManager.Instance.Army.Points).ToString();
     }
 
@@ -113,18 +119,21 @@ public class PrepareUIManager : MonoBehaviour
     {
         foreach (GameObject row in Rows)
         {
-            foreach (GameObject column in row.GetComponent<RowUI>().Columns)
+            foreach (GameObject column in row.GetComponentInChildren<RowUI>().Columns)
             {
                 foreach (GameObject cell in column.GetComponent<ColumnUI>().Cells)
                 {
                     if(cell.GetComponent<CellUI>().unit != null)
                     {
-                        cell.GetComponent<CellUI>().unit = null;
+                        PrepareManager.Instance.RemoveUnitFromArmy(cell.GetComponent<CellUI>().unit, cell.GetComponent<CellUI>());
+
                         Destroy(cell.GetComponentInChildren<Unit>().gameObject);
                     }
                 }
             } 
         }
+
+        ArmyPointsRemaning.text = (1000 - PrepareManager.Instance.Army.Points).ToString(); 
     }
 
     private void Centralize(RectTransform rectTransform)

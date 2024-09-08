@@ -846,7 +846,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -74.44496, y: 0}
+  m_AnchoredPosition: {x: -74.44498, y: 0}
   m_SizeDelta: {x: -148.89, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &155665725
@@ -6898,7 +6898,7 @@ MonoBehaviour:
   CreateUnitPanel: {fileID: 769693280}
   TopView: {fileID: 211519659}
   UnitParent: {fileID: 2089507337}
-  NameArmyInputField: {fileID: 0}
+  NameArmyInputField: {fileID: 155665725}
   NameArmy: {fileID: 39642528}
   ArmyPointsRemaning: {fileID: 1989514308}
   Rows:
@@ -10199,7 +10199,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -24.98}
+  m_AnchoredPosition: {x: 0, y: -24.979996}
   m_SizeDelta: {x: 0, y: -49.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1989514308

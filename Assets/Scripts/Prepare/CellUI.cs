@@ -12,7 +12,7 @@ public class CellUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
 
         Unit dropUnit = pointer.pointerDrag.GetComponent<Unit>();
 
-        if (unit == null || (unit.unitCharacteristics.Name != dropUnit.unitCharacteristics.Name) && dropUnit.unitCharacteristics.Points < 1000 - PrepareManager.Instance.Army.Points)
+        if ((dropUnit.unitCharacteristics.Points < (1000 - PrepareManager.Instance.Army.Points)) && (dropUnit.unitCharacteristics.Value > 0) && (unit == null || unit.unitCharacteristics.Name != dropUnit.unitCharacteristics.Name))
         {
             PrepareManager.Instance.AddUnitToArmy(pointer.pointerDrag.GetComponent<Unit>(), this);
             PrepareUIManager.Instance.AddUnitToArmyUI(pointer.pointerDrag.GetComponent<Unit>(), this);

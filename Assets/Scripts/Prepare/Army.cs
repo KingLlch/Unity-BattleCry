@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Army
 {
@@ -23,7 +24,24 @@ public class Army
 
         Points += unit.unitCharacteristics.Points;
 
+        unit.unitCharacteristics.Value--;
+        unit.Value.text = "x" + unit.unitCharacteristics.Value.ToString();
+
         Rows[rowIndex].AddUnit(columnIndex, unitIndex, unit);
+    }
+
+    public void RemoveUnit(Unit unit, CellUI cell)
+    {
+        int rowIndex = cell.transform.parent.parent.GetComponent<RowUI>().IndexRow;
+        int columnIndex = cell.transform.parent.GetComponent<ColumnUI>().IndexColumn;
+        int unitIndex = cell.transform.GetComponent<CellUI>().IndexCell;
+
+        Points -= unit.unitCharacteristics.Points;
+
+        unit.MainUnitLink.unitCharacteristics.Value++;
+        unit.MainUnitLink.Value.text = "x" + unit.unitCharacteristics.Value.ToString();
+
+        Rows[rowIndex].RemoveUnit(columnIndex, unitIndex);
     }
 }
 
@@ -45,6 +63,11 @@ public class Row
     {
         Columns[columnIndex].AddUnit(unitIndex, unit);
     }
+
+    public void RemoveUnit(int columnIndex, int unitIndex)
+    {
+        Columns[columnIndex].RemoveUnit(unitIndex);
+    }
 }
 
 public class Column
@@ -63,6 +86,11 @@ public class Column
     public void AddUnit(int index, Unit unit)
     {
         Units[index] = unit;
+    }
+
+    public void RemoveUnit(int index)
+    {
+        Units[index] = null;
     }
 }
 

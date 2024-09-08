@@ -42,13 +42,17 @@ public class PrepareManager : MonoBehaviour
 
     public void ResetArmy()
     {
-        Army = new Army();
         PrepareUIManager.Instance.ResetArmy();
     }
 
     public void AddUnitToArmy(Unit unit, CellUI cell)
     {
         Army.AddUnit(unit, cell);
+    }
+
+    public void RemoveUnitFromArmy(Unit unit, CellUI cell)
+    {
+        Army.RemoveUnit(unit, cell);
     }
 
     public void ChoseUnit(Unit chosenUnit)
