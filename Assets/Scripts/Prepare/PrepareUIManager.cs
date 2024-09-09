@@ -29,7 +29,7 @@ public class PrepareUIManager : MonoBehaviour
     public TextMeshProUGUI NameArmy;
 
     public TextMeshProUGUI ArmyPointsRemaning;
-
+    public TextMeshProUGUI GoldText;
 
     public List<GameObject> Rows;
 
@@ -69,6 +69,11 @@ public class PrepareUIManager : MonoBehaviour
     public void ChangeArmyPoints()
     {
         ArmyPointsRemaning.text = (1000 - PrepareManager.Instance.Army.Points).ToString();
+    }
+
+    public void ChangeGold()
+    {
+        GoldText.text = PrepareManager.Instance.Gold.ToString();
     }
 
     public void UnitInArmyUI(Unit unit)

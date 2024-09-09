@@ -21,6 +21,8 @@ public class PrepareManager : MonoBehaviour
     public Army Army = new Army();
     public Unit ChosenUnit = new Unit();
 
+    public int Gold;
+
     private void Awake()
     {
         if (_instance == null)
