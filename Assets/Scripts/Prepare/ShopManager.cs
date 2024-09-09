@@ -29,11 +29,13 @@ public class ShopManager : MonoBehaviour
         {
             _instance = this;
         }
+
+        PrepareUIManager.Instance.ChangeGold();
     }
 
     public void BuyBooster(BusterItems items,int cost)
     {
-        if (PrepareManager.Instance.Gold > cost)
+        if (PrepareManager.Instance.Gold >= cost)
         {
             PrepareManager.Instance.Gold -= cost;
             PrepareUIManager.Instance.ChangeGold();
@@ -95,6 +97,29 @@ public class ShopManager : MonoBehaviour
         newItem.ThisItem = item;
         newItem.Image.sprite = item.Base.Sprite;
         newItem.Value.text = (value).ToString();
+
+        Centralize(newItem.GetComponent<RectTransform>());
+    }
+
+    public void CloseAddItemPanel()
+    {
+        AddItemsPanel.gameObject.SetActive(false);
+        DestroyAllChildren(AddItemsPanel.ItemsParent.gameObject);
+    }
+
+    private void DestroyAllChildren(GameObject parent)
+    {
+        for (int i = parent.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(parent.transform.GetChild(i).gameObject);
+        }
+    }
+
+    private void Centralize(RectTransform rectTransform)
+    {
+        rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+        rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+        rectTransform.localPosition = Vector3.zero;
     }
 }
 

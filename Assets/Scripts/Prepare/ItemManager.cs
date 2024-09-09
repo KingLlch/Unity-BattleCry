@@ -172,7 +172,7 @@ public class ItemManager : MonoBehaviour
     private void AddItems()
     {
         //Races
-        ItemsList.AllItems.Add(new Item("Human", ItemType.Race, Rare.Common, 7, 5, "Sprites/Items/Human", bluntDamage: 1, slashResist: 1));
+        ItemsList.AllItems.Add(new Item("Human", ItemType.Race, Rare.Uncommon, 7, 5, "Sprites/Items/Human", bluntDamage: 1, slashResist: 1));
 
         ItemsList.AllItems.Add(new Item("Goblin", ItemType.Race, Rare.Common, 3, 3, "Sprites/Items/Goblin", slashDamage: 1, bluntResist: -1));
         ItemsList.AllItems.Add(new Item("Orc", ItemType.Race, Rare.Common, 10, 8, "Sprites/Items/Orc", bluntDamage: 2, bluntResist: 1, slashResist: -1));

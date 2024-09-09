@@ -8,7 +8,6 @@ public class ItemsSpawner : MonoBehaviour
     {
         foreach (Item race in ItemsList.AllRace)
         {
-            Debug.Log(CreateUnit.Instance.RacesGrid);
             ItemInfo newItem = Instantiate(ItemPrefab, Vector2.zero, Quaternion.identity, CreateUnit.Instance.RacesGrid).GetComponent<ItemInfo>();
             newItem.ThisItem = race.Copy();
             newItem.Value.text = "x" + newItem.ThisItem.Base.Value.ToString();
