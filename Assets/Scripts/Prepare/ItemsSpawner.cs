@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class ItemsSpawner : MonoBehaviour
@@ -10,7 +11,8 @@ public class ItemsSpawner : MonoBehaviour
         {
             ItemInfo newItem = Instantiate(ItemPrefab, Vector2.zero, Quaternion.identity, CreateUnit.Instance.RacesGrid).GetComponent<ItemInfo>();
             newItem.ThisItem = race.Copy();
-            newItem.Value.text = "x" + newItem.ThisItem.Base.Value.ToString();
+            newItem.ThisItem.Value = race.Value;
+            newItem.Value.text = "x" + newItem.ThisItem.Value.ItemValue.ToString();
             newItem.Image.sprite = newItem.ThisItem.Base.Sprite;
             newItem.GetComponent<RectTransform>().localPosition = Vector3.zero;
         }
@@ -19,7 +21,8 @@ public class ItemsSpawner : MonoBehaviour
         {
             ItemInfo newItem = Instantiate(ItemPrefab, Vector2.zero, Quaternion.identity, CreateUnit.Instance.ItemsGrid).GetComponent<ItemInfo>();
             newItem.ThisItem = item.Copy();
-            newItem.Value.text = "x" + newItem.ThisItem.Base.Value.ToString();
+            newItem.ThisItem.Value = item.Value;
+            newItem.Value.text = "x" + newItem.ThisItem.Value.ItemValue.ToString();
             newItem.Image.sprite = newItem.ThisItem.Base.Sprite;
             newItem.GetComponent<RectTransform>().localPosition = Vector3.zero;
         }

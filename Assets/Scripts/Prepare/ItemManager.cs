@@ -1,6 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class Value
+{
+    public int ItemValue;
+}
+
 public class Base
 {
     public string Name;
@@ -12,8 +17,6 @@ public class Base
 
     public int Points;
     public int Health;
-
-    public int Value;
 
     public Base Copy()
     {
@@ -77,6 +80,7 @@ public class Resists
 
 public class Item
 {
+    public Value Value;
     public Base Base;
     public Weapon Weapon;
     public Resists Resists;
@@ -95,8 +99,13 @@ public class Item
             Rare = rare,
             Points = points,
             Health = health,
-            Sprite = Resources.Load<Sprite>(spritePath),
-            Value = 0
+            Sprite = Resources.Load<Sprite>(spritePath)
+           
+        };
+
+        Value = new Value
+        {
+            ItemValue = 0
         };
 
         Weapon = new Weapon

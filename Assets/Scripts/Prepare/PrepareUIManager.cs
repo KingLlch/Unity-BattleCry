@@ -84,7 +84,8 @@ public class PrepareUIManager : MonoBehaviour
 
     public void CreateNewUnit()
     {
-        CreateUnitPanel.SetActive(true); 
+        CreateUnitPanel.SetActive(true);
+        CreateUnit.Instance.ChangeValueItems();
         CreateUnit.Instance.IsEditUnit = false;
     }
 
@@ -96,6 +97,7 @@ public class PrepareUIManager : MonoBehaviour
         }
 
         CreateUnitPanel.SetActive(true);
+        CreateUnit.Instance.ChangeValueItems();
         CreateUnit.Instance.EditUnit(PrepareManager.Instance.ChosenUnit);
         CreateUnit.Instance.IsEditUnit = true;
     }

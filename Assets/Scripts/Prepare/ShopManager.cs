@@ -33,7 +33,7 @@ public class ShopManager : MonoBehaviour
         PrepareUIManager.Instance.ChangeGold();
     }
 
-    public void BuyBooster(BusterItems items,int cost)
+    public void BuyBooster(BusterItems items, int cost)
     {
         if (PrepareManager.Instance.Gold >= cost)
         {
@@ -51,39 +51,39 @@ public class ShopManager : MonoBehaviour
 
     public void RandomItems(BusterItems items)
     {
-        for (int i = 0; i < items.CommonItemCount; i+=10)
-        {        
-            ItemsList.AllCommonItem[Random.Range(0, ItemsList.AllCommonItem.Count)].Base.Value += 10;
+        for (int i = 0; i < items.CommonItemCount; i += 10)
+        {
+            ItemsList.AllCommonItem[Random.Range(0, ItemsList.AllCommonItem.Count)].Value.ItemValue += 10;
             AddItem(ItemsList.AllCommonItem[Random.Range(0, ItemsList.AllCommonItem.Count)], 10);
         }
 
-        for (int i = 0; i < items.UncommonItemCount; i+=5)
+        for (int i = 0; i < items.UncommonItemCount; i += 5)
         {
-            ItemsList.AllUncommonItem[Random.Range(0, ItemsList.AllUncommonItem.Count)].Base.Value+= 5;
+            ItemsList.AllUncommonItem[Random.Range(0, ItemsList.AllUncommonItem.Count)].Value.ItemValue += 5;
             AddItem(ItemsList.AllUncommonItem[Random.Range(0, ItemsList.AllUncommonItem.Count)], 5);
         }
 
         for (int i = 0; i < items.RareItemCount; i++)
         {
-            ItemsList.AllRareItem[Random.Range(0, ItemsList.AllRareItem.Count)].Base.Value+= 1;
+            ItemsList.AllRareItem[Random.Range(0, ItemsList.AllRareItem.Count)].Value.ItemValue += 1;
             AddItem(ItemsList.AllRareItem[Random.Range(0, ItemsList.AllRareItem.Count)], 1);
         }
 
         for (int i = 0; i < items.EpicItemCount; i++)
         {
-            ItemsList.AllEpicItem[Random.Range(0, ItemsList.AllEpicItem.Count)].Base.Value+= 1;
+            ItemsList.AllEpicItem[Random.Range(0, ItemsList.AllEpicItem.Count)].Value.ItemValue += 1;
             AddItem(ItemsList.AllEpicItem[Random.Range(0, ItemsList.AllEpicItem.Count)], 1);
         }
 
         for (int i = 0; i < items.LegendaryItemCount; i++)
         {
-            ItemsList.AllLegendaryItem[Random.Range(0, ItemsList.AllLegendaryItem.Count)].Base.Value+= 1;
+            ItemsList.AllLegendaryItem[Random.Range(0, ItemsList.AllLegendaryItem.Count)].Value.ItemValue += 1;
             AddItem(ItemsList.AllLegendaryItem[Random.Range(0, ItemsList.AllLegendaryItem.Count)], 1);
         }
 
         for (int i = 0; i < items.MythicalItemCount; i++)
         {
-            ItemsList.AllMythicalItem[Random.Range(0, ItemsList.AllMythicalItem.Count)].Base.Value+= 1;
+            ItemsList.AllMythicalItem[Random.Range(0, ItemsList.AllMythicalItem.Count)].Value.ItemValue += 1;
             AddItem(ItemsList.AllMythicalItem[Random.Range(0, ItemsList.AllMythicalItem.Count)], 1);
         }
 
@@ -93,7 +93,7 @@ public class ShopManager : MonoBehaviour
     {
         AddItemsPanel.gameObject.SetActive(true);
 
-        ItemInfo newItem = Instantiate(ItemPrefab, Vector2.zero,Quaternion.identity, AddItemsPanel.ItemsParent).GetComponent<ItemInfo>();
+        ItemInfo newItem = Instantiate(ItemPrefab, Vector2.zero, Quaternion.identity, AddItemsPanel.ItemsParent).GetComponent<ItemInfo>();
         newItem.ThisItem = item;
         newItem.Image.sprite = item.Base.Sprite;
         newItem.Value.text = (value).ToString();
