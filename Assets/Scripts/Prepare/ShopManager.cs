@@ -96,6 +96,7 @@ public class ShopManager : MonoBehaviour
         ItemInfo newItem = Instantiate(ItemPrefab, Vector2.zero, Quaternion.identity, AddItemsPanel.ItemsParent).GetComponent<ItemInfo>();
         newItem.ThisItem = item;
         newItem.Image.sprite = item.Base.Sprite;
+        newItem.ImageEdge.sprite = Resources.Load<Sprite>("Sprites/Rare/" + item.Base.Rare);
         newItem.Value.text = (value).ToString();
 
         Centralize(newItem.GetComponent<RectTransform>());

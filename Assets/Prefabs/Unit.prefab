@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsInArmy: 0
+  MainUnitLink: {fileID: 0}
   Value: {fileID: 4522351407513334630}
   UnitImage: {fileID: 2566601343634650867}
   UnitImageEdge: {fileID: 2820725048457062704}
@@ -232,8 +233,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -43.409508, y: 20.91565}
-  m_SizeDelta: {x: 79.9096, y: 41.8313}
+  m_AnchoredPosition: {x: -45.11831, y: 21.6752}
+  m_SizeDelta: {x: 76.4919, y: 40.3123}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8959796502314873193
 CanvasRenderer:
@@ -265,15 +266,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: x10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3b04fdf2a649107468883fefc24bd2c1, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: d69f93f9ec6a4634cb3825dfc5aab53c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

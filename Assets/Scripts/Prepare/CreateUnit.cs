@@ -671,12 +671,26 @@ public class CreateUnit : MonoBehaviour
     {
         foreach (Transform child in RacesGrid)
         {
-            child.GetComponent<ItemInfo>().Value.text = child.GetComponent<ItemInfo>().ThisItem.Value.ItemValue.ToString();
+            ItemInfo clildInfo = child.GetComponent<ItemInfo>();
+            clildInfo.Value.text = clildInfo.ThisItem.Value.ItemValue.ToString();
+
+            if (clildInfo.ThisItem.Value.ItemValue > 0)
+            {
+                clildInfo.Hide = false;
+                clildInfo.ImageHide.SetActive(false);
+            }
         }
 
         foreach (Transform child in ItemsGrid)
         {
-            child.GetComponent<ItemInfo>().Value.text = child.GetComponent<ItemInfo>().ThisItem.Value.ItemValue.ToString();
+            ItemInfo clildInfo = child.GetComponent<ItemInfo>();
+            clildInfo.Value.text = clildInfo.ThisItem.Value.ItemValue.ToString();
+
+            if (clildInfo.ThisItem.Value.ItemValue > 0)
+            {
+                clildInfo.Hide = false;
+                clildInfo.ImageHide.SetActive(false);
+            }
         }
     }
 }

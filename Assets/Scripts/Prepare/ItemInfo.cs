@@ -10,6 +10,10 @@ public class ItemInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public TextMeshProUGUI Value;
     public Image Image;
+    public Image ImageEdge;
+
+    public bool Hide;
+    public GameObject ImageHide;
 
     private Camera _mainCamera;
 
@@ -27,17 +31,20 @@ public class ItemInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData pointer)
     {
-        Description.Instance.ShowDescriptionItem(ThisItem, _mainCamera.ScreenToWorldPoint(new Vector3(pointer.position.x, pointer.position.y, 0)));
+        if(!Hide)
+            Description.Instance.ShowDescriptionItem(ThisItem, _mainCamera.ScreenToWorldPoint(new Vector3(pointer.position.x, pointer.position.y, 0)));
     }
 
     public void OnPointerExit(PointerEventData pointer)
     {
-        Description.Instance.HideDescription();
+        if (!Hide)
+            Description.Instance.HideDescription();
     }
 
     public void OnPointerMove(PointerEventData pointer)
     {
-        Description.Instance.ChangePositionDescription(pointer.position);
+        if (!Hide)
+            Description.Instance.ChangePositionDescription(pointer.position);
     }
 
     public void OnPointerClick(PointerEventData eventData)
