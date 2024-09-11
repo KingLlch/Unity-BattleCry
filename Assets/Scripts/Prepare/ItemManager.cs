@@ -224,12 +224,12 @@ public class ItemManager : MonoBehaviour
         ItemsList.AllItems.Add(new Item("Demon", ItemType.Race, Rare.Common, 40, 35, "Sprites/Items/Demon", darknessDamage: 5, darknessResist: 5, lightResist: -3));
         ItemsList.AllItems.Add(new Item("Imp", ItemType.Race, Rare.Common, 10, 8, "Sprites/Items/Imp", fireDamage: 1, fireResist: 2));
 
-        ItemsList.AllItems.Add(new Item("RobotMK1", ItemType.Race, Rare.Common, 20, 15, "Sprites/Items/RobotMK1", bluntDamage: 2, pierceResist: 1));
-        ItemsList.AllItems.Add(new Item("RobotMK10", ItemType.Race, Rare.Uncommon, 30, 20, "Sprites/Items/RobotMK10", bluntDamage: 3, slashResist: 2));
-        ItemsList.AllItems.Add(new Item("RobotMK200", ItemType.Race, Rare.Rare, 40, 30, "Sprites/Items/RobotMK200", bluntDamage: 4, fireResist: 3));
-        ItemsList.AllItems.Add(new Item("RobotMK400", ItemType.Race, Rare.Epic, 50, 40, "Sprites/Items/RobotMK400", bluntDamage: 5, iceResist: 2));
-        ItemsList.AllItems.Add(new Item("RobotMK2000", ItemType.Race, Rare.Legendary, 70, 70, "Sprites/Items/RobotMK400", bluntDamage: 5, iceResist: 2));
-        ItemsList.AllItems.Add(new Item("RobotMK10000", ItemType.Race, Rare.Mythical, 100, 80, "Sprites/Items/RobotMK1000", bluntDamage: 10, fireResist: 5, lightResist: 5));
+        ItemsList.AllItems.Add(new Item("RobotMK1", ItemType.Race, Rare.Common, 20, 15, "Sprites/Items/Robot1", bluntDamage: 2, pierceResist: 1));
+        ItemsList.AllItems.Add(new Item("RobotMK10", ItemType.Race, Rare.Uncommon, 30, 20, "Sprites/Items/Robot2", bluntDamage: 3, slashResist: 2));
+        ItemsList.AllItems.Add(new Item("RobotMK200", ItemType.Race, Rare.Rare, 40, 30, "Sprites/Items/Robot3", bluntDamage: 4, fireResist: 3));
+        ItemsList.AllItems.Add(new Item("RobotMK400", ItemType.Race, Rare.Epic, 50, 40, "Sprites/Items/Robot4", bluntDamage: 5, iceResist: 2));
+        ItemsList.AllItems.Add(new Item("RobotMK2000", ItemType.Race, Rare.Legendary, 70, 70, "Sprites/Items/Robot5", bluntDamage: 5, iceResist: 2));
+        ItemsList.AllItems.Add(new Item("RobotMK10000", ItemType.Race, Rare.Mythical, 100, 80, "Sprites/Items/Robot6", bluntDamage: 10, fireResist: 5, lightResist: 5));
 
         ItemsList.AllItems.Add(new Item("Fire Elemental", ItemType.Race, Rare.Rare, 30, 25, "Sprites/Items/FireElemental", fireDamage: 5, fireResist: 5, waterResist: -5));
         ItemsList.AllItems.Add(new Item("Water Elemental", ItemType.Race, Rare.Rare, 30, 25, "Sprites/Items/WaterElemental", waterDamage: 5, waterResist: 5, fireResist: -5));
@@ -239,10 +239,10 @@ public class ItemManager : MonoBehaviour
         ItemsList.AllItems.Add(new Item("Light Elemental", ItemType.Race, Rare.Rare, 30, 25, "Sprites/Items/LightElemental", lightDamage: 5, lightResist: 5, darknessResist: -3));
         ItemsList.AllItems.Add(new Item("Darkness Elemental", ItemType.Race, Rare.Rare, 30, 25, "Sprites/Items/DarknessElemental", darknessDamage: 5, darknessResist: 5, lightResist: -3));
 
-        ItemsList.AllItems.Add(new Item("ZombieHuman", ItemType.Race, Rare.Common, 2, 3, "Sprites/Items/Skeleton", slashDamage: 1, bluntResist: -1));
-        ItemsList.AllItems.Add(new Item("ZombieOrc", ItemType.Race, Rare.Common, 3, 4, "Sprites/Items/Skeleton", slashDamage: 2, bluntResist: -2));
+        ItemsList.AllItems.Add(new Item("ZombieHuman", ItemType.Race, Rare.Common, 2, 3, "Sprites/Items/Zombie", slashDamage: 1, bluntResist: -1));
+        ItemsList.AllItems.Add(new Item("ZombieOrc", ItemType.Race, Rare.Common, 3, 4, "Sprites/Items/Zombie1", slashDamage: 2, bluntResist: -2));
         ItemsList.AllItems.Add(new Item("SkeletonHuman", ItemType.Race, Rare.Common, 2, 3, "Sprites/Items/Skeleton", pierceDamage: 1, bluntResist: -1));
-        ItemsList.AllItems.Add(new Item("SkeletonOrc", ItemType.Race, Rare.Common, 3, 4, "Sprites/Items/Skeleton", pierceDamage: 2, bluntResist: -2));
+        ItemsList.AllItems.Add(new Item("SkeletonOrc", ItemType.Race, Rare.Common, 3, 4, "Sprites/Items/Skeleton1", pierceDamage: 2, bluntResist: -2));
         ItemsList.AllItems.Add(new Item("Vampire", ItemType.Race, Rare.Legendary, 5, 5, "Sprites/Items/Vampire", pierceDamage: 3, darknessResist: 3));
         ItemsList.AllItems.Add(new Item("AlphaVampire", ItemType.Race, Rare.Mythical, 5, 5, "Sprites/Items/AlphaVampire", pierceDamage: 3, darknessResist: 3));
         ItemsList.AllItems.Add(new Item("Spirit", ItemType.Race, Rare.Epic, 5, 5, "Sprites/Items/Spirit", darknessDamage: 2, lightResist: 2));
