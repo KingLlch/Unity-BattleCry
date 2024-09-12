@@ -189,7 +189,7 @@ public class ItemManager : MonoBehaviour
         ItemsList.AllItems.Add(new Item("Troll", ItemType.Race, Rare.Epic, 20, 15, "Sprites/Items/Troll", bluntDamage: 4, earthDamage: 2, slashResist: 2, earthResist: 2, poisonResist: 3, fireResist: -5, iceResist: -3));
         ItemsList.AllItems.Add(new Item("Stone Troll", ItemType.Race, Rare.Epic, 20, 15, "Sprites/Items/StoneTroll", bluntDamage: 4, earthDamage: 2, slashResist: 2, earthResist: 2, poisonResist: 3, fireResist: -5, iceResist: -3));
         ItemsList.AllItems.Add(new Item("Ogre", ItemType.Race, Rare.Legendary, 50, 30, "Sprites/Items/Ogre", bluntDamage: 7, slashResist: 5, fireResist: -5, waterResist: -3));
-        ItemsList.AllItems.Add(new Item("Centaur", ItemType.Race, Rare.Epic, 30, 15, "Sprites/Items/Centaur", pierceDamage: 4, slashResist: 3, bluntResist: 3, pierceResist: -4));
+        //ItemsList.AllItems.Add(new Item("Centaur", ItemType.Race, Rare.Epic, 30, 15, "Sprites/Items/Centaur", pierceDamage: 4, slashResist: 3, bluntResist: 3, pierceResist: -4));
 
         ItemsList.AllItems.Add(new Item("HighElf", ItemType.Race, Rare.Uncommon, 7, 5, "Sprites/Items/HighElf", slashDamage: 2, bluntResist: -1, darknessResist: -1, lightResist: 2));
         ItemsList.AllItems.Add(new Item("DarkElf", ItemType.Race, Rare.Epic, 15, 10, "Sprites/Items/DarkElf", pierceDamage: 4, bluntResist: -3, poisonResist: -3, darknessResist: 2, lightResist: -1));
@@ -203,12 +203,12 @@ public class ItemManager : MonoBehaviour
         ItemsList.AllItems.Add(new Item("IronDwarf", ItemType.Race, Rare.Rare, 12, 10, "Sprites/Items/IronDwarf", bluntDamage: 2, bluntResist: 2));
         ItemsList.AllItems.Add(new Item("GoldDwarf", ItemType.Race, Rare.Legendary, 21, 15, "Sprites/Items/GoldDwarf", bluntDamage: 3, bluntResist: 3));
 
-        ItemsList.AllItems.Add(new Item("Driad", ItemType.Race, Rare.Uncommon, 5, 5, "Sprites/Items/Driad", earthDamage: 1, poisonResist: 2));
+        ItemsList.AllItems.Add(new Item("Dryad", ItemType.Race, Rare.Uncommon, 5, 5, "Sprites/Items/Driad", earthDamage: 1, poisonResist: 2));
         ItemsList.AllItems.Add(new Item("Ent", ItemType.Race, Rare.Rare, 20, 15, "Sprites/Items/Ent", bluntDamage: 2, earthResist: 3, fireResist: -5));
         ItemsList.AllItems.Add(new Item("DarkEnt", ItemType.Race, Rare.Epic, 25, 18, "Sprites/Items/DarkEnt", bluntDamage: 3, poisonResist: 2, fireResist: -6));
 
-        ItemsList.AllItems.Add(new Item("Naga", ItemType.Race, Rare.Rare, 15, 10, "Sprites/Items/Naga", pierceDamage: 2, poisonResist: 2, fireResist: -2));
-        ItemsList.AllItems.Add(new Item("Medusa", ItemType.Race, Rare.Rare, 20, 15, "Sprites/Items/Medusa", pierceDamage: 3, poisonDamage: 1, bluntResist: -1));
+        ItemsList.AllItems.Add(new Item("Naga", ItemType.Race, Rare.Mythical, 15, 10, "Sprites/Items/Naga", pierceDamage: 2, poisonResist: 2, fireResist: -2));
+        //ItemsList.AllItems.Add(new Item("Medusa", ItemType.Race, Rare.Rare, 20, 15, "Sprites/Items/Medusa", pierceDamage: 3, poisonDamage: 1, bluntResist: -1));
 
         ItemsList.AllItems.Add(new Item("RedDragon", ItemType.Race, Rare.Mythical, 50, 40, "Sprites/Items/RedDragon", fireDamage: 5, fireResist: 5, iceResist: -3));
         ItemsList.AllItems.Add(new Item("BlueDragon", ItemType.Race, Rare.Mythical, 50, 40, "Sprites/Items/BlueDragon", waterDamage: 5, waterResist: 5, lightResist: -2));
@@ -240,9 +240,9 @@ public class ItemManager : MonoBehaviour
         ItemsList.AllItems.Add(new Item("Darkness Elemental", ItemType.Race, Rare.Rare, 30, 25, "Sprites/Items/DarknessElemental", darknessDamage: 5, darknessResist: 5, lightResist: -3));
 
         ItemsList.AllItems.Add(new Item("ZombieHuman", ItemType.Race, Rare.Common, 2, 3, "Sprites/Items/Zombie", slashDamage: 1, bluntResist: -1));
-        ItemsList.AllItems.Add(new Item("ZombieOrc", ItemType.Race, Rare.Common, 3, 4, "Sprites/Items/Zombie1", slashDamage: 2, bluntResist: -2));
+        ItemsList.AllItems.Add(new Item("ZombieOrc", ItemType.Race, Rare.Common, 3, 4, "Sprites/Items/OrcZombie", slashDamage: 2, bluntResist: -2));
         ItemsList.AllItems.Add(new Item("SkeletonHuman", ItemType.Race, Rare.Common, 2, 3, "Sprites/Items/Skeleton", pierceDamage: 1, bluntResist: -1));
-        ItemsList.AllItems.Add(new Item("SkeletonOrc", ItemType.Race, Rare.Common, 3, 4, "Sprites/Items/Skeleton1", pierceDamage: 2, bluntResist: -2));
+        ItemsList.AllItems.Add(new Item("SkeletonOrc", ItemType.Race, Rare.Common, 3, 4, "Sprites/Items/OrcSkeleton", pierceDamage: 2, bluntResist: -2));
         ItemsList.AllItems.Add(new Item("Vampire", ItemType.Race, Rare.Legendary, 5, 5, "Sprites/Items/Vampire", pierceDamage: 3, darknessResist: 3));
         ItemsList.AllItems.Add(new Item("AlphaVampire", ItemType.Race, Rare.Mythical, 5, 5, "Sprites/Items/AlphaVampire", pierceDamage: 3, darknessResist: 3));
         ItemsList.AllItems.Add(new Item("Spirit", ItemType.Race, Rare.Epic, 5, 5, "Sprites/Items/Spirit", darknessDamage: 2, lightResist: 2));
