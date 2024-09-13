@@ -6,12 +6,14 @@ using UnityEngine.UI;
 
 public class MissionUI : MonoBehaviour
 {
+    public Mission ThisMission;
+
     public Image MissionImage;
     public TextMeshProUGUI MissionName;
 
 
     public void StartMission()
     {
-        CampaignManager.Instance.StartMission();
+        CampaignManager.Instance.OpenStartMissionPanel(ThisMission);
     }
 }

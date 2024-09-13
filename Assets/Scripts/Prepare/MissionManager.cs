@@ -7,6 +7,8 @@ public class MissionBase
     public int CampaignNumber;
     public int MissionNumber;
     public string Name;
+    public string Description;
+    public Sprite Sprite;
 }
 
 public class MissionArmy
@@ -19,13 +21,15 @@ public class Mission
     public MissionBase MissionBase;
     public MissionArmy MissionArmy;
 
-    public Mission(int campaignNumber, int missionNumber, string name, Army army) 
+    public Mission(int campaignNumber, int missionNumber, string name, string spritePath, Army army, string description = "") 
     {
         MissionBase = new MissionBase()
         {
             CampaignNumber = campaignNumber,
             MissionNumber = missionNumber,
-            Name = name
+            Name = name,
+            Description = description,
+            Sprite = Resources.Load<Sprite>(spritePath)
         };
 
         MissionArmy = new MissionArmy()
@@ -50,6 +54,12 @@ public class MissionManager : MonoBehaviour
 
     private void AddMission()
     {
-        MissionList.AllMission.Add(new Mission(1,1,"",new Army()));
+        MissionList.AllMission.Add(new Mission(0, 0, "Mission1", "Sprites/Missions/Mission1", new Army(), "MissionDesc"));
+        MissionList.AllMission.Add(new Mission(0, 1, "Mission2", "Sprites/Missions/Mission1", new Army(), "MissionDesc"));
+        MissionList.AllMission.Add(new Mission(0, 2, "Mission3", "Sprites/Missions/Mission1", new Army(), "MissionDesc"));
+        MissionList.AllMission.Add(new Mission(0, 3, "Mission4", "Sprites/Missions/Mission1", new Army(), "MissionDesc"));
+        MissionList.AllMission.Add(new Mission(0, 4, "Mission5", "Sprites/Missions/Mission1", new Army(), "MissionDesc"));
+        MissionList.AllMission.Add(new Mission(0, 5, "Mission6", "Sprites/Missions/Mission1", new Army(), "MissionDesc"));
+        MissionList.AllMission.Add(new Mission(0, 6, "Mission7", "Sprites/Missions/Mission1", new Army(), "MissionDesc"));
     }
 }
