@@ -30,6 +30,8 @@ public class CampaignManager : MonoBehaviour
     public TextMeshProUGUI MissionInfoPanelName;
     public TextMeshProUGUI MissionInfoPanelDescription;
 
+    public Mission CurrentMission;
+
     private void Awake()
     {
         if (_instance == null)
@@ -45,7 +47,6 @@ public class CampaignManager : MonoBehaviour
             newMission.MissionImage.sprite = mission.MissionBase.Sprite;
             newMission.GetComponent<RectTransform>().localPosition = Vector3.zero;
         }
-
     }
 
     public void OpenStartMissionPanel(Mission mission)
@@ -53,10 +54,18 @@ public class CampaignManager : MonoBehaviour
         MissionInfoPanel.SetActive(true);
         MissionInfoPanelName.text = mission.MissionBase.Name;
         MissionInfoPanelDescription.text = mission.MissionBase.Description;
+        CurrentMission = mission;
     }
 
     public void StartMission()
     {
-        SceneManager.LoadScene("");
+        BattleInfo.Instance.PlayerArmy = PrepareManager.Instance.Army;
+        BattleInfo.Instance.EnemyArmy = CurrentMission.MissionArmy.Army;
+
+        BattleInfo.Instance.CampaignNumber = CurrentMission.MissionBase.CampaignNumber;
+        BattleInfo.Instance.MissionNumber = CurrentMission.MissionBase.MissionNumber;
+
+        BattleInfo.Instance.Gold = CurrentMission.MissionBase.Gold;
+        SceneManager.LoadScene("Battle");
     }
 }

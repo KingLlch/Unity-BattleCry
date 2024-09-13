@@ -9,6 +9,8 @@ public class MissionBase
     public string Name;
     public string Description;
     public Sprite Sprite;
+
+    public int Gold;
 }
 
 public class MissionArmy
@@ -21,7 +23,7 @@ public class Mission
     public MissionBase MissionBase;
     public MissionArmy MissionArmy;
 
-    public Mission(int campaignNumber, int missionNumber, string name, string spritePath, Army army, string description = "") 
+    public Mission(int campaignNumber, int missionNumber, string name, string spritePath, Army army, string description = "", int gold = 1000) 
     {
         MissionBase = new MissionBase()
         {
@@ -29,7 +31,8 @@ public class Mission
             MissionNumber = missionNumber,
             Name = name,
             Description = description,
-            Sprite = Resources.Load<Sprite>(spritePath)
+            Sprite = Resources.Load<Sprite>(spritePath),
+            Gold = gold
         };
 
         MissionArmy = new MissionArmy()
