@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using TMPro;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
@@ -46,6 +47,12 @@ public class CampaignManager : MonoBehaviour
             newMission.MissionName.text = mission.MissionBase.Name;
             newMission.MissionImage.sprite = mission.MissionBase.Sprite;
             newMission.GetComponent<RectTransform>().localPosition = Vector3.zero;
+        }
+
+        foreach (GameObject campaignParent in CampaignParents)
+        {
+            int height = Mathf.CeilToInt((float)campaignParent.transform.childCount) * 400 + (Mathf.CeilToInt((float)campaignParent.transform.childCount) - 1) * 30 + 50;
+            campaignParent.GetComponent<RectTransform>().sizeDelta = new Vector2(campaignParent.GetComponent<RectTransform>().sizeDelta.x, height);
         }
     }
 

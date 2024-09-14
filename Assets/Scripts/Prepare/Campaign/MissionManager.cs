@@ -57,12 +57,12 @@ public class MissionManager : MonoBehaviour
 
     private void AddMission()
     {
-        MissionList.AllMission.Add(new Mission(0, 0, "Mission1", "Sprites/Missions/Mission1", new Army(), "MissionDesc"));
-        MissionList.AllMission.Add(new Mission(0, 1, "Mission2", "Sprites/Missions/Mission1", new Army(), "MissionDesc"));
-        MissionList.AllMission.Add(new Mission(0, 2, "Mission3", "Sprites/Missions/Mission1", new Army(), "MissionDesc"));
-        MissionList.AllMission.Add(new Mission(0, 3, "Mission4", "Sprites/Missions/Mission1", new Army(), "MissionDesc"));
-        MissionList.AllMission.Add(new Mission(0, 4, "Mission5", "Sprites/Missions/Mission1", new Army(), "MissionDesc"));
-        MissionList.AllMission.Add(new Mission(0, 5, "Mission6", "Sprites/Missions/Mission1", new Army(), "MissionDesc"));
-        MissionList.AllMission.Add(new Mission(0, 6, "Mission7", "Sprites/Missions/Mission1", new Army(), "MissionDesc"));
+        MissionList.AllMission.Add(new Mission(0, 0, "Mission1", "Sprites/Missions/Mission1", new Army(), "MissionDesc1"));
+        MissionList.AllMission.Add(new Mission(0, 1, "Mission2", "Sprites/Missions/Mission2", new Army(), "MissionDesc2"));
+        MissionList.AllMission.Add(new Mission(0, 2, "Mission3", "Sprites/Missions/Mission3", new Army(), "MissionDesc3"));
+        MissionList.AllMission.Add(new Mission(0, 3, "Mission4", "Sprites/Missions/Mission4", new Army(), "MissionDesc4"));
+        MissionList.AllMission.Add(new Mission(0, 4, "Mission5", "Sprites/Missions/Mission5", new Army(), "MissionDesc5"));
+        MissionList.AllMission.Add(new Mission(0, 5, "Mission6", "Sprites/Missions/Mission6", new Army(), "MissionDesc6"));
+        MissionList.AllMission.Add(new Mission(0, 6, "Mission7", "Sprites/Missions/Mission7", new Army(), "MissionDesc7"));
     }
 }
