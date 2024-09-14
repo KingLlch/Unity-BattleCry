@@ -58,16 +58,16 @@ public class BattleUIManager : MonoBehaviour
         int timeSeconds = 0;
         int timeMinuts = 0;
 
-        while (true) 
+        while (true)
         {
             timeSeconds++;
 
-            if (timeSeconds>=60) 
+            if (timeSeconds >= 60)
                 timeMinuts++;
 
             ChangeTimerUI(timeSeconds, timeMinuts);
             yield return new WaitForSeconds(1f);
-            
+
         }
     }
 

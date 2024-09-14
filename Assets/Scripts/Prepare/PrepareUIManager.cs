@@ -130,17 +130,17 @@ public class PrepareUIManager : MonoBehaviour
             {
                 foreach (GameObject cell in column.GetComponent<ColumnUI>().Cells)
                 {
-                    if(cell.GetComponent<CellUI>().unit != null)
+                    if (cell.GetComponent<CellUI>().unit != null)
                     {
                         PrepareManager.Instance.RemoveUnitFromArmy(cell.GetComponent<CellUI>().unit, cell.GetComponent<CellUI>());
 
                         Destroy(cell.GetComponentInChildren<Unit>().gameObject);
                     }
                 }
-            } 
+            }
         }
 
-        ArmyPointsRemaning.text = (1000 - PrepareManager.Instance.Army.Points).ToString(); 
+        ArmyPointsRemaning.text = (1000 - PrepareManager.Instance.Army.Points).ToString();
     }
 
     private void Centralize(RectTransform rectTransform)

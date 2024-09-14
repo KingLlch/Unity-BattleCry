@@ -75,7 +75,7 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     public void OnPointerClick(PointerEventData pointer)
     {
-        if(PrepareManager.Instance.ChosenUnit == ThisUnit)
+        if (PrepareManager.Instance.ChosenUnit == ThisUnit)
         {
             PrepareManager.Instance.ChoseUnit(null);
         }

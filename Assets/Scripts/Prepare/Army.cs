@@ -96,7 +96,7 @@ public class Column
 
 public enum SpeedRow
 {
-    SlowPace= 0,
+    SlowPace = 0,
     Pace = 1,
     Run = 2
 }

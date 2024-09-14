@@ -32,7 +32,7 @@ public class Buster : MonoBehaviour
         BusterItems.LegendaryItemCount = LegendaryItemCount;
         BusterItems.MythicalItemCount = MythicalItemCount;
 
-        ItemsText.text =  BusterItems.CommonItemCount + " Common" +
+        ItemsText.text = BusterItems.CommonItemCount + " Common" +
             "\n" + BusterItems.UncommonItemCount + " Uncommon" +
             "\n" + BusterItems.RareItemCount + " Rare" +
             "\n" + BusterItems.EpicItemCount + " Epic" +

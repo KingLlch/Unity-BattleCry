@@ -3,6 +3,7 @@ using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class CreateUnit : MonoBehaviour
 {
@@ -347,54 +348,93 @@ public class CreateUnit : MonoBehaviour
 
     public void AllItems()
     {
+        int count = 0;
+
         foreach (Transform item in ItemsGrid.transform)
         {
             item.gameObject.SetActive(true);
+            count++;
         }
+
+        ChangeSize(count);
     }
 
     public void WeaponItems()
     {
+        int count = 0;
+
         foreach (Transform item in ItemsGrid.transform)
         {
             if (item.GetComponent<ItemInfo>().ThisItem.Base.Type == ItemType.Weapon)
+            {
                 item.gameObject.SetActive(true);
+                count++;
+            }
             else
                 item.gameObject.SetActive(false);
         }
+
+        ChangeSize(count);
     }
 
     public void ArmorItems()
     {
+        int count = 0;
+
         foreach (Transform item in ItemsGrid.transform)
         {
             if (item.GetComponent<ItemInfo>().ThisItem.Base.Type == ItemType.Armor)
+            {
                 item.gameObject.SetActive(true);
+                count++;
+            }
             else
                 item.gameObject.SetActive(false);
         }
+
+        ChangeSize(count);
     }
 
     public void ShieldItems()
     {
+        int count = 0;
+
         foreach (Transform item in ItemsGrid.transform)
         {
             if (item.GetComponent<ItemInfo>().ThisItem.Base.Type == ItemType.Shield)
+            {
                 item.gameObject.SetActive(true);
+                count++;
+            }
             else
                 item.gameObject.SetActive(false);
         }
+
+        ChangeSize(count);
     }
 
     public void SpecialItems()
     {
+        int count = 0;
+
         foreach (Transform item in ItemsGrid.transform)
         {
             if (item.GetComponent<ItemInfo>().ThisItem.Base.Type == ItemType.Special)
+            {
                 item.gameObject.SetActive(true);
+                count++;
+            }
             else
                 item.gameObject.SetActive(false);
         }
+
+        ChangeSize(count);
+    }
+
+    private void ChangeSize(int count)
+    {
+        int height = Mathf.CeilToInt((float)count / 5) * 100 + (Mathf.CeilToInt((float)count / 5) - 1) * 30 + 30;
+        ItemsGrid.GetComponent<RectTransform>().sizeDelta = new Vector2(ItemsGrid.GetComponent<RectTransform>().sizeDelta.x, height);
     }
 
     public void AddValue()

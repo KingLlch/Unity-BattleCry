@@ -64,7 +64,7 @@ public class PrepareManager : MonoBehaviour
 
     public void ChoseUnit(Unit chosenUnit)
     {
-        if(ChosenUnit != null)
+        if (ChosenUnit != null)
         {
             ChosenUnit.UnitImageEdge.color = Color.white;
         }

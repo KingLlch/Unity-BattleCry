@@ -39,9 +39,9 @@ public class CampaignManager : MonoBehaviour
             _instance = this;
         }
 
-        foreach(Mission mission in MissionList.AllMission)
+        foreach (Mission mission in MissionList.AllMission)
         {
-            MissionUI newMission = Instantiate(MissionPrefab, Vector2.zero,Quaternion.identity, CampaignParents[mission.MissionBase.CampaignNumber].transform).GetComponent<MissionUI>();
+            MissionUI newMission = Instantiate(MissionPrefab, Vector2.zero, Quaternion.identity, CampaignParents[mission.MissionBase.CampaignNumber].transform).GetComponent<MissionUI>();
             newMission.ThisMission = mission;
             newMission.MissionName.text = mission.MissionBase.Name;
             newMission.MissionImage.sprite = mission.MissionBase.Sprite;

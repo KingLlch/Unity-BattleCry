@@ -99,6 +99,9 @@ public class ShopManager : MonoBehaviour
         newItem.ImageEdge.sprite = Resources.Load<Sprite>("Sprites/Rare/" + item.Base.Rare);
         newItem.Value.text = (value).ToString();
 
+        int height = Mathf.CeilToInt((float)AddItemsPanel.ItemsParent.childCount / 6) * 100 + (Mathf.CeilToInt((float)AddItemsPanel.ItemsParent.childCount / 6) - 1) * 15 + 30;
+        AddItemsPanel.ItemsParent.GetComponent<RectTransform>().sizeDelta = new Vector2(AddItemsPanel.ItemsParent.GetComponent<RectTransform>().sizeDelta.x, height);
+
         Centralize(newItem.GetComponent<RectTransform>());
     }
 

@@ -23,7 +23,7 @@ public class Mission
     public MissionBase MissionBase;
     public MissionArmy MissionArmy;
 
-    public Mission(int campaignNumber, int missionNumber, string name, string spritePath, Army army, string description = "", int gold = 1000) 
+    public Mission(int campaignNumber, int missionNumber, string name, string spritePath, Army army, string description = "", int gold = 1000)
     {
         MissionBase = new MissionBase()
         {

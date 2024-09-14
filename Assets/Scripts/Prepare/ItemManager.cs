@@ -100,7 +100,7 @@ public class Item
             Points = points,
             Health = health,
             Sprite = Resources.Load<Sprite>(spritePath)
-           
+
         };
 
         Value = new Value
@@ -256,9 +256,9 @@ public class ItemManager : MonoBehaviour
 
 
         //Weapon
-        ItemsList.AllItems.Add(new Item("Iron Sword", ItemType.Weapon, Rare.Common, 5, 2, "Sprites/Items/Weapons/Sword",attackRange:1, slashDamage:1));
-        ItemsList.AllItems.Add(new Item("Iron Spear", ItemType.Weapon, Rare.Common, 5, 2, "Sprites/Items/Weapons/Spear", attackRange: 2, pierceDamage:1));
-        ItemsList.AllItems.Add(new Item("Iron Mace", ItemType.Weapon, Rare.Common, 5, 2, "Sprites/Items/Weapons/Mace", attackRange: 1, bluntDamage:1));
+        ItemsList.AllItems.Add(new Item("Iron Sword", ItemType.Weapon, Rare.Common, 5, 2, "Sprites/Items/Weapons/Sword", attackRange: 1, slashDamage: 1));
+        ItemsList.AllItems.Add(new Item("Iron Spear", ItemType.Weapon, Rare.Common, 5, 2, "Sprites/Items/Weapons/Spear", attackRange: 2, pierceDamage: 1));
+        ItemsList.AllItems.Add(new Item("Iron Mace", ItemType.Weapon, Rare.Common, 5, 2, "Sprites/Items/Weapons/Mace", attackRange: 1, bluntDamage: 1));
 
         //Armor
         ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Sprites/Items/Armors/WhiteArmor"));
@@ -335,9 +335,9 @@ public enum ItemType
     Armor = 2,
     Shield = 3,
     Special = 4
-} 
+}
 
-public enum Rare 
+public enum Rare
 {
     Common = 0,
     Uncommon = 1,
