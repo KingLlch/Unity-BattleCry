@@ -480,6 +480,8 @@ public class CreateUnit : MonoBehaviour
             if (Special.ThisItem != null)
                 newUnit.unitCharacteristics.SpecialLink = SpecialLink;
 
+            PrepareManager.Instance.Units.Add(newUnit);
+
             newUnit.GetComponent<RectTransform>().localPosition = Vector3.zero;
         }
 
@@ -499,6 +501,8 @@ public class CreateUnit : MonoBehaviour
                 PrepareManager.Instance.ChosenUnit.unitCharacteristics.ShieldLink = ShieldLink;
             if (Special.ThisItem != null)
                 PrepareManager.Instance.ChosenUnit.unitCharacteristics.SpecialLink = SpecialLink;
+
+            //            PrepareManager.Instance.Units.
         }
 
         CloseCreateUnitPanel(false);
@@ -663,7 +667,7 @@ public class CreateUnit : MonoBehaviour
             SpecialLink.Value.text = SpecialLink.ThisItem.Value.ItemValue.ToString();
         }
 
-
+        PrepareManager.Instance.Units.Remove(PrepareManager.Instance.ChosenUnit);
         Destroy(PrepareManager.Instance.ChosenUnit.gameObject);
     }
 

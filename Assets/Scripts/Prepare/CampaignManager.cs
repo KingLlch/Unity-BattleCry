@@ -59,6 +59,9 @@ public class CampaignManager : MonoBehaviour
 
     public void StartMission()
     {
+
+        SaveAndLoad.Instance.SaveAll();
+
         BattleInfo.Instance.PlayerArmy = PrepareManager.Instance.Army;
         BattleInfo.Instance.EnemyArmy = CurrentMission.MissionArmy.Army;
 

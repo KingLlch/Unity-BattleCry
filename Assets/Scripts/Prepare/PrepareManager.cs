@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -19,6 +20,9 @@ public class PrepareManager : MonoBehaviour
     }
 
     public Army Army = new Army();
+
+    public List<Unit> Units;
+
     public Unit ChosenUnit = new Unit();
 
     public int Gold = 9999999;
@@ -33,13 +37,14 @@ public class PrepareManager : MonoBehaviour
 
     private void Start()
     {
-
+        SaveAndLoad.Instance.LoadGold();
+        SaveAndLoad.Instance.LoadArmy();
+        SaveAndLoad.Instance.LoadUnits();
     }
 
     public void SaveArmy()
     {
-        //PlayerPrefs.S
-        PlayerPrefs.Save();
+        SaveAndLoad.Instance.SaveArmy(Army);
     }
 
     public void ResetArmy()

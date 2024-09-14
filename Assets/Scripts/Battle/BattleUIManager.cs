@@ -14,6 +14,12 @@ public class BattleUIManager : MonoBehaviour
         StartTimer();
     }
 
+    public void x4Speed()
+    {
+        Time.timeScale = 4f;
+        TimeSpeed = 4;
+    }
+
     public void x2Speed()
     {
         Time.timeScale = 2f;
@@ -67,6 +73,9 @@ public class BattleUIManager : MonoBehaviour
 
     private void ChangeTimerUI(int seconds, int minuts)
     {
-        TimeText.text = minuts + ":" + seconds;
+        if ((seconds < 10) && (minuts < 10)) TimeText.text = "0" + minuts + ":0" + seconds;
+        else if (minuts < 10) TimeText.text = "0" + minuts + ":" + seconds;
+        else if (seconds < 10) TimeText.text = minuts + ":0" + seconds;
+        else TimeText.text = minuts + ":" + seconds;
     }
 }

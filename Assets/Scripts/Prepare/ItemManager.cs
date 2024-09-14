@@ -158,6 +158,8 @@ public class Item
 
 public static class ItemsList
 {
+    public static bool IsAddItemsInGame;
+
     public static List<Item> AllItems = new List<Item>();
     public static List<Item> AllCommonItem = new List<Item>();
     public static List<Item> AllUncommonItem = new List<Item>();
@@ -174,7 +176,12 @@ public class ItemManager : MonoBehaviour
 {
     private void Awake()
     {
-        AddItems();
+        if (!ItemsList.IsAddItemsInGame)
+        {
+            AddItems();
+            ItemsList.IsAddItemsInGame = true;
+        }
+
         SortingItems();
     }
 
@@ -278,7 +285,7 @@ public class ItemManager : MonoBehaviour
         ItemsList.AllItems.Add(new Item("Special", ItemType.Special, Rare.Common, 5, 2, "Sprites/Items/Specials/Special"));
     }
 
-    private void SortingItems()
+    public void SortingItems()
     {
         foreach (Item item in ItemsList.AllItems)
         {
