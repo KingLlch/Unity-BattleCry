@@ -66,6 +66,33 @@ public class PrepareUIManager : MonoBehaviour
         ChangeArmyPoints();
     }
 
+    public void LoadUIArmy(Army army)
+    {
+        foreach (Row row in army.Rows)
+        {
+            foreach (Column column in row.Columns)
+            {
+                foreach (Unit unit in column.Units)
+                {
+                    Unit newUnit = Instantiate(unit, Vector3.zero, Quaternion.identity, Rows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].transform);
+
+                    newUnit.unitCharacteristics = unit.unitCharacteristics;
+                    newUnit.UnitImage.sprite = unit.UnitImage.sprite;
+                    newUnit.MainUnitLink = unit;
+
+                    UnitInArmyUI(newUnit);
+
+                    Rows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].GetComponent<CellUI>().unit = newUnit;
+
+                    Centralize(newUnit.GetComponent<RectTransform>());
+                    newUnit.IsInArmy = true;
+                }
+            }
+        }
+
+        ChangeArmyPoints();
+    }
+
     public void ChangeArmyPoints()
     {
         ArmyPointsRemaning.text = (1000 - PrepareManager.Instance.Army.Points).ToString();

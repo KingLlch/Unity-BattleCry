@@ -548,6 +548,23 @@ public class CreateUnit : MonoBehaviour
         CloseCreateUnitPanel(false);
     }
 
+    public void CreateLoadUnit(Unit loadedUnit)
+    {
+        Unit newUnit = Instantiate(UnitPrefab, Vector2.zero, Quaternion.identity, PrepareUIManager.Instance.UnitParent).GetComponent<Unit>();
+        newUnit.unitCharacteristics = loadedUnit.unitCharacteristics.Copy();
+        newUnit.UnitImage.sprite = loadedUnit.UnitImage.sprite;
+        newUnit.Value.text = "x" + loadedUnit.unitCharacteristics.Value;
+
+        newUnit.unitCharacteristics.RaceLink = loadedUnit.unitCharacteristics.RaceLink;
+        newUnit.unitCharacteristics.WeaponLink = loadedUnit.unitCharacteristics.WeaponLink;
+        newUnit.unitCharacteristics.ArmorLink = loadedUnit.unitCharacteristics.ArmorLink;
+        newUnit.unitCharacteristics.ShieldLink = loadedUnit.unitCharacteristics.ShieldLink;
+        newUnit.unitCharacteristics.SpecialLink = loadedUnit.unitCharacteristics.SpecialLink;
+
+        PrepareManager.Instance.Units.Add(newUnit);
+        newUnit.GetComponent<RectTransform>().localPosition = Vector3.zero;
+    }
+
     public void CloseCreateUnitPanel(bool isButton = true)
     {
         if (IsEditUnit && isButton)

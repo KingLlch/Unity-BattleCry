@@ -62,7 +62,8 @@ public class SaveAndLoad : MonoBehaviour
         for (int i = 0; i < unitCount; i++)
         {
             Unit loadedUnit = SaveGame.Load<Unit>("Unit" + i);
-            PrepareManager.Instance.Units.Add(loadedUnit);
+
+            CreateUnit.Instance.CreateLoadUnit(loadedUnit);
         }
     }
 
@@ -74,6 +75,7 @@ public class SaveAndLoad : MonoBehaviour
     public void LoadArmy()
     {
         PrepareManager.Instance.Army = SaveGame.Load<Army>("Army1", new Army());
+        PrepareUIManager.Instance.LoadUIArmy(PrepareManager.Instance.Army);
     }
 
     public void SaveGold(int gold)
