@@ -29,8 +29,6 @@ public class ShopManager : MonoBehaviour
         {
             _instance = this;
         }
-
-        PrepareUIManager.Instance.ChangeGold();
     }
 
     public void BuyBooster(BusterItems items, int cost)
@@ -41,6 +39,8 @@ public class ShopManager : MonoBehaviour
             PrepareUIManager.Instance.ChangeGold();
 
             RandomItems(items);
+
+            SaveAndLoad.Instance.SaveGold(PrepareManager.Instance.Gold);
         }
 
         else

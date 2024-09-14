@@ -25,7 +25,7 @@ public class PrepareManager : MonoBehaviour
 
     public Unit ChosenUnit = new Unit();
 
-    public int Gold = 9999999;
+    public int Gold;
 
     private void Awake()
     {
@@ -37,9 +37,9 @@ public class PrepareManager : MonoBehaviour
 
     private void Start()
     {
-        SaveAndLoad.Instance.LoadGold();
-        SaveAndLoad.Instance.LoadArmy();
-        SaveAndLoad.Instance.LoadUnits();
+        //SaveAndLoad.Instance.SaveGold(999999);
+        SaveAndLoad.Instance.LoadAll();
+        PrepareUIManager.Instance.ChangeGold();
     }
 
     public void SaveArmy()
