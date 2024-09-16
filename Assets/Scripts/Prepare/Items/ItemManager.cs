@@ -13,7 +13,11 @@ public class Base
 
     public ItemType Type;
     public Rare Rare;
-    public Sprite Sprite;
+
+    public Sprite MainUnitSprite;
+
+    public Sprite ItemSprite;
+    public Sprite ItemUISprite;
 
     public int Points;
     public int Health;
@@ -86,7 +90,7 @@ public class Item
     public Resists Resists;
     public Damages Damages;
 
-    public Item(string name, ItemType type, Rare rare, int points, int health, string spritePath, string description = "desc",
+    public Item(string name, ItemType type, Rare rare, int points, int health, string spritePath, string spriteUnitColorPath = "White", string description = "desc",
             float attackTime = 1, int attackRange = 1, bool isMeleeAttack = true,
             int pierceDamage = 0, int slashDamage = 0, int bluntDamage = 0, int fireDamage = 0, int iceDamage = 0, int earthDamage = 0, int poisonDamage = 0, int waterDamage = 0, int lightDamage = 0, int darknessDamage = 0,
             int pierceResist = 0, int slashResist = 0, int bluntResist = 0, int fireResist = 0, int iceResist = 0, int earthResist = 0, int poisonResist = 0, int waterResist = 0, int lightResist = 0, int darknessResist = 0)
@@ -99,13 +103,14 @@ public class Item
             Rare = rare,
             Points = points,
             Health = health,
-            Sprite = Resources.Load<Sprite>(spritePath)
-
+            ItemUISprite = Resources.Load<Sprite>("Sprites/ItemsUI/" + spritePath),
+            ItemSprite = Resources.Load<Sprite>("Sprites/Items/" + spritePath),
+            MainUnitSprite = Resources.Load<Sprite>("Sprites/Items/Main/" + spriteUnitColorPath)
         };
 
         Value = new Value
         {
-            ItemValue = 0
+            ItemValue = 10
         };
 
         Weapon = new Weapon
@@ -188,101 +193,101 @@ public class ItemManager : MonoBehaviour
     private void AddItems()
     {
         //Races
-        ItemsList.AllItems.Add(new Item("Human", ItemType.Race, Rare.Common, 7, 5, "Sprites/Items/Races/Human", bluntDamage: 1, slashResist: 1));
+        ItemsList.AllItems.Add(new Item("Human", ItemType.Race, Rare.Common, 7, 5, "Races/Human", "White", bluntDamage: 1, slashResist: 1));
 
-        ItemsList.AllItems.Add(new Item("Goblin", ItemType.Race, Rare.Common, 3, 3, "Sprites/Items/Races/Goblin", slashDamage: 1, bluntResist: -1));
-        ItemsList.AllItems.Add(new Item("Orc", ItemType.Race, Rare.Common, 10, 8, "Sprites/Items/Races/Orc", bluntDamage: 2, bluntResist: 1, slashResist: -1));
-        ItemsList.AllItems.Add(new Item("RedOrc", ItemType.Race, Rare.Rare, 17, 12, "Sprites/Items/Races/RedOrc", bluntDamage: 3, bluntResist: 2));
-        ItemsList.AllItems.Add(new Item("Troll", ItemType.Race, Rare.Epic, 20, 15, "Sprites/Items/Races/Troll", bluntDamage: 4, earthDamage: 2, slashResist: 2, earthResist: 2, poisonResist: 3, fireResist: -5, iceResist: -3));
-        ItemsList.AllItems.Add(new Item("Stone Troll", ItemType.Race, Rare.Epic, 20, 15, "Sprites/Items/Races/StoneTroll", bluntDamage: 4, earthDamage: 2, slashResist: 2, earthResist: 2, poisonResist: 3, fireResist: -5, iceResist: -3));
-        ItemsList.AllItems.Add(new Item("Ogre", ItemType.Race, Rare.Legendary, 50, 30, "Sprites/Items/Races/Ogre", bluntDamage: 7, slashResist: 5, fireResist: -5, waterResist: -3));
-        //ItemsList.AllItems.Add(new Item("Centaur", ItemType.Race, Rare.Epic, 30, 15, "Sprites/Items/Races/Centaur", pierceDamage: 4, slashResist: 3, bluntResist: 3, pierceResist: -4));
+        ItemsList.AllItems.Add(new Item("Goblin", ItemType.Race, Rare.Common, 3, 3, "Races/Goblin", "Green", slashDamage: 1, bluntResist: -1));
+        ItemsList.AllItems.Add(new Item("Orc", ItemType.Race, Rare.Common, 10, 8, "Races/Orc", "DarkGreen", bluntDamage: 2, bluntResist: 1, slashResist: -1));
+        ItemsList.AllItems.Add(new Item("RedOrc", ItemType.Race, Rare.Rare, 17, 12, "Races/RedOrc", "Red", bluntDamage: 3, bluntResist: 2));
+        ItemsList.AllItems.Add(new Item("Troll", ItemType.Race, Rare.Epic, 20, 15, "Races/Troll", "DarkGreen", bluntDamage: 4, earthDamage: 2, slashResist: 2, earthResist: 2, poisonResist: 3, fireResist: -5, iceResist: -3));
+        ItemsList.AllItems.Add(new Item("Stone Troll", ItemType.Race, Rare.Epic, 20, 15, "Races/StoneTroll", "Grey", bluntDamage: 4, earthDamage: 2, slashResist: 2, earthResist: 2, poisonResist: 3, fireResist: -5, iceResist: -3));
+        ItemsList.AllItems.Add(new Item("Ogre", ItemType.Race, Rare.Legendary, 50, 30, "Races/Ogre", "DarkYellow", bluntDamage: 7, slashResist: 5, fireResist: -5, waterResist: -3));
+        //ItemsList.AllItems.Add(new Item("Centaur", ItemType.Race, Rare.Epic, 30, 15, "Races/Centaur","White", pierceDamage: 4, slashResist: 3, bluntResist: 3, pierceResist: -4));
 
-        ItemsList.AllItems.Add(new Item("HighElf", ItemType.Race, Rare.Uncommon, 7, 5, "Sprites/Items/Races/HighElf", slashDamage: 2, bluntResist: -1, darknessResist: -1, lightResist: 2));
-        ItemsList.AllItems.Add(new Item("DarkElf", ItemType.Race, Rare.Epic, 15, 10, "Sprites/Items/Races/DarkElf", pierceDamage: 4, bluntResist: -3, poisonResist: -3, darknessResist: 2, lightResist: -1));
-        ItemsList.AllItems.Add(new Item("ForestElf", ItemType.Race, Rare.Rare, 10, 7, "Sprites/Items/Races/ForestElf", poisonDamage: 3, poisonResist: 2, bluntResist: -2));
+        ItemsList.AllItems.Add(new Item("HighElf", ItemType.Race, Rare.Uncommon, 7, 5, "Races/HighElf", "SnowWhite", slashDamage: 2, bluntResist: -1, darknessResist: -1, lightResist: 2));
+        ItemsList.AllItems.Add(new Item("DarkElf", ItemType.Race, Rare.Epic, 15, 10, "Races/DarkElf",  "Purple", pierceDamage: 4, bluntResist: -3, poisonResist: -3, darknessResist: 2, lightResist: -1));
+        ItemsList.AllItems.Add(new Item("ForestElf", ItemType.Race, Rare.Rare, 10, 7, "Races/ForestElf",  "Green", poisonDamage: 3, poisonResist: 2, bluntResist: -2));
 
-        ItemsList.AllItems.Add(new Item("Skaven", ItemType.Race, Rare.Common, 2, 2, "Sprites/Items/Races/Skaven", slashDamage: 1, bluntResist: -1, pierceResist: -1, earthResist: 1));
-        ItemsList.AllItems.Add(new Item("Black Skaven", ItemType.Race, Rare.Epic, 12, 7, "Sprites/Items/Races/BlackSkaven", slashDamage: 3, bluntDamage: 2, bluntResist: -1, pierceResist: -1, earthResist: 3));
-        ItemsList.AllItems.Add(new Item("White Skaven", ItemType.Race, Rare.Mythical, 12, 7, "Sprites/Items/Races/WhiteSkaven", slashDamage: 3, bluntDamage: 2, bluntResist: -1, pierceResist: -1, earthResist: 3));
+        ItemsList.AllItems.Add(new Item("Skaven", ItemType.Race, Rare.Common, 2, 2, "Races/Skaven", "Grey", slashDamage: 1, bluntResist: -1, pierceResist: -1, earthResist: 1));
+        ItemsList.AllItems.Add(new Item("Black Skaven", ItemType.Race, Rare.Epic, 12, 7, "Races/BlackSkaven", "Black", slashDamage: 3, bluntDamage: 2, bluntResist: -1, pierceResist: -1));
+        ItemsList.AllItems.Add(new Item("White Skaven", ItemType.Race, Rare.Mythical, 12, 7, "Races/WhiteSkaven", "SnowWhite", slashDamage: 3, bluntDamage: 2, bluntResist: -1, pierceResist: -1));
 
-        ItemsList.AllItems.Add(new Item("CopperDwarf", ItemType.Race, Rare.Uncommon, 9, 7, "Sprites/Items/Races/CopperDwarf", bluntDamage: 1, bluntResist: 1));
-        ItemsList.AllItems.Add(new Item("IronDwarf", ItemType.Race, Rare.Rare, 12, 10, "Sprites/Items/Races/IronDwarf", bluntDamage: 2, bluntResist: 2));
-        ItemsList.AllItems.Add(new Item("GoldDwarf", ItemType.Race, Rare.Legendary, 21, 15, "Sprites/Items/Races/GoldDwarf", bluntDamage: 3, bluntResist: 3));
+        ItemsList.AllItems.Add(new Item("CopperDwarf", ItemType.Race, Rare.Uncommon, 9, 7, "Races/CopperDwarf",  "Brown", bluntDamage: 1, bluntResist: 1));
+        ItemsList.AllItems.Add(new Item("IronDwarf", ItemType.Race, Rare.Rare, 12, 10, "Races/IronDwarf",  "Grey", bluntDamage: 2, bluntResist: 2));
+        ItemsList.AllItems.Add(new Item("GoldDwarf", ItemType.Race, Rare.Legendary, 21, 15, "Races/GoldDwarf",  "DarkYellow", bluntDamage: 3, bluntResist: 3));
 
-        ItemsList.AllItems.Add(new Item("Dryad", ItemType.Race, Rare.Uncommon, 5, 5, "Sprites/Items/Races/Dryad", earthDamage: 1, poisonResist: 2));
-        ItemsList.AllItems.Add(new Item("Ent", ItemType.Race, Rare.Rare, 20, 15, "Sprites/Items/Races/Ent", bluntDamage: 2, earthResist: 3, fireResist: -5));
-        ItemsList.AllItems.Add(new Item("DarkEnt", ItemType.Race, Rare.Epic, 25, 18, "Sprites/Items/Races/DarkEnt", bluntDamage: 3, poisonResist: 2, fireResist: -6));
+        ItemsList.AllItems.Add(new Item("Dryad", ItemType.Race, Rare.Uncommon, 5, 5, "Races/Dryad",  "Brown", earthDamage: 1, poisonResist: 2));
+        ItemsList.AllItems.Add(new Item("Ent", ItemType.Race, Rare.Rare, 20, 15, "Races/Ent", "Brown", bluntDamage: 2, earthResist: 3, fireResist: -5));
+        ItemsList.AllItems.Add(new Item("DarkEnt", ItemType.Race, Rare.Epic, 25, 18, "Races/DarkEnt",  "Purple", bluntDamage: 3, poisonResist: 2, fireResist: -6));
 
-        ItemsList.AllItems.Add(new Item("Naga", ItemType.Race, Rare.Mythical, 15, 10, "Sprites/Items/Races/Naga", pierceDamage: 2, poisonResist: 2, fireResist: -2));
-        //ItemsList.AllItems.Add(new Item("Medusa", ItemType.Race, Rare.Rare, 20, 15, "Sprites/Items/Races/Medusa", pierceDamage: 3, poisonDamage: 1, bluntResist: -1));
+        ItemsList.AllItems.Add(new Item("Naga", ItemType.Race, Rare.Mythical, 15, 10, "Races/Naga",  "Blue", pierceDamage: 2, poisonResist: 2, fireResist: -2));
+        //ItemsList.AllItems.Add(new Item("Medusa", ItemType.Race, Rare.Rare, 20, 15, "Races/Medusa","White", pierceDamage: 3, poisonDamage: 1, bluntResist: -1));
 
-        ItemsList.AllItems.Add(new Item("RedDragon", ItemType.Race, Rare.Mythical, 50, 40, "Sprites/Items/Races/RedDragon", fireDamage: 5, fireResist: 5, iceResist: -3));
-        ItemsList.AllItems.Add(new Item("BlueDragon", ItemType.Race, Rare.Mythical, 50, 40, "Sprites/Items/Races/BlueDragon", waterDamage: 5, waterResist: 5, lightResist: -2));
-        ItemsList.AllItems.Add(new Item("YellowDragon", ItemType.Race, Rare.Mythical, 50, 40, "Sprites/Items/Races/YellowDragon", lightDamage: 5, lightResist: 5, earthResist: -2));
-        ItemsList.AllItems.Add(new Item("GreenDragon", ItemType.Race, Rare.Mythical, 50, 40, "Sprites/Items/Races/GreenDragon", poisonDamage: 4, poisonResist: 4, fireResist: -2));
-        ItemsList.AllItems.Add(new Item("BrownDragon", ItemType.Race, Rare.Mythical, 50, 40, "Sprites/Items/Races/BrownDragon", earthDamage: 4, earthResist: 5, lightResist: -2));
-        ItemsList.AllItems.Add(new Item("GreyDragon", ItemType.Race, Rare.Mythical, 50, 40, "Sprites/Items/Races/GreyDragon", bluntDamage: 4, slashResist: 4, pierceResist: 3));
-        ItemsList.AllItems.Add(new Item("PurpleDragon", ItemType.Race, Rare.Mythical, 50, 40, "Sprites/Items/Races/PurpleDragon", darknessDamage: 5, darknessResist: 5, lightResist: -4));
-        ItemsList.AllItems.Add(new Item("WhiteDragon", ItemType.Race, Rare.Mythical, 50, 40, "Sprites/Items/Races/WhiteDragon", iceDamage: 5, iceResist: 5, fireResist: -3));
-        ItemsList.AllItems.Add(new Item("BlackDragon", ItemType.Race, Rare.Mythical, 50, 40, "Sprites/Items/Races/BlackDragon", darknessDamage: 5, poisonResist: 3, lightResist: -5));
+        ItemsList.AllItems.Add(new Item("RedDragon", ItemType.Race, Rare.Mythical, 50, 40, "Races/RedDragon",  "Red", fireDamage: 5, fireResist: 5, iceResist: -3));
+        ItemsList.AllItems.Add(new Item("BlueDragon", ItemType.Race, Rare.Mythical, 50, 40, "Races/BlueDragon",  "Blue", waterDamage: 5, waterResist: 5, lightResist: -2));
+        ItemsList.AllItems.Add(new Item("YellowDragon", ItemType.Race, Rare.Mythical, 50, 40, "Races/YellowDragon",  "Yellow", lightDamage: 5, lightResist: 5, earthResist: -2));
+        ItemsList.AllItems.Add(new Item("GreenDragon", ItemType.Race, Rare.Mythical, 50, 40, "Races/GreenDragon",  "Green", poisonDamage: 4, poisonResist: 4, fireResist: -2));
+        ItemsList.AllItems.Add(new Item("BrownDragon", ItemType.Race, Rare.Mythical, 50, 40, "Races/BrownDragon",  "Brown", earthDamage: 4, earthResist: 5, lightResist: -2));
+        ItemsList.AllItems.Add(new Item("GreyDragon", ItemType.Race, Rare.Mythical, 50, 40, "Races/GreyDragon",  "Grey", bluntDamage: 4, slashResist: 4, pierceResist: 3));
+        ItemsList.AllItems.Add(new Item("PurpleDragon", ItemType.Race, Rare.Mythical, 50, 40, "Races/PurpleDragon",  "Purple", darknessDamage: 5, darknessResist: 5, lightResist: -4));
+        ItemsList.AllItems.Add(new Item("WhiteDragon", ItemType.Race, Rare.Mythical, 50, 40, "Races/WhiteDragon", "SnowWhite", iceDamage: 5, iceResist: 5, fireResist: -3));
+        ItemsList.AllItems.Add(new Item("BlackDragon", ItemType.Race, Rare.Mythical, 50, 40, "Races/BlackDragon",  "Black", darknessDamage: 5, poisonResist: 3, lightResist: -5));
 
-        ItemsList.AllItems.Add(new Item("Angel", ItemType.Race, Rare.Common, 40, 35, "Sprites/Items/Races/Angel", lightDamage: 5, lightResist: 5, darknessResist: -3));
-        ItemsList.AllItems.Add(new Item("Demon", ItemType.Race, Rare.Common, 40, 35, "Sprites/Items/Races/Demon", darknessDamage: 5, darknessResist: 5, lightResist: -3));
-        ItemsList.AllItems.Add(new Item("Imp", ItemType.Race, Rare.Common, 10, 8, "Sprites/Items/Races/Imp", fireDamage: 1, fireResist: 2));
+        ItemsList.AllItems.Add(new Item("Angel", ItemType.Race, Rare.Common, 40, 35, "Races/Angel",  "White", lightDamage: 5, lightResist: 5, darknessResist: -3));
+        ItemsList.AllItems.Add(new Item("Demon", ItemType.Race, Rare.Common, 40, 35, "Races/Demon",  "Red", darknessDamage: 5, darknessResist: 5, lightResist: -3));
+        ItemsList.AllItems.Add(new Item("Imp", ItemType.Race, Rare.Common, 10, 8, "Races/Imp",  "Red", fireDamage: 1, fireResist: 2));
 
-        ItemsList.AllItems.Add(new Item("RobotMK1", ItemType.Race, Rare.Common, 20, 15, "Sprites/Items/Races/Robot1", bluntDamage: 2, pierceResist: 1));
-        ItemsList.AllItems.Add(new Item("RobotMK10", ItemType.Race, Rare.Uncommon, 30, 20, "Sprites/Items/Races/Robot2", bluntDamage: 3, slashResist: 2));
-        ItemsList.AllItems.Add(new Item("RobotMK200", ItemType.Race, Rare.Rare, 40, 30, "Sprites/Items/Races/Robot3", bluntDamage: 4, fireResist: 3));
-        ItemsList.AllItems.Add(new Item("RobotMK400", ItemType.Race, Rare.Epic, 50, 40, "Sprites/Items/Races/Robot4", bluntDamage: 5, iceResist: 2));
-        ItemsList.AllItems.Add(new Item("RobotMK2000", ItemType.Race, Rare.Legendary, 70, 70, "Sprites/Items/Races/Robot5", bluntDamage: 5, iceResist: 2));
-        ItemsList.AllItems.Add(new Item("RobotMK10000", ItemType.Race, Rare.Mythical, 100, 80, "Sprites/Items/Races/Robot6", bluntDamage: 10, fireResist: 5, lightResist: 5));
+        ItemsList.AllItems.Add(new Item("RobotMK1", ItemType.Race, Rare.Common, 20, 15, "Races/Robot1",  "Grey", bluntDamage: 2, pierceResist: 1));
+        ItemsList.AllItems.Add(new Item("RobotMK10", ItemType.Race, Rare.Uncommon, 30, 20, "Races/Robot2", "Grey", bluntDamage: 3, slashResist: 2));
+        ItemsList.AllItems.Add(new Item("RobotMK200", ItemType.Race, Rare.Rare, 40, 30, "Races/Robot3", "Grey", bluntDamage: 4, fireResist: 3));
+        ItemsList.AllItems.Add(new Item("RobotMK400", ItemType.Race, Rare.Epic, 50, 40, "Races/Robot4", "Grey", bluntDamage: 5, iceResist: 2));
+        ItemsList.AllItems.Add(new Item("RobotMK2000", ItemType.Race, Rare.Legendary, 70, 70, "Races/Robot5", "Grey", bluntDamage: 5, iceResist: 2));
+        ItemsList.AllItems.Add(new Item("RobotMK10000", ItemType.Race, Rare.Mythical, 100, 80, "Races/Robot6", "Grey", bluntDamage: 10, fireResist: 5, lightResist: 5));
 
-        ItemsList.AllItems.Add(new Item("Fire Elemental", ItemType.Race, Rare.Rare, 30, 25, "Sprites/Items/Races/FireElemental", fireDamage: 5, fireResist: 5, waterResist: -5));
-        ItemsList.AllItems.Add(new Item("Water Elemental", ItemType.Race, Rare.Rare, 30, 25, "Sprites/Items/Races/WaterElemental", waterDamage: 5, waterResist: 5, fireResist: -5));
-        ItemsList.AllItems.Add(new Item("Earth Elemental", ItemType.Race, Rare.Rare, 30, 25, "Sprites/Items/Races/EarthElemental", earthDamage: 5, earthResist: 5, lightResist: -3));
-        ItemsList.AllItems.Add(new Item("Ice Elemental", ItemType.Race, Rare.Rare, 30, 25, "Sprites/Items/Races/IceElemental", iceDamage: 5, iceResist: 5, fireResist: -5));
-        ItemsList.AllItems.Add(new Item("Poison Elemental", ItemType.Race, Rare.Rare, 30, 25, "Sprites/Items/Races/PoisonElemental", poisonDamage: 5, poisonResist: 5, lightResist: -2));
-        ItemsList.AllItems.Add(new Item("Light Elemental", ItemType.Race, Rare.Rare, 30, 25, "Sprites/Items/Races/LightElemental", lightDamage: 5, lightResist: 5, darknessResist: -3));
-        ItemsList.AllItems.Add(new Item("Darkness Elemental", ItemType.Race, Rare.Rare, 30, 25, "Sprites/Items/Races/DarknessElemental", darknessDamage: 5, darknessResist: 5, lightResist: -3));
+        ItemsList.AllItems.Add(new Item("Fire Elemental", ItemType.Race, Rare.Rare, 30, 25, "Races/FireElemental",  "Red", fireDamage: 5, fireResist: 5, waterResist: -5));
+        ItemsList.AllItems.Add(new Item("Water Elemental", ItemType.Race, Rare.Rare, 30, 25, "Races/WaterElemental",  "Blue", waterDamage: 5, waterResist: 5, fireResist: -5));
+        ItemsList.AllItems.Add(new Item("Earth Elemental", ItemType.Race, Rare.Rare, 30, 25, "Races/EarthElemental",  "Brown", earthDamage: 5, earthResist: 5, lightResist: -3));
+        ItemsList.AllItems.Add(new Item("Ice Elemental", ItemType.Race, Rare.Rare, 30, 25, "Races/IceElemental",  "SnowWhite", iceDamage: 5, iceResist: 5, fireResist: -5));
+        ItemsList.AllItems.Add(new Item("Poison Elemental", ItemType.Race, Rare.Rare, 30, 25, "Races/PoisonElemental",  "Green", poisonDamage: 5, poisonResist: 5, lightResist: -2));
+        ItemsList.AllItems.Add(new Item("Light Elemental", ItemType.Race, Rare.Rare, 30, 25, "Races/LightElemental",  "Yellow", lightDamage: 5, lightResist: 5, darknessResist: -3));
+        ItemsList.AllItems.Add(new Item("Darkness Elemental", ItemType.Race, Rare.Rare, 30, 25, "Races/DarknessElemental",  "Purple", darknessDamage: 5, darknessResist: 5, lightResist: -3));
 
-        ItemsList.AllItems.Add(new Item("ZombieHuman", ItemType.Race, Rare.Common, 2, 3, "Sprites/Items/Races/Zombie", slashDamage: 1, bluntResist: -1));
-        ItemsList.AllItems.Add(new Item("ZombieOrc", ItemType.Race, Rare.Common, 3, 4, "Sprites/Items/Races/OrcZombie", slashDamage: 2, bluntResist: -2));
-        ItemsList.AllItems.Add(new Item("SkeletonHuman", ItemType.Race, Rare.Common, 2, 3, "Sprites/Items/Races/Skeleton", pierceDamage: 1, bluntResist: -1));
-        ItemsList.AllItems.Add(new Item("SkeletonOrc", ItemType.Race, Rare.Common, 3, 4, "Sprites/Items/Races/OrcSkeleton", pierceDamage: 2, bluntResist: -2));
-        ItemsList.AllItems.Add(new Item("Vampire", ItemType.Race, Rare.Legendary, 5, 5, "Sprites/Items/Races/Vampire", pierceDamage: 3, darknessResist: 3));
-        ItemsList.AllItems.Add(new Item("AlphaVampire", ItemType.Race, Rare.Mythical, 5, 5, "Sprites/Items/Races/AlphaVampire", pierceDamage: 3, darknessResist: 3));
-        ItemsList.AllItems.Add(new Item("Spirit", ItemType.Race, Rare.Epic, 5, 5, "Sprites/Items/Races/Spirit", darknessDamage: 2, lightResist: 2));
+        ItemsList.AllItems.Add(new Item("ZombieHuman", ItemType.Race, Rare.Common, 2, 3, "Races/Zombie",  "Green", slashDamage: 1, bluntResist: -1));
+        ItemsList.AllItems.Add(new Item("ZombieOrc", ItemType.Race, Rare.Common, 3, 4, "Races/OrcZombie",  "DarkGreen", slashDamage: 2, bluntResist: -2));
+        ItemsList.AllItems.Add(new Item("SkeletonHuman", ItemType.Race, Rare.Common, 2, 3, "Races/Skeleton", "SnowWhite", pierceDamage: 1, bluntResist: -1));
+        ItemsList.AllItems.Add(new Item("SkeletonOrc", ItemType.Race, Rare.Common, 3, 4, "Races/OrcSkeleton", "SnowWhite", pierceDamage: 2, bluntResist: -2));
+        ItemsList.AllItems.Add(new Item("Vampire", ItemType.Race, Rare.Legendary, 5, 5, "Races/Vampire",  "SnowWhite", pierceDamage: 3, darknessResist: 3));
+        ItemsList.AllItems.Add(new Item("AlphaVampire", ItemType.Race, Rare.Mythical, 5, 5, "Races/AlphaVampire", "SnowWhite", pierceDamage: 3, darknessResist: 3));
+        ItemsList.AllItems.Add(new Item("Spirit", ItemType.Race, Rare.Epic, 5, 5, "Races/Spirit",  "Blue", darknessDamage: 2, lightResist: 2));
 
 
         //Weapon
-        ItemsList.AllItems.Add(new Item("Iron Sword", ItemType.Weapon, Rare.Common, 5, 2, "Sprites/Items/Weapons/Sword", attackRange: 1, slashDamage: 1));
-        ItemsList.AllItems.Add(new Item("Iron Spear", ItemType.Weapon, Rare.Common, 5, 2, "Sprites/Items/Weapons/Spear", attackRange: 2, pierceDamage: 1));
-        ItemsList.AllItems.Add(new Item("Iron Mace", ItemType.Weapon, Rare.Common, 5, 2, "Sprites/Items/Weapons/Mace", attackRange: 1, bluntDamage: 1));
+        ItemsList.AllItems.Add(new Item("Iron Sword", ItemType.Weapon, Rare.Common, 5, 2, "Weapons/Sword",  attackRange: 1, slashDamage: 1));
+        ItemsList.AllItems.Add(new Item("Iron Spear", ItemType.Weapon, Rare.Common, 5, 2, "Weapons/Spear",  attackRange: 2, pierceDamage: 1));
+        ItemsList.AllItems.Add(new Item("Iron Mace", ItemType.Weapon, Rare.Common, 5, 2, "Weapons/Mace",  attackRange: 1, bluntDamage: 1));
 
         //Armor
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Sprites/Items/Armors/WhiteArmor"));
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Sprites/Items/Armors/YellowArmor"));
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Sprites/Items/Armors/PurpleArmor"));
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Sprites/Items/Armors/RedArmor"));
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Sprites/Items/Armors/GreenArmor"));
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Sprites/Items/Armors/GreyArmor"));
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Sprites/Items/Armors/BlueArmor"));
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Sprites/Items/Armors/BrownArmor"));
+        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/WhiteArmor"));
+        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/YellowArmor"));
+        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/PurpleArmor"));
+        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/RedArmor"));
+        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/GreenArmor"));
+        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/GreyArmor"));
+        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/BlueArmor"));
+        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/BrownArmor"));
 
         //Shield
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Sprites/Items/Shields/WhiteShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Sprites/Items/Shields/YellowShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Sprites/Items/Shields/PurpleShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Sprites/Items/Shields/RedShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Sprites/Items/Shields/GreenShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Sprites/Items/Shields/BlueShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Sprites/Items/Shields/DarkBlueShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Sprites/Items/Shields/GreyShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Sprites/Items/Shields/BrownShield"));
+        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/WhiteShield"));
+        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/YellowShield"));
+        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/PurpleShield"));
+        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/RedShield"));
+        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/GreenShield"));
+        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/BlueShield"));
+        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/DarkBlueShield"));
+        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/GreyShield"));
+        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/BrownShield"));
 
         //Special
-        ItemsList.AllItems.Add(new Item("Special", ItemType.Special, Rare.Common, 5, 2, "Sprites/Items/Specials/Special"));
+        ItemsList.AllItems.Add(new Item("Special", ItemType.Special, Rare.Common, 5, 2, "Specials/Special"));
     }
 
     public void SortingItems()

@@ -38,7 +38,7 @@ public class PrepareManager : MonoBehaviour
     private void Start()
     {
         //SaveAndLoad.Instance.SaveGold(999999);
-        SaveAndLoad.Instance.LoadAll();
+        //SaveAndLoad.Instance.LoadAll();
         PrepareUIManager.Instance.ChangeGold();
     }
 
@@ -66,13 +66,13 @@ public class PrepareManager : MonoBehaviour
     {
         if (ChosenUnit != null)
         {
-            ChosenUnit.UnitImageEdge.color = Color.white;
+            ChosenUnit.UnitImageRare.color = Color.white;
         }
 
         if (chosenUnit != null)
         {
             ChosenUnit = chosenUnit;
-            ChosenUnit.UnitImageEdge.color = Color.red;
+            ChosenUnit.UnitImageRare.color = Color.red;
         }
         else
         {

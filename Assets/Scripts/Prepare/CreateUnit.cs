@@ -3,7 +3,6 @@ using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class CreateUnit : MonoBehaviour
 {
@@ -61,6 +60,13 @@ public class CreateUnit : MonoBehaviour
 
     public GameObject UnitPrefab;
 
+    public Image MainUnitImage;
+    public Image RaceUnitImage;
+    public Image WeaponUnitImage;
+    public Image ArmorUnitImage;
+    public Image ShieldUnitImage;
+    public Image SpecialUnitImage;
+
     public bool IsEditUnit;
 
     private void Awake()
@@ -93,7 +99,11 @@ public class CreateUnit : MonoBehaviour
 
             Race.ThisItem = itemInfo.ThisItem.Copy();
             RaceLink = itemInfo;
-            Race.Image.sprite = itemInfo.ThisItem.Base.Sprite;
+            Race.Image.sprite = itemInfo.ThisItem.Base.ItemUISprite;
+
+            createUnit.UnitMainImage.sprite = itemInfo.ThisItem.Base.MainUnitSprite;
+            createUnit.UnitRaceImage.sprite = itemInfo.ThisItem.Base.ItemSprite;
+
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
         }
@@ -107,7 +117,8 @@ public class CreateUnit : MonoBehaviour
 
             Weapon.ThisItem = itemInfo.ThisItem.Copy();
             WeaponLink = itemInfo;
-            Weapon.Image.sprite = itemInfo.ThisItem.Base.Sprite;
+            Weapon.Image.sprite = itemInfo.ThisItem.Base.ItemUISprite;
+            createUnit.UnitWeaponImage.sprite = itemInfo.ThisItem.Base.ItemSprite;
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
         }
@@ -121,7 +132,8 @@ public class CreateUnit : MonoBehaviour
 
             Armor.ThisItem = itemInfo.ThisItem.Copy();
             ArmorLink = itemInfo;
-            Armor.Image.sprite = itemInfo.ThisItem.Base.Sprite;
+            Armor.Image.sprite = itemInfo.ThisItem.Base.ItemUISprite;
+            createUnit.UnitArmorImage.sprite = itemInfo.ThisItem.Base.ItemSprite;
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
         }
@@ -135,7 +147,8 @@ public class CreateUnit : MonoBehaviour
 
             Shield.ThisItem = itemInfo.ThisItem.Copy();
             ShieldLink = itemInfo;
-            Shield.Image.sprite = itemInfo.ThisItem.Base.Sprite;
+            Shield.Image.sprite = itemInfo.ThisItem.Base.ItemUISprite;
+            createUnit.UnitShieldImage.sprite = itemInfo.ThisItem.Base.ItemSprite;
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
         }
@@ -149,7 +162,8 @@ public class CreateUnit : MonoBehaviour
 
             Special.ThisItem = itemInfo.ThisItem.Copy();
             SpecialLink = itemInfo;
-            Special.Image.sprite = itemInfo.ThisItem.Base.Sprite;
+            Special.Image.sprite = itemInfo.ThisItem.Base.ItemUISprite;
+            createUnit.UnitSpecialImage.sprite = itemInfo.ThisItem.Base.ItemSprite;
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
         }
@@ -300,6 +314,52 @@ public class CreateUnit : MonoBehaviour
 
     public void ChangeUI(Unit unit)
     {
+        if (Race.ThisItem != null)
+        {
+            MainUnitImage.gameObject.SetActive(true);
+            MainUnitImage.sprite = unit.UnitMainImage.sprite;
+
+            RaceUnitImage.gameObject.SetActive(true);
+            RaceUnitImage.sprite = unit.UnitRaceImage.sprite;
+        }
+        else
+        {
+            MainUnitImage.gameObject.SetActive(false);
+            RaceUnitImage.gameObject.SetActive(false);
+        }
+
+        if (Weapon.ThisItem != null)
+        {
+            WeaponUnitImage.gameObject.SetActive(true);
+            WeaponUnitImage.sprite = unit.UnitWeaponImage.sprite;
+        }
+        else
+            WeaponUnitImage.gameObject.SetActive(false);
+
+        if (Armor.ThisItem != null)
+        {
+            ArmorUnitImage.gameObject.SetActive(true);
+            ArmorUnitImage.sprite = unit.UnitArmorImage.sprite;
+        }
+        else
+            ArmorUnitImage.gameObject.SetActive(false);
+
+        if (Shield.ThisItem != null)
+        {
+            ShieldUnitImage.gameObject.SetActive(true);
+            ShieldUnitImage.sprite = unit.UnitShieldImage.sprite;
+        }
+        else
+            ShieldUnitImage.gameObject.SetActive(false);
+
+        if (Special.ThisItem != null)
+        {
+            SpecialUnitImage.gameObject.SetActive(true);
+            SpecialUnitImage.sprite = unit.UnitSpecialImage.sprite;
+        }
+        else
+            SpecialUnitImage.gameObject.SetActive(false);
+
         Value.text = unit.unitCharacteristics.Value.ToString();
         Points.text = unit.unitCharacteristics.Points.ToString();
         Health.text = unit.unitCharacteristics.Health + " / " + unit.unitCharacteristics.MaxHealth;
@@ -506,19 +566,45 @@ public class CreateUnit : MonoBehaviour
         {
             Unit newUnit = Instantiate(UnitPrefab, Vector2.zero, Quaternion.identity, PrepareUIManager.Instance.UnitParent).GetComponent<Unit>();
             newUnit.unitCharacteristics = createUnit.unitCharacteristics.Copy();
-            newUnit.UnitImage.sprite = createUnit.UnitImage.sprite;
             newUnit.Value.text = "x" + createUnit.unitCharacteristics.Value;
 
+
             if (Race.ThisItem != null)
+            {
                 newUnit.unitCharacteristics.RaceLink = RaceLink;
+                newUnit.UnitMainImage.gameObject.SetActive(true);
+                newUnit.UnitMainImage.sprite = createUnit.UnitMainImage.sprite;
+                newUnit.UnitRaceImage.gameObject.SetActive(true);
+                newUnit.UnitRaceImage.sprite = createUnit.UnitRaceImage.sprite;
+            }
             if (Weapon.ThisItem != null)
+            {
                 newUnit.unitCharacteristics.WeaponLink = WeaponLink;
+                newUnit.UnitWeaponImage.gameObject.SetActive(true);
+                newUnit.UnitWeaponImage.sprite = createUnit.UnitWeaponImage.sprite;
+
+            }
             if (Armor.ThisItem != null)
+            {
                 newUnit.unitCharacteristics.ArmorLink = ArmorLink;
+                newUnit.UnitArmorImage.gameObject.SetActive(true);
+                newUnit.UnitArmorImage.sprite = createUnit.UnitArmorImage.sprite;
+
+            }
             if (Shield.ThisItem != null)
+            {
                 newUnit.unitCharacteristics.ShieldLink = ShieldLink;
+                newUnit.UnitShieldImage.gameObject.SetActive(true);
+                newUnit.UnitShieldImage.sprite = createUnit.UnitShieldImage.sprite;
+
+            }
             if (Special.ThisItem != null)
+            {
                 newUnit.unitCharacteristics.SpecialLink = SpecialLink;
+                newUnit.UnitSpecialImage.gameObject.SetActive(true);
+                newUnit.UnitSpecialImage.sprite = createUnit.UnitSpecialImage.sprite;
+
+            }
 
             PrepareManager.Instance.Units.Add(newUnit);
 
@@ -528,7 +614,7 @@ public class CreateUnit : MonoBehaviour
         else
         {
             PrepareManager.Instance.ChosenUnit.unitCharacteristics = createUnit.unitCharacteristics.Copy();
-            PrepareManager.Instance.ChosenUnit.UnitImage.sprite = createUnit.UnitImage.sprite;
+            PrepareManager.Instance.ChosenUnit.UnitMainImage.sprite = createUnit.UnitMainImage.sprite;
             PrepareManager.Instance.ChosenUnit.Value.text = "x" + createUnit.unitCharacteristics.Value;
 
             if (Race.ThisItem != null)
@@ -552,7 +638,7 @@ public class CreateUnit : MonoBehaviour
     {
         Unit newUnit = Instantiate(UnitPrefab, Vector2.zero, Quaternion.identity, PrepareUIManager.Instance.UnitParent).GetComponent<Unit>();
         newUnit.unitCharacteristics = loadedUnit.unitCharacteristics.Copy();
-        newUnit.UnitImage.sprite = loadedUnit.UnitImage.sprite;
+        newUnit.UnitMainImage.sprite = loadedUnit.UnitMainImage.sprite;
         newUnit.Value.text = "x" + loadedUnit.unitCharacteristics.Value;
 
         newUnit.unitCharacteristics.RaceLink = loadedUnit.unitCharacteristics.RaceLink;
@@ -639,15 +725,15 @@ public class CreateUnit : MonoBehaviour
         Special.ThisItem = loadUnit.unitCharacteristics.Special;
 
         if (loadUnit.unitCharacteristics.Race != null)
-            Race.Image.sprite = loadUnit.unitCharacteristics.Race.Base.Sprite;
+            Race.Image.sprite = loadUnit.unitCharacteristics.Race.Base.ItemUISprite;
         if (loadUnit.unitCharacteristics.Weapon != null)
-            Weapon.Image.sprite = loadUnit.unitCharacteristics.Weapon.Base.Sprite;
+            Weapon.Image.sprite = loadUnit.unitCharacteristics.Weapon.Base.ItemUISprite;
         if (loadUnit.unitCharacteristics.Armor != null)
-            Armor.Image.sprite = loadUnit.unitCharacteristics.Armor.Base.Sprite;
+            Armor.Image.sprite = loadUnit.unitCharacteristics.Armor.Base.ItemUISprite;
         if (loadUnit.unitCharacteristics.Shield != null)
-            Shield.Image.sprite = loadUnit.unitCharacteristics.Shield.Base.Sprite;
+            Shield.Image.sprite = loadUnit.unitCharacteristics.Shield.Base.ItemUISprite;
         if (loadUnit.unitCharacteristics.Special != null)
-            Special.Image.sprite = loadUnit.unitCharacteristics.Special.Base.Sprite;
+            Special.Image.sprite = loadUnit.unitCharacteristics.Special.Base.ItemUISprite;
 
         RaceLink = loadUnit.unitCharacteristics.RaceLink;
         WeaponLink = loadUnit.unitCharacteristics.WeaponLink;

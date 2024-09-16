@@ -22,7 +22,7 @@ public class ItemsSpawner : MonoBehaviour
             newItem.ThisItem = race.Copy();
             newItem.ThisItem.Value = race.Value;
             newItem.Value.text = "x" + newItem.ThisItem.Value.ItemValue.ToString();
-            newItem.Image.sprite = newItem.ThisItem.Base.Sprite;
+            newItem.Image.sprite = newItem.ThisItem.Base.ItemUISprite;
 
             if (race.Value.ItemValue == 0)
             {
@@ -41,7 +41,7 @@ public class ItemsSpawner : MonoBehaviour
             newItem.ThisItem = item.Copy();
             newItem.ThisItem.Value = item.Value;
             newItem.Value.text = "x" + newItem.ThisItem.Value.ItemValue.ToString();
-            newItem.Image.sprite = newItem.ThisItem.Base.Sprite;
+            newItem.Image.sprite = newItem.ThisItem.Base.ItemUISprite;
 
             if (item.Value.ItemValue == 0)
             {
@@ -67,7 +67,7 @@ public class ItemsSpawner : MonoBehaviour
             ItemInfo newItem = Instantiate(ItemPrefab, Vector2.zero, Quaternion.identity, AllItemsParent).GetComponent<ItemInfo>();
             newItem.ThisItem = item.Copy();
             newItem.ThisItem.Value = item.Value;
-            newItem.Image.sprite = newItem.ThisItem.Base.Sprite;
+            newItem.Image.sprite = newItem.ThisItem.Base.ItemUISprite;
             newItem.ImageEdge.sprite = Resources.Load<Sprite>("Sprites/Rare/" + item.Base.Rare);
             newItem.GetComponent<RectTransform>().localPosition = Vector3.zero;
         }

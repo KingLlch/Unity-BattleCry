@@ -3,6 +3,7 @@ using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Description : MonoBehaviour
 {
@@ -23,7 +24,12 @@ public class Description : MonoBehaviour
 
     public GameObject DescriptionGameObject;
 
-    public Image ImageDescription;
+    public Image MainUnitImage;
+    public Image RaceUnitImage;
+    public Image WeaponUnitImage;
+    public Image ArmorUnitImage;
+    public Image ShieldUnitImage;
+    public Image SpecialUnitImage;
 
     public TextMeshProUGUI Name;
     public TextMeshProUGUI ItemName;
@@ -54,7 +60,41 @@ public class Description : MonoBehaviour
         if (PrepareUIManager.Instance.IsDrug)
             return;
 
-        ImageDescription.sprite = unit.UnitImage.sprite;
+        MainUnitImage.sprite = unit.UnitMainImage.sprite;
+        RaceUnitImage.gameObject.SetActive(true);
+        RaceUnitImage.sprite = unit.UnitRaceImage.sprite;
+
+        if (unit.unitCharacteristics.Weapon != null)
+        {
+            WeaponUnitImage.gameObject.SetActive(true);
+            WeaponUnitImage.sprite = unit.UnitWeaponImage.sprite;
+        }
+        else
+            WeaponUnitImage.gameObject.SetActive(false);
+
+        if (unit.unitCharacteristics.Armor != null)
+        {
+            ArmorUnitImage.gameObject.SetActive(true);
+            ArmorUnitImage.sprite = unit.UnitArmorImage.sprite;
+        }
+        else
+            ArmorUnitImage.gameObject.SetActive(false);
+
+        if (unit.unitCharacteristics.Shield != null)
+        {
+            ShieldUnitImage.gameObject.SetActive(true);
+            ShieldUnitImage.sprite = unit.UnitShieldImage.sprite;
+        }
+        else
+            ShieldUnitImage.gameObject.SetActive(false);
+
+        if (unit.unitCharacteristics.Special != null)
+        {
+            SpecialUnitImage.gameObject.SetActive(true);
+            SpecialUnitImage.sprite = unit.UnitSpecialImage.sprite;
+        }
+        else
+            SpecialUnitImage.gameObject.SetActive(false);
 
         Name.text = unit.unitCharacteristics.Name.ToString();
         ItemName.text = unit.unitCharacteristics.RaceName + "\n" + unit.unitCharacteristics.WeaponName + "\n" + unit.unitCharacteristics.ArmorName + "\n" + unit.unitCharacteristics.ShieldName + "\n" + unit.unitCharacteristics.SpecialName;
@@ -111,7 +151,12 @@ public class Description : MonoBehaviour
         if (item == null)
             return;
 
-        ImageDescription.sprite = item.Base.Sprite;
+        MainUnitImage.sprite = item.Base.ItemUISprite;
+        RaceUnitImage.gameObject.SetActive(false);
+        WeaponUnitImage.gameObject.SetActive(false);
+        ArmorUnitImage.gameObject.SetActive(false);
+        ShieldUnitImage.gameObject.SetActive(false);
+        SpecialUnitImage.gameObject.SetActive(false);
 
         Name.text = item.Base.Name.ToString();
         ItemName.text = item.Base.Description.ToString();

@@ -52,7 +52,7 @@ public class PrepareUIManager : MonoBehaviour
         Unit newUnit = Instantiate(unit, Vector3.zero, Quaternion.identity, Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform);
 
         newUnit.unitCharacteristics = unit.unitCharacteristics;
-        newUnit.UnitImage.sprite = unit.UnitImage.sprite;
+        newUnit.UnitMainImage.sprite = unit.UnitMainImage.sprite;
         newUnit.MainUnitLink = unit;
 
         UnitInArmyUI(newUnit);
@@ -77,7 +77,7 @@ public class PrepareUIManager : MonoBehaviour
                     Unit newUnit = Instantiate(unit, Vector3.zero, Quaternion.identity, Rows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].transform);
 
                     newUnit.unitCharacteristics = unit.unitCharacteristics;
-                    newUnit.UnitImage.sprite = unit.UnitImage.sprite;
+                    newUnit.UnitMainImage.sprite = unit.UnitMainImage.sprite;
                     newUnit.MainUnitLink = unit;
 
                     UnitInArmyUI(newUnit);
@@ -106,7 +106,7 @@ public class PrepareUIManager : MonoBehaviour
     public void UnitInArmyUI(Unit unit)
     {
         unit.Value.gameObject.SetActive(false);
-        unit.UnitImageEdge.gameObject.SetActive(false);
+        unit.UnitImageRare.gameObject.SetActive(false);
     }
 
     public void CreateNewUnit()
