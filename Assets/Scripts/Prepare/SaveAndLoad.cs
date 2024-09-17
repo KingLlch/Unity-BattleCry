@@ -1,6 +1,5 @@
 using BayatGames.SaveGameFree;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class SaveAndLoad : MonoBehaviour
 {
@@ -25,6 +24,11 @@ public class SaveAndLoad : MonoBehaviour
         {
             _instance = this;
         }
+    }
+
+    public void ClearAll()
+    {
+        SaveGame.DeleteAll();
     }
 
     public void SaveAll()
@@ -57,25 +61,31 @@ public class SaveAndLoad : MonoBehaviour
 
     public void LoadUnits()
     {
-        int unitCount = SaveGame.Load<int>("UnitCount", 0);
-
-        for (int i = 0; i < unitCount; i++)
+        if (SaveGame.Exists("UnitCount"))
         {
-            Unit loadedUnit = SaveGame.Load<Unit>("Unit" + i);
+            int unitCount = SaveGame.Load<int>("UnitCount", 0);
 
-            CreateUnit.Instance.CreateLoadUnit(loadedUnit);
+            for (int i = 0; i < unitCount; i++)
+            {
+                Unit loadedUnit = SaveGame.Load<Unit>("Unit" + i);
+
+                CreateUnit.Instance.CreateLoadUnit(loadedUnit);
+            }
         }
     }
 
     public void SaveArmy(Army army)
     {
-        SaveGame.Save<Army>("Army1", army);
+        SaveGame.Save<Army>("Army", army);
     }
 
     public void LoadArmy()
     {
-        PrepareManager.Instance.Army = SaveGame.Load<Army>("Army1", new Army());
-        PrepareUIManager.Instance.LoadUIArmy(PrepareManager.Instance.Army);
+        if (SaveGame.Exists("Army"))
+        {
+            PrepareManager.Instance.Army = SaveGame.Load<Army>("Army", new Army());
+            PrepareUIManager.Instance.LoadUIArmy(PrepareManager.Instance.Army);
+        }
     }
 
     public void SaveGold(int gold)
@@ -85,7 +95,10 @@ public class SaveAndLoad : MonoBehaviour
 
     public void LoadGold()
     {
-        PrepareManager.Instance.Gold = SaveGame.Load<int>("Gold", 10000);
+        if (SaveGame.Exists("Gold"))
+        {
+            PrepareManager.Instance.Gold = SaveGame.Load<int>("Gold", 10000);
+        }
     }
 
     public void SaveProgress()
@@ -105,16 +118,19 @@ public class SaveAndLoad : MonoBehaviour
 
     public void LoadProgress()
     {
-        int itemCount = SaveGame.Load<int>("ItemCount", 0);
-
-        for (int i = 0; i < itemCount; i++)
+        if (SaveGame.Exists("ItemCount"))
         {
-            Item loadedItem = SaveGame.Load<Item>("Item" + i);
-            ItemsList.AllItems.Add(loadedItem);
+            int itemCount = SaveGame.Load<int>("ItemCount", 0);
+
+            for (int i = 0; i < itemCount; i++)
+            {
+                Item loadedItem = SaveGame.Load<Item>("Item" + i);
+                ItemsList.AllItems.Add(loadedItem);
+            }
+
+            ItemsList.IsAddItemsInGame = SaveGame.Load<bool>("IsAddItemsInGame", false);
+
+            //loadCampaign
         }
-
-        ItemsList.IsAddItemsInGame = SaveGame.Load<bool>("IsAddItemsInGame", false);
-
-        //loadCampaign
     }
 }

@@ -37,8 +37,9 @@ public class PrepareManager : MonoBehaviour
 
     private void Start()
     {
+        SaveAndLoad.Instance.ClearAll();
         //SaveAndLoad.Instance.SaveGold(999999);
-        //SaveAndLoad.Instance.LoadAll();
+        SaveAndLoad.Instance.LoadAll();
         PrepareUIManager.Instance.ChangeGold();
     }
 

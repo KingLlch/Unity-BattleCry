@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +10,8 @@ public class MissionBase
     public Sprite Sprite;
 
     public int Gold;
+
+    public bool Completed;
 }
 
 public class MissionArmy

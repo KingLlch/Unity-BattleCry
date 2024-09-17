@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
 using TMPro;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -33,6 +29,8 @@ public class CampaignManager : MonoBehaviour
 
     public Mission CurrentMission;
 
+    public Mission PreviousMission;
+
     private void Awake()
     {
         if (_instance == null)
@@ -47,6 +45,13 @@ public class CampaignManager : MonoBehaviour
             newMission.MissionName.text = mission.MissionBase.Name;
             newMission.MissionImage.sprite = mission.MissionBase.Sprite;
             newMission.GetComponent<RectTransform>().localPosition = Vector3.zero;
+
+            if (PreviousMission!= null && !PreviousMission.MissionBase.Completed)
+            {
+                newMission.ButtonStartMission.interactable = false;
+            }
+
+            PreviousMission = mission;
         }
 
         foreach (GameObject campaignParent in CampaignParents)

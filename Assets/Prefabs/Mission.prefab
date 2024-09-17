@@ -645,3 +645,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MissionImage: {fileID: 3847094730994107007}
   MissionName: {fileID: 4021778416497920821}
+  ButtonStartMission: {fileID: 4903756171549407181}
