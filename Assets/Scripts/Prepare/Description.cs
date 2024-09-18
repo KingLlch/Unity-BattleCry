@@ -57,7 +57,7 @@ public class Description : MonoBehaviour
 
     public void ShowDescriptionUnit(Unit unit, Vector3 position)
     {
-        if (PrepareUIManager.Instance.IsDrug)
+        if (FindAnyObjectByType<PrepareUIManager>()!= null && PrepareUIManager.Instance.IsDrug)
             return;
 
         MainUnitImage.sprite = unit.UnitMainImage.sprite;

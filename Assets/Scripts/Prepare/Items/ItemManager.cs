@@ -181,6 +181,7 @@ public class ItemManager : MonoBehaviour
 {
     private void Awake()
     {
+
     }
 
     private void Start()

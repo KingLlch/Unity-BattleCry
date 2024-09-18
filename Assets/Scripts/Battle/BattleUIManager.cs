@@ -63,7 +63,10 @@ public class BattleUIManager : MonoBehaviour
             timeSeconds++;
 
             if (timeSeconds >= 60)
+            {
+                timeSeconds = 0;
                 timeMinuts++;
+            }
 
             ChangeTimerUI(timeSeconds, timeMinuts);
             yield return new WaitForSeconds(1f);
