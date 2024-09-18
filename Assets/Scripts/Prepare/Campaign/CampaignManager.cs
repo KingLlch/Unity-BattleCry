@@ -20,7 +20,7 @@ public class CampaignManager : MonoBehaviour
         }
     }
 
-    public List<Campaign> Campaigns = new List<Campaign>(5);
+    public List<Campaign> Campaigns = new List<Campaign>();
 
     public GameObject[] CampaignParents;
     public GameObject MissionPrefab;
@@ -39,6 +39,14 @@ public class CampaignManager : MonoBehaviour
         {
             _instance = this;
         }
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Campaigns.Add(new Campaign {Missions = new List<MissionUI>()});
+        }
 
         foreach (Mission mission in MissionList.AllMission)
         {
@@ -48,7 +56,7 @@ public class CampaignManager : MonoBehaviour
             newMission.MissionImage.sprite = mission.MissionBase.Sprite;
             newMission.GetComponent<RectTransform>().localPosition = Vector3.zero;
 
-            if (PreviousMission!= null && !PreviousMission.MissionBase.Completed)
+            if (PreviousMission != null && !PreviousMission.MissionBase.Completed)
             {
                 newMission.ButtonStartMission.interactable = false;
             }
@@ -62,7 +70,7 @@ public class CampaignManager : MonoBehaviour
         {
             int height = Mathf.CeilToInt((float)campaignParent.transform.childCount) * 400 + (Mathf.CeilToInt((float)campaignParent.transform.childCount) - 1) * 30 + 50;
             campaignParent.GetComponent<RectTransform>().sizeDelta = new Vector2(campaignParent.GetComponent<RectTransform>().sizeDelta.x, height);
-            campaignParent.GetComponent<RectTransform>().position = new Vector3(campaignParent.GetComponent<RectTransform>().position.x, -height/2, campaignParent.GetComponent<RectTransform>().position.z);
+            campaignParent.GetComponent<RectTransform>().position = new Vector3(campaignParent.GetComponent<RectTransform>().position.x, -height / 2, campaignParent.GetComponent<RectTransform>().position.z);
         }
     }
 
@@ -97,5 +105,5 @@ public class CampaignManager : MonoBehaviour
 
 public class Campaign
 {
-    public List<MissionUI> Missions;
+    public List<MissionUI> Missions = new List<MissionUI>();
 }
