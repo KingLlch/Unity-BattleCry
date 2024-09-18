@@ -45,6 +45,8 @@ public class Mission
 
 public static class MissionList
 {
+    public static bool IsMissionsAdded;
+
     public static List<Mission> AllMission = new List<Mission>();
 }
 
@@ -53,7 +55,15 @@ public class MissionManager : MonoBehaviour
 {
     private void Awake()
     {
-        AddMission();
+    }
+
+    private void Start()
+    {
+        if (!MissionList.IsMissionsAdded)
+        {
+            AddMission();
+            MissionList.IsMissionsAdded = true;
+        }
     }
 
     private void AddMission()
@@ -65,5 +75,37 @@ public class MissionManager : MonoBehaviour
         MissionList.AllMission.Add(new Mission(0, 4, "Mission5", "Sprites/Missions/Mission5", new Army(), "MissionDesc5"));
         MissionList.AllMission.Add(new Mission(0, 5, "Mission6", "Sprites/Missions/Mission6", new Army(), "MissionDesc6"));
         MissionList.AllMission.Add(new Mission(0, 6, "Mission7", "Sprites/Missions/Mission7", new Army(), "MissionDesc7"));
+
+        MissionList.AllMission.Add(new Mission(1, 0, "Mission1", "Sprites/Missions/Mission1", new Army(), "MissionDesc1"));
+        MissionList.AllMission.Add(new Mission(1, 1, "Mission2", "Sprites/Missions/Mission2", new Army(), "MissionDesc2"));
+        MissionList.AllMission.Add(new Mission(1, 2, "Mission3", "Sprites/Missions/Mission3", new Army(), "MissionDesc3"));
+        MissionList.AllMission.Add(new Mission(1, 3, "Mission4", "Sprites/Missions/Mission4", new Army(), "MissionDesc4"));
+        MissionList.AllMission.Add(new Mission(1, 4, "Mission5", "Sprites/Missions/Mission5", new Army(), "MissionDesc5"));
+        MissionList.AllMission.Add(new Mission(1, 5, "Mission6", "Sprites/Missions/Mission6", new Army(), "MissionDesc6"));
+        MissionList.AllMission.Add(new Mission(1, 6, "Mission7", "Sprites/Missions/Mission7", new Army(), "MissionDesc7"));
+
+        MissionList.AllMission.Add(new Mission(2, 0, "Mission1", "Sprites/Missions/Mission1", new Army(), "MissionDesc1"));
+        MissionList.AllMission.Add(new Mission(2, 1, "Mission2", "Sprites/Missions/Mission2", new Army(), "MissionDesc2"));
+        MissionList.AllMission.Add(new Mission(2, 2, "Mission3", "Sprites/Missions/Mission3", new Army(), "MissionDesc3"));
+        MissionList.AllMission.Add(new Mission(2, 3, "Mission4", "Sprites/Missions/Mission4", new Army(), "MissionDesc4"));
+        MissionList.AllMission.Add(new Mission(2, 4, "Mission5", "Sprites/Missions/Mission5", new Army(), "MissionDesc5"));
+        MissionList.AllMission.Add(new Mission(2, 5, "Mission6", "Sprites/Missions/Mission6", new Army(), "MissionDesc6"));
+        MissionList.AllMission.Add(new Mission(2, 6, "Mission7", "Sprites/Missions/Mission7", new Army(), "MissionDesc7"));
+
+        MissionList.AllMission.Add(new Mission(3, 0, "Mission1", "Sprites/Missions/Mission1", new Army(), "MissionDesc1"));
+        MissionList.AllMission.Add(new Mission(3, 1, "Mission2", "Sprites/Missions/Mission2", new Army(), "MissionDesc2"));
+        MissionList.AllMission.Add(new Mission(3, 2, "Mission3", "Sprites/Missions/Mission3", new Army(), "MissionDesc3"));
+        MissionList.AllMission.Add(new Mission(3, 3, "Mission4", "Sprites/Missions/Mission4", new Army(), "MissionDesc4"));
+        MissionList.AllMission.Add(new Mission(3, 4, "Mission5", "Sprites/Missions/Mission5", new Army(), "MissionDesc5"));
+        MissionList.AllMission.Add(new Mission(3, 5, "Mission6", "Sprites/Missions/Mission6", new Army(), "MissionDesc6"));
+        MissionList.AllMission.Add(new Mission(3, 6, "Mission7", "Sprites/Missions/Mission7", new Army(), "MissionDesc7"));
+
+        MissionList.AllMission.Add(new Mission(4, 0, "Mission1", "Sprites/Missions/Mission1", new Army(), "MissionDesc1"));
+        MissionList.AllMission.Add(new Mission(4, 1, "Mission2", "Sprites/Missions/Mission2", new Army(), "MissionDesc2"));
+        MissionList.AllMission.Add(new Mission(4, 2, "Mission3", "Sprites/Missions/Mission3", new Army(), "MissionDesc3"));
+        MissionList.AllMission.Add(new Mission(4, 3, "Mission4", "Sprites/Missions/Mission4", new Army(), "MissionDesc4"));
+        MissionList.AllMission.Add(new Mission(4, 4, "Mission5", "Sprites/Missions/Mission5", new Army(), "MissionDesc5"));
+        MissionList.AllMission.Add(new Mission(4, 5, "Mission6", "Sprites/Missions/Mission6", new Army(), "MissionDesc6"));
+        MissionList.AllMission.Add(new Mission(4, 6, "Mission7", "Sprites/Missions/Mission7", new Army(), "MissionDesc7"));
     }
 }

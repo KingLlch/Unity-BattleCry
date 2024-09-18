@@ -18,13 +18,31 @@ public class Unit : MonoBehaviour
     public Image UnitArmorImage;
     public Image UnitShieldImage;
     public Image UnitSpecialImage;
+
+    public Unit Copy()
+    {
+        Unit copy = (Unit)MemberwiseClone();
+
+        copy.IsInArmy = IsInArmy;
+        copy.unitCharacteristics = unitCharacteristics.Copy();
+
+
+        copy.UnitMainImage = UnitMainImage;
+        copy.UnitRaceImage = UnitRaceImage; 
+        copy.UnitWeaponImage = UnitWeaponImage; 
+        copy.UnitArmorImage = UnitArmorImage; 
+        copy.UnitShieldImage = UnitShieldImage; 
+        copy.UnitSpecialImage = UnitSpecialImage;
+
+        return copy;
+    }
 }
 
 public class UnitCharacteristics
 {
     public int Value = 1;
 
-    public string Name = "N Unit";
+    public string Name = "Unit 1";
     public int Points;
 
     public string RaceName = " ";

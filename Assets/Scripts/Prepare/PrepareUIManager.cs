@@ -20,8 +20,6 @@ public class PrepareUIManager : MonoBehaviour
             return _instance;
         }
     }
-
-    public GameObject CreateUnitPanel;
     public GameObject TopView;
 
     public Transform UnitParent;
@@ -111,8 +109,7 @@ public class PrepareUIManager : MonoBehaviour
 
     public void CreateNewUnit()
     {
-        CreateUnitPanel.SetActive(true);
-        CreateUnit.Instance.ChangeValueItems();
+        CreateUnit.Instance.Enable();
         CreateUnit.Instance.IsEditUnit = false;
     }
 
@@ -123,8 +120,7 @@ public class PrepareUIManager : MonoBehaviour
             return;
         }
 
-        CreateUnitPanel.SetActive(true);
-        CreateUnit.Instance.ChangeValueItems();
+        CreateUnit.Instance.Enable();
         CreateUnit.Instance.EditUnit(PrepareManager.Instance.ChosenUnit);
         CreateUnit.Instance.IsEditUnit = true;
     }
@@ -137,16 +133,10 @@ public class PrepareUIManager : MonoBehaviour
         CreateUnit.Instance.DeleteUnit(PrepareManager.Instance.ChosenUnit);
     }
 
-    public void EnableChangeNameArmy()
+    public void ChangeNameArmy()
     {
-        NameArmyInputField.enabled = true;
-    }
-
-    public void ChangeNameArmy(string name)
-    {
-        NameArmy.text = name;
-        PrepareManager.Instance.Army.Name = name;
-        NameArmyInputField.enabled = false;
+        NameArmy.text = NameArmyInputField.text;
+        PrepareManager.Instance.Army.Name = NameArmyInputField.text;
     }
 
     public void ResetArmy()

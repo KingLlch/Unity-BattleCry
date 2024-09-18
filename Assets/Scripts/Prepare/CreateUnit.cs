@@ -41,6 +41,7 @@ public class CreateUnit : MonoBehaviour
 
     public TextMeshProUGUI Value;
 
+    public TextMeshProUGUI NamePlaceholder;
     public TextMeshProUGUI Name;
     public TextMeshProUGUI Points;
 
@@ -77,6 +78,20 @@ public class CreateUnit : MonoBehaviour
         }
 
         ClearUI();
+    }
+
+    public void Enable()
+    {
+        createUnitGameObject.SetActive(true);
+
+        SetName();
+        ChangeValueItems();
+    }
+
+    public void SetName()
+    {
+        createUnit.unitCharacteristics.Name = "Unit " + PrepareManager.Instance.Army.UnitNameNumber;
+        NamePlaceholder.text = createUnit.unitCharacteristics.Name + "...";
     }
 
     public void ChangeName(string name)
@@ -568,6 +583,7 @@ public class CreateUnit : MonoBehaviour
             newUnit.unitCharacteristics = createUnit.unitCharacteristics.Copy();
             newUnit.Value.text = "x" + createUnit.unitCharacteristics.Value;
 
+            PrepareManager.Instance.Army.UnitNameNumber++;
 
             if (Race.ThisItem != null)
             {

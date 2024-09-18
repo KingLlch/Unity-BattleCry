@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public Army EnemyArmy;
     public List<GameObject> EnemyArmyRows;
+
+    public GameObject UnitPrefab;
 
     private void Awake()
     {
@@ -55,17 +56,13 @@ public class GameManager : MonoBehaviour
                         if (unit == null)
                             continue;
 
-                        Unit newUnit = Instantiate(unit, Vector3.zero, Quaternion.identity, PlayerArmyRows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].transform);
+                        Unit newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, PlayerArmyRows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].transform).GetComponent<Unit>();
 
-                        newUnit.unitCharacteristics = unit.unitCharacteristics;
-                        newUnit.UnitMainImage.sprite = unit.UnitMainImage.sprite;
-                        newUnit.MainUnitLink = unit;
-                        newUnit.Value.gameObject.SetActive(false);
-                        newUnit.UnitImageRare.gameObject.SetActive(false);
+                        LoadUnit(newUnit, unit);
 
                         PlayerArmyRows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].GetComponent<CellUI>().unit = newUnit;
 
-                        //Centralize(newUnit.GetComponent<RectTransform>());
+                        Centralize(newUnit.GetComponent<RectTransform>());
                         newUnit.IsInArmy = true;
                     }
                 }
@@ -81,20 +78,69 @@ public class GameManager : MonoBehaviour
                         if (unit == null)
                             continue;
 
-                        Unit newUnit = Instantiate(unit, Vector3.zero, Quaternion.identity, EnemyArmyRows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].transform);
-
-                        newUnit.unitCharacteristics = unit.unitCharacteristics;
-                        newUnit.UnitMainImage.sprite = unit.UnitMainImage.sprite;
-                        newUnit.MainUnitLink = unit;
-                        newUnit.Value.gameObject.SetActive(false);
-                        newUnit.UnitImageRare.gameObject.SetActive(false);
+                        Unit newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, EnemyArmyRows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].transform).GetComponent<Unit>();
+                        
+                        LoadUnit(newUnit, unit);
 
                         EnemyArmyRows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].GetComponent<CellUI>().unit = newUnit;
 
-                        //Centralize(newUnit.GetComponent<RectTransform>());
+                        Centralize(newUnit.GetComponent<RectTransform>());
                         newUnit.IsInArmy = true;
                     }
                 }
             }
+    }
+
+    private void LoadUnit(Unit newUnit, Unit unit)
+    {
+        newUnit.unitCharacteristics = unit.unitCharacteristics;
+        newUnit.UnitMainImage.sprite = unit.UnitMainImage.sprite;
+        newUnit.MainUnitLink = unit;
+        newUnit.Value.gameObject.SetActive(false);
+        newUnit.UnitImageRare.gameObject.SetActive(false);
+
+        ShowUnit(newUnit, unit);
+    }
+
+    private void ShowUnit(Unit newUnit, Unit unit)
+    {
+        if (newUnit.unitCharacteristics.Race != null)
+        {
+            newUnit.UnitMainImage.gameObject.SetActive(true);
+            newUnit.UnitMainImage.sprite = unit.UnitMainImage.sprite;
+            newUnit.UnitRaceImage.gameObject.SetActive(true);
+            newUnit.UnitRaceImage.sprite = unit.UnitRaceImage.sprite;
+        }
+        if (newUnit.unitCharacteristics.Weapon != null)
+        {
+            newUnit.UnitWeaponImage.gameObject.SetActive(true);
+            newUnit.UnitWeaponImage.sprite = unit.UnitWeaponImage.sprite;
+
+        }
+        if (newUnit.unitCharacteristics.Armor != null)
+        {
+            newUnit.UnitArmorImage.gameObject.SetActive(true);
+            newUnit.UnitArmorImage.sprite = unit.UnitArmorImage.sprite;
+
+        }
+        if (newUnit.unitCharacteristics.Shield != null)
+        {
+            newUnit.UnitShieldImage.gameObject.SetActive(true);
+            newUnit.UnitShieldImage.sprite = unit.UnitShieldImage.sprite;
+
+        }
+        if (newUnit.unitCharacteristics.Special != null)
+        {
+            newUnit.UnitSpecialImage.gameObject.SetActive(true);
+            newUnit.UnitSpecialImage.sprite = unit.UnitSpecialImage.sprite;
+
+        }
+    }
+
+    private void Centralize(RectTransform rectTransform)
+    {
+        rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+        rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+        rectTransform.localPosition = Vector3.zero;
     }
 }

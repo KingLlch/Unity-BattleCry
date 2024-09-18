@@ -110,7 +110,7 @@ public class SaveAndLoad : MonoBehaviour
             itemCount++;
         }
 
-        SaveGame.Save<bool>("IsAddItemsInGame", ItemsList.IsAddItemsInGame);
+        SaveGame.Save<bool>("IsAddItemsInGame", ItemsList.IsItemsAdded);
         SaveGame.Save<int>("ItemCount", itemCount);
 
         //saveCampaign
@@ -128,7 +128,7 @@ public class SaveAndLoad : MonoBehaviour
                 ItemsList.AllItems.Add(loadedItem);
             }
 
-            ItemsList.IsAddItemsInGame = SaveGame.Load<bool>("IsAddItemsInGame", false);
+            ItemsList.IsItemsAdded = SaveGame.Load<bool>("IsAddItemsInGame", false);
 
             //loadCampaign
         }

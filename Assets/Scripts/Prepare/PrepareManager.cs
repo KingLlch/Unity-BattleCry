@@ -33,14 +33,19 @@ public class PrepareManager : MonoBehaviour
         {
             _instance = this;
         }
-    }
 
-    private void Start()
-    {
         SaveAndLoad.Instance.ClearAll();
         //SaveAndLoad.Instance.SaveGold(999999);
         SaveAndLoad.Instance.LoadAll();
         PrepareUIManager.Instance.ChangeGold();
+    }
+
+    private void Start()
+    {
+        if (BattleInfo.Instance.IsWin)
+        {
+            CampaignManager.Instance.ChangeProgress(BattleInfo.Instance.CampaignNumber, BattleInfo.Instance.MissionNumber);
+        }
     }
 
     public void SaveArmy()

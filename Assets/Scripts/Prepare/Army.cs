@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Army
 {
     public List<Row> Rows;
     public string Name;
     public int Points;
+    public int UnitNameNumber;
 
     public Army()
     {
@@ -43,6 +43,22 @@ public class Army
 
         Rows[rowIndex].RemoveUnit(columnIndex, unitIndex);
     }
+
+    public Army Copy()
+    {
+        Army copy = (Army)MemberwiseClone();
+
+        for (int i = 0; i < Rows.Count; i++)
+        {
+            copy.Rows[i] = Rows[i].Copy();
+        }
+
+        copy.Name = Name;
+        copy.Points = Points;
+        copy.UnitNameNumber = UnitNameNumber;
+
+        return copy;
+    }
 }
 
 public class Row
@@ -68,6 +84,20 @@ public class Row
     {
         Columns[columnIndex].RemoveUnit(unitIndex);
     }
+
+    public Row Copy()
+    {
+        Row copy = (Row)MemberwiseClone();
+
+        copy.SpeedRow = SpeedRow;
+
+        for (int i = 0; i < Columns.Count; i++)
+        {
+            copy.Columns[i] = Columns[i].Copy();
+        }
+
+        return copy;
+    }
 }
 
 public class Column
@@ -91,6 +121,21 @@ public class Column
     public void RemoveUnit(int index)
     {
         Units[index] = null;
+    }
+
+    public Column Copy()
+    {
+        Column copy = (Column)MemberwiseClone();
+
+        for (int i = 0; i < Units.Count; i++)
+        {
+            if (Units[i] != null)
+            {
+                copy.Units[i] = Units[i].Copy();
+            }
+        }
+
+        return copy;
     }
 }
 

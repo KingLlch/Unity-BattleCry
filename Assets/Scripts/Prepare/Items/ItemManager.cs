@@ -163,7 +163,7 @@ public class Item
 
 public static class ItemsList
 {
-    public static bool IsAddItemsInGame;
+    public static bool IsItemsAdded;
 
     public static List<Item> AllItems = new List<Item>();
     public static List<Item> AllCommonItem = new List<Item>();
@@ -181,13 +181,17 @@ public class ItemManager : MonoBehaviour
 {
     private void Awake()
     {
-        if (!ItemsList.IsAddItemsInGame)
+    }
+
+    private void Start()
+    {
+        if (!ItemsList.IsItemsAdded)
         {
             AddItems();
-            ItemsList.IsAddItemsInGame = true;
+            ItemsList.IsItemsAdded = true;
         }
 
-        SortingItems();
+        SortingItems();     
     }
 
     private void AddItems()

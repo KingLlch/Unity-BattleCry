@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,6 +20,8 @@ public class CampaignManager : MonoBehaviour
         }
     }
 
+    public List<Campaign> Campaigns = new List<Campaign>(5);
+
     public GameObject[] CampaignParents;
     public GameObject MissionPrefab;
 
@@ -28,7 +31,6 @@ public class CampaignManager : MonoBehaviour
     public TextMeshProUGUI MissionInfoPanelDescription;
 
     public Mission CurrentMission;
-
     public Mission PreviousMission;
 
     private void Awake()
@@ -51,6 +53,8 @@ public class CampaignManager : MonoBehaviour
                 newMission.ButtonStartMission.interactable = false;
             }
 
+            Campaigns[mission.MissionBase.CampaignNumber].Missions.Add(newMission);
+
             PreviousMission = mission;
         }
 
@@ -58,6 +62,7 @@ public class CampaignManager : MonoBehaviour
         {
             int height = Mathf.CeilToInt((float)campaignParent.transform.childCount) * 400 + (Mathf.CeilToInt((float)campaignParent.transform.childCount) - 1) * 30 + 50;
             campaignParent.GetComponent<RectTransform>().sizeDelta = new Vector2(campaignParent.GetComponent<RectTransform>().sizeDelta.x, height);
+            campaignParent.GetComponent<RectTransform>().position = new Vector3(campaignParent.GetComponent<RectTransform>().position.x, -height/2, campaignParent.GetComponent<RectTransform>().position.z);
         }
     }
 
@@ -71,11 +76,10 @@ public class CampaignManager : MonoBehaviour
 
     public void StartMission()
     {
-
         SaveAndLoad.Instance.SaveAll();
 
-        BattleInfo.Instance.PlayerArmy = PrepareManager.Instance.Army;
-        BattleInfo.Instance.EnemyArmy = CurrentMission.MissionArmy.Army;
+        BattleInfo.Instance.PlayerArmy = PrepareManager.Instance.Army.Copy();
+        BattleInfo.Instance.EnemyArmy = CurrentMission.MissionArmy.Army.Copy();
 
         BattleInfo.Instance.CampaignNumber = CurrentMission.MissionBase.CampaignNumber;
         BattleInfo.Instance.MissionNumber = CurrentMission.MissionBase.MissionNumber;
@@ -83,4 +87,15 @@ public class CampaignManager : MonoBehaviour
         BattleInfo.Instance.Gold = CurrentMission.MissionBase.Gold;
         SceneManager.LoadScene("Battle");
     }
+
+    public void ChangeProgress(int campaighNumber, int missionNumber)
+    {
+        Campaigns[campaighNumber].Missions[missionNumber].ThisMission.MissionBase.Completed = true;
+        Campaigns[campaighNumber].Missions[missionNumber].ButtonStartMission.interactable = true;
+    }
+}
+
+public class Campaign
+{
+    public List<MissionUI> Missions;
 }
