@@ -625,6 +625,9 @@ public class CreateUnit : MonoBehaviour
             PrepareManager.Instance.Units.Add(newUnit);
 
             newUnit.GetComponent<RectTransform>().localPosition = Vector3.zero;
+            newUnit.transform.SetAsFirstSibling();
+
+            PrepareUIManager.Instance.UnitParentChangeSize();
         }
 
         else

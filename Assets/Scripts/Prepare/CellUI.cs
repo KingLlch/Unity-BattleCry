@@ -24,11 +24,10 @@ public class CellUI : MonoBehaviour, IDropHandler, IPointerClickHandler
 
     private void AddUnitInCell(Unit addUnit)
     {
-        Unit dropUnit = addUnit;
 
-        if ((dropUnit.unitCharacteristics.Points < (1000 - PrepareManager.Instance.Army.Points)) && (dropUnit.unitCharacteristics.Value > 0 || dropUnit.IsInArmy == true) && (addUnit == null || unit.unitCharacteristics.Name != dropUnit.unitCharacteristics.Name))
+        if ((addUnit.unitCharacteristics.Points < (1000 - PrepareManager.Instance.Army.Points)) && (addUnit.unitCharacteristics.Value > 0 || addUnit.IsInArmy == true) && (unit == null || unit.unitCharacteristics.Name != addUnit.unitCharacteristics.Name))
         {
-            if (addUnit != null)
+            if (unit != null)
             {
                 PrepareManager.Instance.RemoveUnitFromArmy(addUnit, this);
             }

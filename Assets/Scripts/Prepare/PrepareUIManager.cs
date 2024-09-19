@@ -159,6 +159,15 @@ public class PrepareUIManager : MonoBehaviour
         ArmyPointsRemaning.text = (1000 - PrepareManager.Instance.Army.Points).ToString();
     }
 
+    public void UnitParentChangeSize()
+    {
+        int height = UnitParent.childCount * 150 + (UnitParent.childCount - 1) * 30 + 70;
+        if (height < 1920)
+            height = 1920;
+
+        UnitParent.GetComponent<RectTransform>().sizeDelta = new Vector2(height, UnitParent.GetComponent<RectTransform>().sizeDelta.y);
+    }
+
     private void Centralize(RectTransform rectTransform)
     {
         rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
