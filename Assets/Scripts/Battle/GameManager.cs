@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
 
                         Unit newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, PlayerArmyRows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].transform).GetComponent<Unit>();
 
+                        newUnit.GetComponent<UnitMove>().IsDraggable = false;
                         LoadUnit(newUnit, unit);
 
                         PlayerArmyRows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].GetComponent<CellUI>().unit = newUnit;
@@ -79,7 +80,8 @@ public class GameManager : MonoBehaviour
                             continue;
 
                         Unit newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, EnemyArmyRows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].transform).GetComponent<Unit>();
-                        
+
+                        newUnit.GetComponent<UnitMove>().IsDraggable = false;
                         LoadUnit(newUnit, unit);
 
                         EnemyArmyRows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].GetComponent<CellUI>().unit = newUnit;

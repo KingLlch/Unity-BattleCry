@@ -31,6 +31,7 @@ public class PrepareUIManager : MonoBehaviour
 
     public List<GameObject> Rows;
 
+    public Unit DruggableUnit;
     public bool IsDrug;
 
     private void Awake()
@@ -150,8 +151,6 @@ public class PrepareUIManager : MonoBehaviour
                     if (cell.GetComponent<CellUI>().unit != null)
                     {
                         PrepareManager.Instance.RemoveUnitFromArmy(cell.GetComponent<CellUI>().unit, cell.GetComponent<CellUI>());
-
-                        Destroy(cell.GetComponentInChildren<Unit>().gameObject);
                     }
                 }
             }

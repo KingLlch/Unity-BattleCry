@@ -12,9 +12,30 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     private Transform CurrentParentTransform;
     private int StartSiblingIndex;
 
+    private bool IsShiftPressed;
+    private bool IsDragging;
+    private PointerEventData currentPointer;
+
     private void Awake()
     {
         _mainCamera = Camera.main;
+    }
+
+    private void Update()
+    {
+        if (IsShiftPressed && IsDragging)
+        {
+            OnDrag(currentPointer);
+
+            if (!Input.GetKey(KeyCode.LeftShift))
+            {
+                IsShiftPressed = false;
+
+                GetComponent<CanvasGroup>().blocksRaycasts = true;
+                transform.SetParent(CurrentParentTransform);
+                transform.SetSiblingIndex(StartSiblingIndex);
+            }
+        }
     }
 
     public void OnBeginDrag(PointerEventData pointer)
@@ -26,7 +47,9 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         StartSiblingIndex = transform.GetSiblingIndex();
         GetComponent<CanvasGroup>().blocksRaycasts = false;
         transform.SetParent(PrepareUIManager.Instance.TopView.transform);
-        PrepareUIManager.Instance.IsDrug = true;
+        IsDragging = true;
+        PrepareUIManager.Instance.IsDrug = IsDragging;
+
     }
 
     public void OnDrag(PointerEventData pointer)
@@ -34,28 +57,42 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         if (!IsDraggable) return;
 
         transform.position = (_mainCamera.ScreenToWorldPoint(new Vector3(pointer.position.x + 100, pointer.position.y, 0)) + _offset);
+
+        currentPointer = pointer;
+
     }
 
     public void OnEndDrag(PointerEventData pointer)
     {
         if (!IsDraggable) return;
-        GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-        if (!ThisUnit.IsInArmy)
+        if (!ThisUnit.IsInArmy && Input.GetKey(KeyCode.LeftShift))
         {
-            transform.SetParent(CurrentParentTransform);
-            transform.SetSiblingIndex(StartSiblingIndex);
+            IsShiftPressed = true;
+            PrepareUIManager.Instance.DruggableUnit = pointer.pointerDrag.GetComponent<Unit>();
         }
 
         else
         {
-            PrepareManager.Instance.RemoveUnitFromArmy(ThisUnit, CurrentParentTransform.GetComponent<CellUI>());
-            PrepareUIManager.Instance.ChangeArmyPoints();
-            CurrentParentTransform.GetComponent<CellUI>().unit = null;
-            Destroy(gameObject);
+            GetComponent<CanvasGroup>().blocksRaycasts = true;
+
+            if (!ThisUnit.IsInArmy)
+            {
+                transform.SetParent(CurrentParentTransform);
+                transform.SetSiblingIndex(StartSiblingIndex);
+            }
+
+            else
+            {
+                PrepareManager.Instance.RemoveUnitFromArmy(ThisUnit, CurrentParentTransform.GetComponent<CellUI>());
+                PrepareUIManager.Instance.ChangeArmyPoints();
+                CurrentParentTransform.GetComponent<CellUI>().unit = null;
+            }
+
+            IsDragging = false;
+            PrepareUIManager.Instance.IsDrug = IsDragging;
         }
 
-        PrepareUIManager.Instance.IsDrug = false;
     }
 
     public void OnPointerEnter(PointerEventData pointer)
