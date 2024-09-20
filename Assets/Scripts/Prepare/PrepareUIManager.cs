@@ -67,13 +67,19 @@ public class PrepareUIManager : MonoBehaviour
 
     public void LoadUIArmy(Army army)
     {
-        foreach (Row row in army.Rows)
+        for (int rowIndex = 0; rowIndex < army.Rows.Count; rowIndex++)
         {
-            foreach (Column column in row.Columns)
+            Row row = army.Rows[rowIndex];
+
+            for (int columnIndex = 0; columnIndex < row.Columns.Count; columnIndex++)
             {
-                foreach (Unit unit in column.Units)
+                Column column = row.Columns[columnIndex];
+
+                for (int unitIndex = 0; unitIndex < column.Units.Count; unitIndex++)
                 {
-                    Unit newUnit = Instantiate(unit, Vector3.zero, Quaternion.identity, Rows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].transform);
+                    Unit unit = column.Units[unitIndex];
+
+                    Unit newUnit = Instantiate(unit, Vector3.zero, Quaternion.identity,Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform);
 
                     newUnit.unitCharacteristics = unit.unitCharacteristics;
                     newUnit.UnitMainImage.sprite = unit.UnitMainImage.sprite;
@@ -81,13 +87,15 @@ public class PrepareUIManager : MonoBehaviour
 
                     UnitInArmyUI(newUnit);
 
-                    Rows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].GetComponent<CellUI>().unit = newUnit;
+                    Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].GetComponent<CellUI>().unit = newUnit;
 
                     Centralize(newUnit.GetComponent<RectTransform>());
+
                     newUnit.IsInArmy = true;
                 }
             }
         }
+
 
         ChangeArmyPoints();
     }

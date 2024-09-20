@@ -24,7 +24,6 @@ public class CellUI : MonoBehaviour, IDropHandler, IPointerClickHandler
 
     private void AddUnitInCell(Unit addUnit)
     {
-
         if ((addUnit.unitCharacteristics.Points < (1000 - PrepareManager.Instance.Army.Points)) && (addUnit.unitCharacteristics.Value > 0 || addUnit.IsInArmy == true) && (unit == null || unit.unitCharacteristics.Name != addUnit.unitCharacteristics.Name))
         {
             if (unit != null)

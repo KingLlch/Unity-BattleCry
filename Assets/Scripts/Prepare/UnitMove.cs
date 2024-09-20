@@ -34,6 +34,9 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
                 GetComponent<CanvasGroup>().blocksRaycasts = true;
                 transform.SetParent(CurrentParentTransform);
                 transform.SetSiblingIndex(StartSiblingIndex);
+
+                IsDragging = false;
+                PrepareUIManager.Instance.IsDrug = IsDragging;
             }
         }
     }
@@ -49,7 +52,6 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         transform.SetParent(PrepareUIManager.Instance.TopView.transform);
         IsDragging = true;
         PrepareUIManager.Instance.IsDrug = IsDragging;
-
     }
 
     public void OnDrag(PointerEventData pointer)

@@ -47,50 +47,65 @@ public class GameManager : MonoBehaviour
     private void LoadArmy(Army army, bool isPlayer)
     {
         if (isPlayer)
-            foreach (Row row in army.Rows)
+        {
+            for (int rowIndex = 0; rowIndex < army.Rows.Count; rowIndex++)
             {
-                foreach (Column column in row.Columns)
+                Row row = army.Rows[rowIndex];
+
+                for (int columnIndex = 0; columnIndex < row.Columns.Count; columnIndex++)
                 {
-                    foreach (Unit unit in column.Units)
+                    Column column = row.Columns[columnIndex];
+
+                    for (int unitIndex = 0; unitIndex < column.Units.Count; unitIndex++)
                     {
+                        Unit unit = column.Units[unitIndex];
+
                         if (unit == null)
                             continue;
 
-                        Unit newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, PlayerArmyRows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].transform).GetComponent<Unit>();
+                        Unit newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity,PlayerArmyRows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform).GetComponent<Unit>();
 
                         newUnit.GetComponent<UnitMove>().IsDraggable = false;
                         LoadUnit(newUnit, unit);
 
-                        PlayerArmyRows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].GetComponent<CellUI>().unit = newUnit;
+                        PlayerArmyRows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].GetComponent<CellUI>().unit = newUnit;
 
                         Centralize(newUnit.GetComponent<RectTransform>());
                         newUnit.IsInArmy = true;
                     }
                 }
             }
-
+        }
         else
-            foreach (Row row in army.Rows)
+        {
+            for (int rowIndex = 0; rowIndex < army.Rows.Count; rowIndex++)
             {
-                foreach (Column column in row.Columns)
+                Row row = army.Rows[rowIndex];
+
+                for (int columnIndex = 0; columnIndex < row.Columns.Count; columnIndex++)
                 {
-                    foreach (Unit unit in column.Units)
+                    Column column = row.Columns[columnIndex];
+
+                    for (int unitIndex = 0; unitIndex < column.Units.Count; unitIndex++)
                     {
+                        Unit unit = column.Units[unitIndex];
+
                         if (unit == null)
                             continue;
 
-                        Unit newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, EnemyArmyRows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].transform).GetComponent<Unit>();
+                        Unit newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity,EnemyArmyRows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform).GetComponent<Unit>();
 
                         newUnit.GetComponent<UnitMove>().IsDraggable = false;
                         LoadUnit(newUnit, unit);
 
-                        EnemyArmyRows[army.Rows.IndexOf(row)].GetComponentInChildren<RowUI>().Columns[row.Columns.IndexOf(column)].GetComponent<ColumnUI>().Cells[column.Units.IndexOf(unit)].GetComponent<CellUI>().unit = newUnit;
+                        EnemyArmyRows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].GetComponent<CellUI>().unit = newUnit;
 
                         Centralize(newUnit.GetComponent<RectTransform>());
                         newUnit.IsInArmy = true;
                     }
                 }
             }
+        }
     }
 
     private void LoadUnit(Unit newUnit, Unit unit)
