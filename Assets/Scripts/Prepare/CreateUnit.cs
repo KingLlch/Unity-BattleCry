@@ -248,7 +248,7 @@ public class CreateUnit : MonoBehaviour
             Type damageTypeItem = damagesItem.GetType();
             FieldInfo[] damageFieldsItem = damageTypeItem.GetFields();
 
-            for (int i = 0; i < Damages.Length; i++)
+            for (int i = 0; i < damageFieldsItem.Length; i++)
             {
                 int currentDamageValue = (int)damageFields[i].GetValue(damages);
                 int itemDamageValue = (int)damageFieldsItem[i].GetValue(damagesItem);
@@ -276,8 +276,12 @@ public class CreateUnit : MonoBehaviour
                 resistFields[i].SetValueDirect(__makeref(resists), resultValue);
             }
 
-            createUnit.unitCharacteristics.AttackTime = item.Weapon.AttackTime;
-            createUnit.unitCharacteristics.AttackRange = item.Weapon.AttackRange;
+            if (item.Weapon.IsWeapon)
+            {
+                createUnit.unitCharacteristics.AttackTime = item.Weapon.AttackTime;
+                createUnit.unitCharacteristics.AttackRange = item.Weapon.AttackRange;
+                createUnit.unitCharacteristics.IsMeleeAttack = item.Weapon.IsMeleeAttack;
+            }
         }
 
         else
@@ -294,7 +298,7 @@ public class CreateUnit : MonoBehaviour
             Type damageTypeItem = damagesItem.GetType();
             FieldInfo[] damageFieldsItem = damageTypeItem.GetFields();
 
-            for (int i = 0; i < Damages.Length; i++)
+            for (int i = 0; i < damageFieldsItem.Length; i++)
             {
                 int currentDamageValue = (int)damageFields[i].GetValue(damages);
                 int itemDamageValue = (int)damageFieldsItem[i].GetValue(damagesItem);
@@ -322,8 +326,12 @@ public class CreateUnit : MonoBehaviour
                 resistFields[i].SetValueDirect(__makeref(resists), resultValue);
             }
 
-            createUnit.unitCharacteristics.AttackTime = item.Weapon.AttackTime;
-            createUnit.unitCharacteristics.AttackRange = item.Weapon.AttackRange;
+            if (item.Weapon.IsWeapon)
+            {
+                createUnit.unitCharacteristics.AttackTime = 1;
+                createUnit.unitCharacteristics.AttackRange = 1;
+                createUnit.unitCharacteristics.IsMeleeAttack = true;
+            }
         }
     }
 

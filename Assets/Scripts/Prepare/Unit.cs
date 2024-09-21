@@ -10,7 +10,7 @@ public class Unit : MonoBehaviour
     public UnitCharacteristics unitCharacteristics = new();
 
     public TextMeshProUGUI Value;
-    public Image UnitImageRare;
+    public Image UnitChosenImage;
 
     public Image UnitMainImage;
     public Image UnitRaceImage;

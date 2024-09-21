@@ -74,13 +74,13 @@ public class PrepareManager : MonoBehaviour
     {
         if (ChosenUnit != null)
         {
-            ChosenUnit.UnitImageRare.color = Color.white;
+            ChosenUnit.UnitChosenImage.color = Color.white;
         }
 
         if (chosenUnit != null)
         {
             ChosenUnit = chosenUnit;
-            ChosenUnit.UnitImageRare.color = Color.red;
+            ChosenUnit.UnitChosenImage.color = Color.red;
         }
         else
         {

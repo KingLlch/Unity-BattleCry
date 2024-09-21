@@ -113,7 +113,7 @@ public class PrepareUIManager : MonoBehaviour
     public void UnitInArmyUI(Unit unit)
     {
         unit.Value.gameObject.SetActive(false);
-        unit.UnitImageRare.gameObject.SetActive(false);
+        unit.UnitChosenImage.gameObject.SetActive(false);
     }
 
     public void CreateNewUnit()

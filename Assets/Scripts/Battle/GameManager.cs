@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
         newUnit.UnitMainImage.sprite = unit.UnitMainImage.sprite;
         newUnit.MainUnitLink = unit;
         newUnit.Value.gameObject.SetActive(false);
-        newUnit.UnitImageRare.gameObject.SetActive(false);
+        newUnit.UnitChosenImage.gameObject.SetActive(false);
 
         ShowUnit(newUnit, unit);
     }

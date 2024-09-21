@@ -69,7 +69,7 @@ public class MissionManager : MonoBehaviour
 
     private void AddMission()
     {
-        MissionList.AllMission.Add(new Mission(0, 0, "Шайка гоблинов", "Sprites/Missions/Mission1", new Army(), "Небольшой отряд гоблинов грабил поселения неподалёку. Командир, это ваш шанс проявить себя. Уничтожьте этих мерзавцев!"));
+        MissionList.AllMission.Add(new Mission(0, 0, "Шайка гоблинов", "Sprites/Missions/Mission1", AllEnemyArmy.EnemyArmy[0], "Небольшой отряд гоблинов грабил поселения неподалёку. Командир, это ваш шанс проявить себя. Уничтожьте этих мерзавцев!"));
         MissionList.AllMission.Add(new Mission(0, 1, "Отряд гоблинов", "Sprites/Missions/Mission1", new Army(), "Отряд гоблинов взял в плен группу лучников. Нужно спасти наших и отправить на тот свет этих зелёных мерзавцев!"));
         MissionList.AllMission.Add(new Mission(0, 2, "Лучники гоблинов", "Sprites/Missions/Mission2", new Army(), "Часть армии гоблинов отделилась от основной группы для того чтобы ограбить наши поля. В их составе есть лучники. Нужно показать им что не стоит нападать на наших крестьян!"));
         MissionList.AllMission.Add(new Mission(0, 3, "Армия гоблинов", "Sprites/Missions/Mission2", new Army(), "Командир, мы собрали достаточно воинов чтобы сокрушить армию гоблинов вторгнувшуяся к нам. Давайте сокрушим этих мерзавцев!"));

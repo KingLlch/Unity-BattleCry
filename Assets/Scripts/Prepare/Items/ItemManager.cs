@@ -31,6 +31,8 @@ public class Base
 
 public class Weapon
 {
+    public bool IsWeapon;
+
     public float AttackTime;
     public int AttackRange;
     public bool IsMeleeAttack;
@@ -93,7 +95,8 @@ public class Item
     public Item(string name, ItemType type, Rare rare, int points, int health, string spritePath, string spriteUnitColorPath = "White", string description = "desc",
             float attackTime = 1, int attackRange = 1, bool isMeleeAttack = true,
             int pierceDamage = 0, int slashDamage = 0, int bluntDamage = 0, int fireDamage = 0, int iceDamage = 0, int earthDamage = 0, int poisonDamage = 0, int waterDamage = 0, int lightDamage = 0, int darknessDamage = 0,
-            int pierceResist = 0, int slashResist = 0, int bluntResist = 0, int fireResist = 0, int iceResist = 0, int earthResist = 0, int poisonResist = 0, int waterResist = 0, int lightResist = 0, int darknessResist = 0)
+            int pierceResist = 0, int slashResist = 0, int bluntResist = 0, int fireResist = 0, int iceResist = 0, int earthResist = 0, int poisonResist = 0, int waterResist = 0, int lightResist = 0, int darknessResist = 0,
+            bool isWeapon = false)
     {
         Base = new Base
         {
@@ -115,6 +118,7 @@ public class Item
 
         Weapon = new Weapon
         {
+            IsWeapon = isWeapon,
             AttackRange = attackRange,
             AttackTime = attackTime,
             IsMeleeAttack = isMeleeAttack
