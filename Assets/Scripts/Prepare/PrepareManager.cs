@@ -21,9 +21,9 @@ public class PrepareManager : MonoBehaviour
 
     public Army Army = new Army();
 
-    public List<Unit> Units;
+    public List<UnitUI> Units;
 
-    public Unit ChosenUnit = new Unit();
+    public UnitUI ChosenUnit = new UnitUI();
 
     public int Gold;
 
@@ -63,14 +63,14 @@ public class PrepareManager : MonoBehaviour
         Army.AddUnit(unit, cell);
     }
 
-    public void RemoveUnitFromArmy(Unit unit, CellUI cell)
+    public void RemoveUnitFromArmy(UnitUI unit, CellUI cell)
     {
         Army.RemoveUnit(unit, cell);
 
         Destroy(unit.gameObject);
     }
 
-    public void ChoseUnit(Unit chosenUnit)
+    public void ChoseUnit(UnitUI chosenUnit)
     {
         if (ChosenUnit != null)
         {

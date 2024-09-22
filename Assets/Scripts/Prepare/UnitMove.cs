@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerMoveHandler, IPointerClickHandler
 {
     public bool IsDraggable = true;
-    public Unit ThisUnit;
+    public UnitUI ThisUnit;
 
     private Camera _mainCamera;
     private Vector3 _offset;
@@ -71,7 +71,7 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         if (!ThisUnit.IsInArmy && Input.GetKey(KeyCode.LeftShift))
         {
             IsShiftPressed = true;
-            PrepareUIManager.Instance.DruggableUnit = pointer.pointerDrag.GetComponent<Unit>();
+            PrepareUIManager.Instance.DruggableUnit = pointer.pointerDrag.GetComponent<UnitUI>();
         }
 
         else
@@ -99,7 +99,7 @@ public class UnitMove : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
 
     public void OnPointerEnter(PointerEventData pointer)
     {
-        Description.Instance.ShowDescriptionUnit(transform.GetComponent<Unit>(), _mainCamera.ScreenToWorldPoint(new Vector3(pointer.position.x, pointer.position.y, 0)));
+        Description.Instance.ShowDescriptionUnit(transform.GetComponent<UnitUI>(), _mainCamera.ScreenToWorldPoint(new Vector3(pointer.position.x, pointer.position.y, 0)));
     }
 
     public void OnPointerExit(PointerEventData pointer)

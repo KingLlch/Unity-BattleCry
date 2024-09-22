@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
                         if (unit == null)
                             continue;
 
-                        Unit newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity,PlayerArmyRows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform).GetComponent<Unit>();
+                        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity,PlayerArmyRows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform).GetComponent<UnitUI>();
 
                         newUnit.GetComponent<UnitMove>().IsDraggable = false;
                         LoadUnit(newUnit, unit);
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
                         if (unit == null)
                             continue;
 
-                        Unit newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity,EnemyArmyRows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform).GetComponent<Unit>();
+                        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity,EnemyArmyRows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform).GetComponent<UnitUI>();
 
                         newUnit.GetComponent<UnitMove>().IsDraggable = false;
                         LoadUnit(newUnit, unit);
@@ -108,51 +108,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void LoadUnit(Unit newUnit, Unit unit)
+    private void LoadUnit(UnitUI newUnit, Unit unit)
     {
-        newUnit.unitCharacteristics = unit.unitCharacteristics;
-        newUnit.UnitMainImage.sprite = unit.UnitMainImage.sprite;
+        newUnit.Unit = unit;
+        newUnit.UnitMainImage.sprite = unit.MainSprite;
         newUnit.MainUnitLink = unit;
         newUnit.Value.gameObject.SetActive(false);
         newUnit.UnitChosenImage.gameObject.SetActive(false);
 
         newUnit.ActiveUI();
     }
-
-    //private void ShowUnit(Unit newUnit, Unit unit)
-    //{
-    //    if (newUnit.unitCharacteristics.Race != null)
-    //    {
-    //        newUnit.UnitMainImage.gameObject.SetActive(true);
-    //        newUnit.UnitMainImage.sprite = unit.UnitMainImage.sprite;
-    //        newUnit.UnitRaceImage.gameObject.SetActive(true);
-    //        newUnit.UnitRaceImage.sprite = unit.UnitRaceImage.sprite;
-    //    }
-    //    if (newUnit.unitCharacteristics.Weapon != null)
-    //    {
-    //        newUnit.UnitWeaponImage.gameObject.SetActive(true);
-    //        newUnit.UnitWeaponImage.sprite = unit.UnitWeaponImage.sprite;
-
-    //    }
-    //    if (newUnit.unitCharacteristics.Armor != null)
-    //    {
-    //        newUnit.UnitArmorImage.gameObject.SetActive(true);
-    //        newUnit.UnitArmorImage.sprite = unit.UnitArmorImage.sprite;
-
-    //    }
-    //    if (newUnit.unitCharacteristics.Shield != null)
-    //    {
-    //        newUnit.UnitShieldImage.gameObject.SetActive(true);
-    //        newUnit.UnitShieldImage.sprite = unit.UnitShieldImage.sprite;
-
-    //    }
-    //    if (newUnit.unitCharacteristics.Special != null)
-    //    {
-    //        newUnit.UnitSpecialImage.gameObject.SetActive(true);
-    //        newUnit.UnitSpecialImage.sprite = unit.UnitSpecialImage.sprite;
-
-    //    }
-    //}
 
     private void Centralize(RectTransform rectTransform)
     {

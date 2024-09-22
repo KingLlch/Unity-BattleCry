@@ -55,19 +55,19 @@ public class Description : MonoBehaviour
         }
     }
 
-    public void ShowDescriptionUnit(Unit unit, Vector3 position)
+    public void ShowDescriptionUnit(UnitUI unit, Vector3 position)
     {
         if (FindAnyObjectByType<PrepareUIManager>() != null && PrepareUIManager.Instance.IsDrug)
             return;
 
         ChangeImageDescription(unit);
 
-        Name.text = unit.unitCharacteristics.Name.ToString();
-        ItemName.text = unit.unitCharacteristics.RaceName + "\n" + unit.unitCharacteristics.WeaponName + "\n" + unit.unitCharacteristics.ArmorName + "\n" + unit.unitCharacteristics.ShieldName + "\n" + unit.unitCharacteristics.SpecialName;
-        Points.text = unit.unitCharacteristics.Points.ToString();
-        Health.text = unit.unitCharacteristics.Health + " / " + unit.unitCharacteristics.MaxHealth;
+        Name.text = unit.Unit.Name.ToString();
+        ItemName.text = unit.Unit.RaceName + "\n" + unit.Unit.WeaponName + "\n" + unit.Unit.ArmorName + "\n" + unit.Unit.ShieldName + "\n" + unit.Unit.SpecialName;
+        Points.text = unit.Unit.Points.ToString();
+        Health.text = unit.Unit.Health + " / " + unit.Unit.MaxHealth;
 
-        Damages damages = unit.unitCharacteristics.Damages;
+        Damages damages = unit.Unit.Damages;
         Type damageType = damages.GetType();
         FieldInfo[] damagefields = damageType.GetFields();
 
@@ -86,7 +86,7 @@ public class Description : MonoBehaviour
             }
         }
 
-        Resists resists = unit.unitCharacteristics.Resists;
+        Resists resists = unit.Unit.Resists;
         Type resistType = resists.GetType();
         FieldInfo[] resistfields = resistType.GetFields();
 
@@ -105,47 +105,47 @@ public class Description : MonoBehaviour
             }
         }
 
-        AttackInterval.text = unit.unitCharacteristics.AttackTime.ToString();
-        AttackRange.text = unit.unitCharacteristics.AttackRange.ToString();
+        AttackInterval.text = unit.Unit.AttackTime.ToString();
+        AttackRange.text = unit.Unit.AttackRange.ToString();
 
         DescriptionGameObject.transform.localPosition = position + new Vector3(170 - Screen.width / 2, 0 - Screen.height / 2, 0);
         DescriptionGameObject.SetActive(true);
     }
 
-    private void ChangeImageDescription(Unit unit)
+    private void ChangeImageDescription(UnitUI unit)
     {
-        MainUnitImage.sprite = unit.unitCharacteristics.MainSprite;
+        MainUnitImage.sprite = unit.Unit.MainSprite;
         RaceUnitImage.gameObject.SetActive(true);
-        RaceUnitImage.sprite = unit.unitCharacteristics.RaceSprite;
+        RaceUnitImage.sprite = unit.Unit.RaceSprite;
 
-        if (unit.unitCharacteristics.Weapon != null)
+        if (unit.Unit.Weapon != null)
         {
             WeaponUnitImage.gameObject.SetActive(true);
-            WeaponUnitImage.sprite = unit.unitCharacteristics.WeaponSprite;
+            WeaponUnitImage.sprite = unit.Unit.WeaponSprite;
         }
         else
             WeaponUnitImage.gameObject.SetActive(false);
 
-        if (unit.unitCharacteristics.Armor != null)
+        if (unit.Unit.Armor != null)
         {
             ArmorUnitImage.gameObject.SetActive(true);
-            ArmorUnitImage.sprite = unit.unitCharacteristics.ArmorSprite;
+            ArmorUnitImage.sprite = unit.Unit.ArmorSprite;
         }
         else
             ArmorUnitImage.gameObject.SetActive(false);
 
-        if (unit.unitCharacteristics.Shield != null)
+        if (unit.Unit.Shield != null)
         {
             ShieldUnitImage.gameObject.SetActive(true);
-            ShieldUnitImage.sprite = unit.unitCharacteristics.ShieldSprite;
+            ShieldUnitImage.sprite = unit.Unit.ShieldSprite;
         }
         else
             ShieldUnitImage.gameObject.SetActive(false);
 
-        if (unit.unitCharacteristics.Special != null)
+        if (unit.Unit.Special != null)
         {
             SpecialUnitImage.gameObject.SetActive(true);
-            SpecialUnitImage.sprite = unit.unitCharacteristics.SpecialSprite;
+            SpecialUnitImage.sprite = unit.Unit.SpecialSprite;
         }
         else
             SpecialUnitImage.gameObject.SetActive(false);

@@ -7819,12 +7819,6 @@ MonoBehaviour:
   RacesGrid: {fileID: 5797362420654578126}
   ItemsGrid: {fileID: 8648541817035207124}
   UnitPrefab: {fileID: 5970744504276471157, guid: 798790968df876f458f997c20d8a2c1a, type: 3}
-  MainUnitImage: {fileID: 0}
-  RaceUnitImage: {fileID: 0}
-  WeaponUnitImage: {fileID: 0}
-  ArmorUnitImage: {fileID: 0}
-  ShieldUnitImage: {fileID: 0}
-  SpecialUnitImage: {fileID: 0}
   IsEditUnit: 0
 --- !u!1 &5343478271410706487
 GameObject:
@@ -13220,12 +13214,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5470654667913148431, guid: 798790968df876f458f997c20d8a2c1a, type: 3}
+      propertyPath: Value
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5970744504276471157, guid: 798790968df876f458f997c20d8a2c1a, type: 3}
       propertyPath: m_Name
       value: Unit
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    - target: {fileID: 7484418516337932254, guid: 798790968df876f458f997c20d8a2c1a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5734394551988360495, guid: 798790968df876f458f997c20d8a2c1a, type: 3}
+    - {fileID: -3724435253614547213, guid: 798790968df876f458f997c20d8a2c1a, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 7285927224587392420, guid: 798790968df876f458f997c20d8a2c1a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 798790968df876f458f997c20d8a2c1a, type: 3}

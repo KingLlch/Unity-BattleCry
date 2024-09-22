@@ -4,14 +4,14 @@ using UnityEngine.EventSystems;
 public class CellUI : MonoBehaviour, IDropHandler, IPointerClickHandler
 {
     public int IndexCell;
-    public Unit unit;
+    public UnitUI unit;
 
     public void OnDrop(PointerEventData pointer)
     {
-        if (pointer.pointerDrag == null && !pointer.pointerDrag.GetComponent<Unit>())
+        if (pointer.pointerDrag == null && !pointer.pointerDrag.GetComponent<UnitUI>())
             return;
 
-        AddUnitInCell(pointer.pointerDrag.GetComponent<Unit>());
+        AddUnitInCell(pointer.pointerDrag.GetComponent<UnitUI>());
     }
 
     public void OnPointerClick(PointerEventData pointer)
@@ -22,17 +22,17 @@ public class CellUI : MonoBehaviour, IDropHandler, IPointerClickHandler
         AddUnitInCell(PrepareUIManager.Instance.DruggableUnit);
     }
 
-    private void AddUnitInCell(Unit addUnit)
+    private void AddUnitInCell(UnitUI addUnit)
     {
-        if ((addUnit.unitCharacteristics.Points < (1000 - PrepareManager.Instance.Army.Points)) && (addUnit.unitCharacteristics.Value > 0 || addUnit.IsInArmy == true) && (unit == null || unit.unitCharacteristics.Name != addUnit.unitCharacteristics.Name))
+        if ((addUnit.Unit.Points < (1000 - PrepareManager.Instance.Army.Points)) && (addUnit.Unit.Value > 0 || addUnit.IsInArmy == true) && (unit == null || unit.Unit.Name != addUnit.Unit.Name))
         {
             if (unit != null)
             {
                 PrepareManager.Instance.RemoveUnitFromArmy(addUnit, this);
             }
 
-            PrepareManager.Instance.AddUnitToArmy(addUnit, this);
-            PrepareUIManager.Instance.AddUnitToArmyUI(addUnit, this);
+            PrepareManager.Instance.AddUnitToArmy(addUnit.Unit, this);
+            PrepareUIManager.Instance.AddUnitToArmyUI(addUnit.Unit, this);
         }
     }
 }

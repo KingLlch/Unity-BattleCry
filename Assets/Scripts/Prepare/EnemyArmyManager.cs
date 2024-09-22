@@ -23,11 +23,15 @@ public class EnemyArmyManager : MonoBehaviour
             ChangeTypeUnit(unit);
         }
 
+        Debug.Log(AllEnemyArmy.AllEnemyUnits[0]);
+        Debug.Log(AllEnemyArmy.AllEnemyUnits[0].Name);
+
         AddEnemyArmy();
     }
 
     public void AddEnemyArmy()
     {
+
         AllEnemyArmy.EnemyArmy.Add(CreateEnemyArmy("GoblinArmy", 
             CreateRow(CreateColumn(FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin")), CreateColumn(FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"))), 
             CreateRow(), 
@@ -39,7 +43,7 @@ public class EnemyArmyManager : MonoBehaviour
 
     public Unit FindUnit(string name)
     {
-        return (AllEnemyArmy.AllEnemyUnits.Find(i => i.unitCharacteristics.Name == name));
+        return (AllEnemyArmy.AllEnemyUnits.Find(i => i.Name == name));
     }
 
     public Column CreateColumn(Unit unit1, Unit unit2, Unit unit3, Unit unit4, Unit unit5, Unit unit6)
@@ -60,9 +64,20 @@ public class EnemyArmyManager : MonoBehaviour
     {
         Row newRow = new Row();
 
-        newRow.Columns.Add(column1);
-        newRow.Columns.Add(column2);
-        newRow.Columns.Add(column3);
+        if(column1 != null)
+            newRow.Columns.Add(column1);
+        else
+            newRow.Columns.Add(new Column());
+
+        if (column2 != null)
+            newRow.Columns.Add(column2);
+        else
+            newRow.Columns.Add(new Column());
+
+        if (column3 != null)
+            newRow.Columns.Add(column3);
+        else
+            newRow.Columns.Add(new Column());
 
         return newRow;
     }
@@ -90,62 +105,57 @@ public class EnemyArmyManager : MonoBehaviour
 
     public void ChangeTypeUnit(EnemyUnit unit)
     {
-        Unit newUnit = new Unit();
+        Unit newUnitCharacteristics = new Unit();
 
-        newUnit.unitCharacteristics.Name = unit.Name;
+        newUnitCharacteristics.Name = unit.Name;
 
-        if (unit.Race != null)
-        {
-            newUnit.unitCharacteristics.RaceName = unit.Race.Base.Name;
-            newUnit.unitCharacteristics.MainSprite = unit.Race.Base.MainUnitSprite;
-            newUnit.unitCharacteristics.RaceSprite = unit.Race.Base.ItemSprite;
-
-            ChangeDamagesResists(newUnit, unit.Race);
-        }
+        newUnitCharacteristics.RaceName = unit.Race.Base.Name;
+        newUnitCharacteristics.MainSprite = unit.Race.Base.MainUnitSprite;
+        newUnitCharacteristics.RaceSprite = unit.Race.Base.ItemSprite;
+        ChangeDamagesResists(newUnitCharacteristics, unit.Race);
 
         if(unit.Weapon != null)
         {
-            newUnit.unitCharacteristics.WeaponName = unit.Weapon.Base.Name;
-            newUnit.unitCharacteristics.WeaponSprite = unit.Weapon.Base.ItemSprite;
+            newUnitCharacteristics.WeaponName = unit.Weapon.Base.Name;
+            newUnitCharacteristics.WeaponSprite = unit.Weapon.Base.ItemSprite;
 
-            ChangeDamagesResists(newUnit, unit.Weapon);
+            ChangeDamagesResists(newUnitCharacteristics, unit.Weapon);
         }
 
         if (unit.Armor != null)
         {
-            newUnit.unitCharacteristics.ArmorName = unit.Armor.Base.Name;
-            newUnit.unitCharacteristics.ArmorSprite = unit.Armor.Base.ItemSprite;
+            newUnitCharacteristics.ArmorName = unit.Armor.Base.Name;
+            newUnitCharacteristics.ArmorSprite = unit.Armor.Base.ItemSprite;
 
-            ChangeDamagesResists(newUnit, unit.Armor);
+            ChangeDamagesResists(newUnitCharacteristics, unit.Armor);
         }
 
         if (unit.Shield != null)
         {
-            newUnit.unitCharacteristics.ShieldName = unit.Shield.Base.Name;
-            newUnit.unitCharacteristics.ShieldSprite = unit.Shield.Base.ItemSprite;
+            newUnitCharacteristics.ShieldName = unit.Shield.Base.Name;
+            newUnitCharacteristics.ShieldSprite = unit.Shield.Base.ItemSprite;
 
-            ChangeDamagesResists(newUnit, unit.Shield);
+            ChangeDamagesResists(newUnitCharacteristics, unit.Shield);
         }
 
         if (unit.Special != null)
         {
-            newUnit.unitCharacteristics.SpecialName = unit.Special.Base.Name;
-            newUnit.unitCharacteristics.SpecialSprite = unit.Special.Base.ItemSprite;
+            newUnitCharacteristics.SpecialName = unit.Special.Base.Name;
+            newUnitCharacteristics.SpecialSprite = unit.Special.Base.ItemSprite;
 
-            ChangeDamagesResists(newUnit, unit.Special);
+            ChangeDamagesResists(newUnitCharacteristics, unit.Special);
         }
 
-
-        AllEnemyArmy.AllEnemyUnits.Add(newUnit);
+        AllEnemyArmy.AllEnemyUnits.Add(newUnitCharacteristics);
     }
 
-    public void ChangeDamagesResists(Unit unit, Item item)
+    public void ChangeDamagesResists(Unit newUnitCharacteristics, Item item)
     {
-        unit.unitCharacteristics.Points += item.Base.Points;
-        unit.unitCharacteristics.Health += item.Base.Health;
-        unit.unitCharacteristics.MaxHealth += item.Base.Health;
+        newUnitCharacteristics.Points += item.Base.Points;
+        newUnitCharacteristics.Health += item.Base.Health;
+        newUnitCharacteristics.MaxHealth += item.Base.Health;
 
-        Damages damages = unit.unitCharacteristics.Damages;
+        Damages damages = newUnitCharacteristics.Damages;
         Type damageType = damages.GetType();
         FieldInfo[] damageFields = damageType.GetFields();
 
@@ -163,7 +173,7 @@ public class EnemyArmyManager : MonoBehaviour
             damageFields[i].SetValueDirect(__makeref(damages), resultValue);
         }
 
-        Resists resists = unit.unitCharacteristics.Resists;
+        Resists resists = newUnitCharacteristics.Resists;
         Type resistType = resists.GetType();
         FieldInfo[] resistFields = resistType.GetFields();
 
@@ -183,9 +193,9 @@ public class EnemyArmyManager : MonoBehaviour
 
         if (item.Weapon.IsWeapon)
         {
-            unit.unitCharacteristics.AttackRange = item.Weapon.AttackRange;
-            unit.unitCharacteristics.AttackTime = item.Weapon.AttackTime;
-            unit.unitCharacteristics.IsMeleeAttack = item.Weapon.IsMeleeAttack;
+            newUnitCharacteristics.AttackRange = item.Weapon.AttackRange;
+            newUnitCharacteristics.AttackTime = item.Weapon.AttackTime;
+            newUnitCharacteristics.IsMeleeAttack = item.Weapon.IsMeleeAttack;
         }
     }
 

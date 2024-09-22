@@ -30,8 +30,9 @@ public class PrepareUIManager : MonoBehaviour
     public TextMeshProUGUI GoldText;
 
     public List<GameObject> Rows;
+    public UnitUI UnitPrefab;
 
-    public Unit DruggableUnit;
+    public UnitUI DruggableUnit;
     public bool IsDrug;
 
     private void Awake()
@@ -48,10 +49,10 @@ public class PrepareUIManager : MonoBehaviour
         int columnIndex = cell.transform.parent.GetComponent<ColumnUI>().IndexColumn;
         int unitIndex = cell.transform.GetComponent<CellUI>().IndexCell;
 
-        Unit newUnit = Instantiate(unit, Vector3.zero, Quaternion.identity, Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform);
+        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform);
 
-        newUnit.unitCharacteristics = unit.unitCharacteristics;
-        newUnit.UnitMainImage.sprite = unit.UnitMainImage.sprite;
+        newUnit.Unit = unit;
+        newUnit.UnitMainImage.sprite = unit.MainSprite;
         newUnit.MainUnitLink = unit;
 
         UnitInArmyUI(newUnit);
@@ -79,10 +80,10 @@ public class PrepareUIManager : MonoBehaviour
                 {
                     Unit unit = column.Units[unitIndex];
 
-                    Unit newUnit = Instantiate(unit, Vector3.zero, Quaternion.identity,Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform);
+                    UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity,Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform);
 
-                    newUnit.unitCharacteristics = unit.unitCharacteristics;
-                    newUnit.UnitMainImage.sprite = unit.UnitMainImage.sprite;
+                    newUnit.Unit = unit;
+                    newUnit.UnitMainImage.sprite = unit.MainSprite;
                     newUnit.MainUnitLink = unit;
 
                     UnitInArmyUI(newUnit);
@@ -110,7 +111,7 @@ public class PrepareUIManager : MonoBehaviour
         GoldText.text = PrepareManager.Instance.Gold.ToString();
     }
 
-    public void UnitInArmyUI(Unit unit)
+    public void UnitInArmyUI(UnitUI unit)
     {
         unit.Value.gameObject.SetActive(false);
         unit.UnitChosenImage.gameObject.SetActive(false);

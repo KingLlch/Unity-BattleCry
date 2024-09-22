@@ -2,12 +2,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Unit : MonoBehaviour
+public class UnitUI : MonoBehaviour
 {
     public bool IsInArmy = false;
     public Unit MainUnitLink;
 
-    public UnitCharacteristics unitCharacteristics = new();
+    public Unit Unit = new();
 
     public TextMeshProUGUI Value;
     public Image UnitChosenImage;
@@ -21,48 +21,50 @@ public class Unit : MonoBehaviour
 
     public void ActiveUI()
     {
-        UnitMainImage.sprite = unitCharacteristics.MainSprite;
-        UnitRaceImage.sprite = unitCharacteristics.RaceSprite;
+        UnitMainImage.gameObject.SetActive(true);
+        UnitMainImage.sprite = Unit.MainSprite;
+        UnitRaceImage.gameObject.SetActive(true);
+        UnitRaceImage.sprite = Unit.RaceSprite;
 
-        if (unitCharacteristics.Weapon != null)
+        if (Unit.Weapon != null)
         {
             UnitWeaponImage.gameObject.SetActive(true);
-            UnitWeaponImage.sprite = unitCharacteristics.WeaponSprite;
+            UnitWeaponImage.sprite = Unit.WeaponSprite;
         }
         else
             UnitWeaponImage.gameObject.SetActive(false);
 
-        if (unitCharacteristics.Armor != null)
+        if (Unit.Armor != null)
         {
             UnitArmorImage.gameObject.SetActive(true);
-            UnitArmorImage.sprite = unitCharacteristics.ArmorSprite;
+            UnitArmorImage.sprite = Unit.ArmorSprite;
         }
         else
             UnitArmorImage.gameObject.SetActive(false);
 
-        if (unitCharacteristics.Shield != null)
+        if (Unit.Shield != null)
         {
             UnitShieldImage.gameObject.SetActive(true);
-            UnitShieldImage.sprite = unitCharacteristics.ShieldSprite;
+            UnitShieldImage.sprite = Unit.ShieldSprite;
         }
         else
             UnitShieldImage.gameObject.SetActive(false);
 
-        if (unitCharacteristics.Special != null)
+        if (Unit.Special != null)
         {
             UnitSpecialImage.gameObject.SetActive(true);
-            UnitSpecialImage.sprite = unitCharacteristics.SpecialSprite;
+            UnitSpecialImage.sprite = Unit.SpecialSprite;
         }
         else
             UnitSpecialImage.gameObject.SetActive(false);
     }
 
-    public Unit Copy()
+    public UnitUI Copy()
     {
-        Unit copy = (Unit)MemberwiseClone();
+        UnitUI copy = (UnitUI)MemberwiseClone();
 
         copy.IsInArmy = IsInArmy;
-        copy.unitCharacteristics = unitCharacteristics.Copy();
+        copy.Unit = Unit.Copy();
 
 
         //copy.UnitMainImage = UnitMainImage;
@@ -76,7 +78,7 @@ public class Unit : MonoBehaviour
     }
 }
 
-public class UnitCharacteristics
+public class Unit
 {
     public int Value = 1;
 
@@ -119,9 +121,9 @@ public class UnitCharacteristics
     public int AttackRange;
     public bool IsMeleeAttack;
 
-    public UnitCharacteristics Copy()
+    public Unit Copy()
     {
-        UnitCharacteristics copy = (UnitCharacteristics)MemberwiseClone();
+        Unit copy = (Unit)MemberwiseClone();
 
         copy.Race = Race.Copy();
         copy.MainSprite = MainSprite;

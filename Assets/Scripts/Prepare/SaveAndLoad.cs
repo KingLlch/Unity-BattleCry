@@ -50,9 +50,9 @@ public class SaveAndLoad : MonoBehaviour
     private static void SaveUnits()
     {
         int unitCount = 0;
-        foreach (Unit unit in PrepareManager.Instance.Units)
+        foreach (UnitUI unit in PrepareManager.Instance.Units)
         {
-            SaveGame.Save<Unit>("Unit" + unitCount, unit);
+            SaveGame.Save<UnitUI>("Unit" + unitCount, unit);
             unitCount++;
         }
 
@@ -67,7 +67,7 @@ public class SaveAndLoad : MonoBehaviour
 
             for (int i = 0; i < unitCount; i++)
             {
-                Unit loadedUnit = SaveGame.Load<Unit>("Unit" + i);
+                UnitUI loadedUnit = SaveGame.Load<UnitUI>("Unit" + i);
 
                 CreateUnit.Instance.CreateLoadUnit(loadedUnit);
             }
