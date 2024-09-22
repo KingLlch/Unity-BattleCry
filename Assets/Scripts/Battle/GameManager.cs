@@ -95,6 +95,7 @@ public class GameManager : MonoBehaviour
 
                         UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity,EnemyArmyRows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform).GetComponent<UnitUI>();
 
+                        newUnit.GetComponent<RectTransform>().rotation = Quaternion.Euler(new Vector3(0,180,0));
                         newUnit.GetComponent<UnitMove>().IsDraggable = false;
                         LoadUnit(newUnit, unit);
 
@@ -112,7 +113,7 @@ public class GameManager : MonoBehaviour
     {
         newUnit.Unit = unit;
         newUnit.UnitMainImage.sprite = unit.MainSprite;
-        newUnit.MainUnitLink = unit;
+        newUnit.MainUnitLink = newUnit;
         newUnit.Value.gameObject.SetActive(false);
         newUnit.UnitChosenImage.gameObject.SetActive(false);
 

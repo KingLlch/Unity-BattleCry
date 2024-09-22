@@ -32,7 +32,7 @@ public class CellUI : MonoBehaviour, IDropHandler, IPointerClickHandler
             }
 
             PrepareManager.Instance.AddUnitToArmy(addUnit.Unit, this);
-            PrepareUIManager.Instance.AddUnitToArmyUI(addUnit.Unit, this);
+            PrepareUIManager.Instance.AddUnitToArmyUI(addUnit, this);
         }
     }
 }

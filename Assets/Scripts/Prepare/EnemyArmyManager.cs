@@ -23,9 +23,6 @@ public class EnemyArmyManager : MonoBehaviour
             ChangeTypeUnit(unit);
         }
 
-        Debug.Log(AllEnemyArmy.AllEnemyUnits[0]);
-        Debug.Log(AllEnemyArmy.AllEnemyUnits[0].Name);
-
         AddEnemyArmy();
     }
 
@@ -50,12 +47,12 @@ public class EnemyArmyManager : MonoBehaviour
     {
         Column newColumn = new Column();
 
-        newColumn.Units.Add(unit1);
-        newColumn.Units.Add(unit2);
-        newColumn.Units.Add(unit3);
-        newColumn.Units.Add(unit4);
-        newColumn.Units.Add(unit5);
-        newColumn.Units.Add(unit6);
+        newColumn.Units[0] = unit1;
+        newColumn.Units[1] = unit2;
+        newColumn.Units[2] = unit3;
+        newColumn.Units[3] = unit4;
+        newColumn.Units[4] = unit5;
+        newColumn.Units[5] = unit6;
 
         return newColumn;
     }
@@ -65,19 +62,19 @@ public class EnemyArmyManager : MonoBehaviour
         Row newRow = new Row();
 
         if(column1 != null)
-            newRow.Columns.Add(column1);
+            newRow.Columns[0] = column1;
         else
-            newRow.Columns.Add(new Column());
+            newRow.Columns[0] = new Column();
 
         if (column2 != null)
-            newRow.Columns.Add(column2);
+            newRow.Columns[1] = column2;
         else
-            newRow.Columns.Add(new Column());
+            newRow.Columns[1] = new Column();
 
         if (column3 != null)
-            newRow.Columns.Add(column3);
+            newRow.Columns[2] = column3;
         else
-            newRow.Columns.Add(new Column());
+            newRow.Columns[2] = new Column();
 
         return newRow;
     }
@@ -105,48 +102,54 @@ public class EnemyArmyManager : MonoBehaviour
 
     public void ChangeTypeUnit(EnemyUnit unit)
     {
-        Unit newUnitCharacteristics = new Unit();
+        Unit newUnit = new Unit();
 
-        newUnitCharacteristics.Name = unit.Name;
+        newUnit.Name = unit.Name;
 
-        newUnitCharacteristics.RaceName = unit.Race.Base.Name;
-        newUnitCharacteristics.MainSprite = unit.Race.Base.MainUnitSprite;
-        newUnitCharacteristics.RaceSprite = unit.Race.Base.ItemSprite;
-        ChangeDamagesResists(newUnitCharacteristics, unit.Race);
+        newUnit.Race = unit.Race;
+        newUnit.RaceName = unit.Race.Base.Name;
+        newUnit.MainSprite = unit.Race.Base.MainUnitSprite;
+        newUnit.RaceSprite = unit.Race.Base.ItemSprite;
+
+        ChangeDamagesResists(newUnit, unit.Race);
 
         if(unit.Weapon != null)
         {
-            newUnitCharacteristics.WeaponName = unit.Weapon.Base.Name;
-            newUnitCharacteristics.WeaponSprite = unit.Weapon.Base.ItemSprite;
+            newUnit.Weapon = unit.Weapon;
+            newUnit.WeaponName = unit.Weapon.Base.Name;
+            newUnit.WeaponSprite = unit.Weapon.Base.ItemSprite;
 
-            ChangeDamagesResists(newUnitCharacteristics, unit.Weapon);
+            ChangeDamagesResists(newUnit, unit.Weapon);
         }
 
         if (unit.Armor != null)
         {
-            newUnitCharacteristics.ArmorName = unit.Armor.Base.Name;
-            newUnitCharacteristics.ArmorSprite = unit.Armor.Base.ItemSprite;
+            newUnit.Armor = unit.Armor;
+            newUnit.ArmorName = unit.Armor.Base.Name;
+            newUnit.ArmorSprite = unit.Armor.Base.ItemSprite;
 
-            ChangeDamagesResists(newUnitCharacteristics, unit.Armor);
+            ChangeDamagesResists(newUnit, unit.Armor);
         }
 
         if (unit.Shield != null)
         {
-            newUnitCharacteristics.ShieldName = unit.Shield.Base.Name;
-            newUnitCharacteristics.ShieldSprite = unit.Shield.Base.ItemSprite;
+            newUnit.Shield = unit.Shield;
+            newUnit.ShieldName = unit.Shield.Base.Name;
+            newUnit.ShieldSprite = unit.Shield.Base.ItemSprite;
 
-            ChangeDamagesResists(newUnitCharacteristics, unit.Shield);
+            ChangeDamagesResists(newUnit, unit.Shield);
         }
 
         if (unit.Special != null)
         {
-            newUnitCharacteristics.SpecialName = unit.Special.Base.Name;
-            newUnitCharacteristics.SpecialSprite = unit.Special.Base.ItemSprite;
+            newUnit.Special = unit.Special;
+            newUnit.SpecialName = unit.Special.Base.Name;
+            newUnit.SpecialSprite = unit.Special.Base.ItemSprite;
 
-            ChangeDamagesResists(newUnitCharacteristics, unit.Special);
+            ChangeDamagesResists(newUnit, unit.Special);
         }
 
-        AllEnemyArmy.AllEnemyUnits.Add(newUnitCharacteristics);
+        AllEnemyArmy.AllEnemyUnits.Add(newUnit);
     }
 
     public void ChangeDamagesResists(Unit newUnitCharacteristics, Item item)

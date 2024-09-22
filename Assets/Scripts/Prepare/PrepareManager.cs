@@ -65,7 +65,8 @@ public class PrepareManager : MonoBehaviour
 
     public void RemoveUnitFromArmy(UnitUI unit, CellUI cell)
     {
-        Army.RemoveUnit(unit, cell);
+        Army.RemoveUnit(unit.Unit, cell);
+        unit.MainUnitLink.Value.text = unit.Unit.Value.ToString();
 
         Destroy(unit.gameObject);
     }

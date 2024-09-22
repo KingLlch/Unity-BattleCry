@@ -30,7 +30,7 @@ public class PrepareUIManager : MonoBehaviour
     public TextMeshProUGUI GoldText;
 
     public List<GameObject> Rows;
-    public UnitUI UnitPrefab;
+    public GameObject UnitPrefab;
 
     public UnitUI DruggableUnit;
     public bool IsDrug;
@@ -43,17 +43,19 @@ public class PrepareUIManager : MonoBehaviour
         }
     }
 
-    public void AddUnitToArmyUI(Unit unit, CellUI cell)
+    public void AddUnitToArmyUI(UnitUI unitUI, CellUI cell)
     {
+        unitUI.Value.text = unitUI.Unit.Value.ToString();
+
         int rowIndex = cell.transform.parent.parent.GetComponent<RowUI>().IndexRow;
         int columnIndex = cell.transform.parent.GetComponent<ColumnUI>().IndexColumn;
         int unitIndex = cell.transform.GetComponent<CellUI>().IndexCell;
 
-        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform);
+        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform).GetComponent<UnitUI>();
 
-        newUnit.Unit = unit;
-        newUnit.UnitMainImage.sprite = unit.MainSprite;
-        newUnit.MainUnitLink = unit;
+        newUnit.Unit = unitUI.Unit;
+        newUnit.UnitMainImage.sprite = unitUI.Unit.MainSprite;
+        newUnit.MainUnitLink = unitUI;
 
         UnitInArmyUI(newUnit);
 
@@ -80,11 +82,11 @@ public class PrepareUIManager : MonoBehaviour
                 {
                     Unit unit = column.Units[unitIndex];
 
-                    UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity,Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform);
+                    UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform).GetComponent<UnitUI>();
 
                     newUnit.Unit = unit;
                     newUnit.UnitMainImage.sprite = unit.MainSprite;
-                    newUnit.MainUnitLink = unit;
+                    //newUnit.MainUnitLink = unit;
 
                     UnitInArmyUI(newUnit);
 
@@ -115,6 +117,8 @@ public class PrepareUIManager : MonoBehaviour
     {
         unit.Value.gameObject.SetActive(false);
         unit.UnitChosenImage.gameObject.SetActive(false);
+
+        unit.ActiveUI();
     }
 
     public void CreateNewUnit()

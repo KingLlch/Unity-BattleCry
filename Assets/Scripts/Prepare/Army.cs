@@ -30,16 +30,15 @@ public class Army
         Rows[rowIndex].AddUnit(columnIndex, unitIndex, unit);
     }
 
-    public void RemoveUnit(UnitUI unit, CellUI cell)
+    public void RemoveUnit(Unit unit, CellUI cell)
     {
         int rowIndex = cell.transform.parent.parent.GetComponent<RowUI>().IndexRow;
         int columnIndex = cell.transform.parent.GetComponent<ColumnUI>().IndexColumn;
         int unitIndex = cell.transform.GetComponent<CellUI>().IndexCell;
 
-        Points -= unit.Unit.Points;
+        Points -= unit.Points;
 
-        unit.Unit.Value++;
-        unit.Value.text = "x" + unit.Unit.Value.ToString();
+        unit.Value++;
 
         Rows[rowIndex].RemoveUnit(columnIndex, unitIndex);
     }

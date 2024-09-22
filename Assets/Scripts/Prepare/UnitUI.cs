@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class UnitUI : MonoBehaviour
 {
     public bool IsInArmy = false;
-    public Unit MainUnitLink;
+    public UnitUI MainUnitLink;
 
     public Unit Unit = new();
 
@@ -125,10 +125,12 @@ public class Unit
     {
         Unit copy = (Unit)MemberwiseClone();
 
-        copy.Race = Race.Copy();
-        copy.MainSprite = MainSprite;
-        copy.RaceSprite = RaceSprite;
-
+        if (Race != null)
+        {
+            copy.Race = Race.Copy();
+            copy.MainSprite = MainSprite;
+            copy.RaceSprite = RaceSprite;
+        }
 
         if (Weapon != null)
         {
@@ -151,8 +153,11 @@ public class Unit
             copy.SpecialSprite = SpecialSprite;
         }
 
-        copy.Damages = Damages.Copy();
-        copy.Resists = Resists.Copy();
+        if(copy != null)
+        {
+            copy.Damages = Damages.Copy();
+            copy.Resists = Resists.Copy();
+        }
 
         return copy;
     }
