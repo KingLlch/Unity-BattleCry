@@ -57,44 +57,10 @@ public class Description : MonoBehaviour
 
     public void ShowDescriptionUnit(Unit unit, Vector3 position)
     {
-        if (FindAnyObjectByType<PrepareUIManager>()!= null && PrepareUIManager.Instance.IsDrug)
+        if (FindAnyObjectByType<PrepareUIManager>() != null && PrepareUIManager.Instance.IsDrug)
             return;
 
-        MainUnitImage.sprite = unit.UnitMainImage.sprite;
-        RaceUnitImage.gameObject.SetActive(true);
-        RaceUnitImage.sprite = unit.UnitRaceImage.sprite;
-
-        if (unit.unitCharacteristics.Weapon != null)
-        {
-            WeaponUnitImage.gameObject.SetActive(true);
-            WeaponUnitImage.sprite = unit.UnitWeaponImage.sprite;
-        }
-        else
-            WeaponUnitImage.gameObject.SetActive(false);
-
-        if (unit.unitCharacteristics.Armor != null)
-        {
-            ArmorUnitImage.gameObject.SetActive(true);
-            ArmorUnitImage.sprite = unit.UnitArmorImage.sprite;
-        }
-        else
-            ArmorUnitImage.gameObject.SetActive(false);
-
-        if (unit.unitCharacteristics.Shield != null)
-        {
-            ShieldUnitImage.gameObject.SetActive(true);
-            ShieldUnitImage.sprite = unit.UnitShieldImage.sprite;
-        }
-        else
-            ShieldUnitImage.gameObject.SetActive(false);
-
-        if (unit.unitCharacteristics.Special != null)
-        {
-            SpecialUnitImage.gameObject.SetActive(true);
-            SpecialUnitImage.sprite = unit.UnitSpecialImage.sprite;
-        }
-        else
-            SpecialUnitImage.gameObject.SetActive(false);
+        ChangeImageDescription(unit);
 
         Name.text = unit.unitCharacteristics.Name.ToString();
         ItemName.text = unit.unitCharacteristics.RaceName + "\n" + unit.unitCharacteristics.WeaponName + "\n" + unit.unitCharacteristics.ArmorName + "\n" + unit.unitCharacteristics.ShieldName + "\n" + unit.unitCharacteristics.SpecialName;
@@ -144,6 +110,45 @@ public class Description : MonoBehaviour
 
         DescriptionGameObject.transform.localPosition = position + new Vector3(170 - Screen.width / 2, 0 - Screen.height / 2, 0);
         DescriptionGameObject.SetActive(true);
+    }
+
+    private void ChangeImageDescription(Unit unit)
+    {
+        MainUnitImage.sprite = unit.unitCharacteristics.MainSprite;
+        RaceUnitImage.gameObject.SetActive(true);
+        RaceUnitImage.sprite = unit.unitCharacteristics.RaceSprite;
+
+        if (unit.unitCharacteristics.Weapon != null)
+        {
+            WeaponUnitImage.gameObject.SetActive(true);
+            WeaponUnitImage.sprite = unit.unitCharacteristics.WeaponSprite;
+        }
+        else
+            WeaponUnitImage.gameObject.SetActive(false);
+
+        if (unit.unitCharacteristics.Armor != null)
+        {
+            ArmorUnitImage.gameObject.SetActive(true);
+            ArmorUnitImage.sprite = unit.unitCharacteristics.ArmorSprite;
+        }
+        else
+            ArmorUnitImage.gameObject.SetActive(false);
+
+        if (unit.unitCharacteristics.Shield != null)
+        {
+            ShieldUnitImage.gameObject.SetActive(true);
+            ShieldUnitImage.sprite = unit.unitCharacteristics.ShieldSprite;
+        }
+        else
+            ShieldUnitImage.gameObject.SetActive(false);
+
+        if (unit.unitCharacteristics.Special != null)
+        {
+            SpecialUnitImage.gameObject.SetActive(true);
+            SpecialUnitImage.sprite = unit.unitCharacteristics.SpecialSprite;
+        }
+        else
+            SpecialUnitImage.gameObject.SetActive(false);
     }
 
     public void ShowDescriptionItem(Item item, Vector3 position)

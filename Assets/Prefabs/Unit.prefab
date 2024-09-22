@@ -321,7 +321,7 @@ MonoBehaviour:
   IsInArmy: 0
   MainUnitLink: {fileID: 0}
   Value: {fileID: 4522351407513334630}
-  UnitImageRare: {fileID: 2820725048457062704}
+  UnitChosenImage: {fileID: 2820725048457062704}
   UnitMainImage: {fileID: 2566601343634650867}
   UnitRaceImage: {fileID: 1822478584968529762}
   UnitWeaponImage: {fileID: 5307172070765304277}

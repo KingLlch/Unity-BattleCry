@@ -5,14 +5,14 @@ using System;
 
 public static class AllEnemyArmy
 {
-    public static List<Army> EnemyArmy;
+    public static List<Army> EnemyArmy = new List<Army>();
 
-    public static List<Unit> AllEnemyUnits;
+    public static List<Unit> AllEnemyUnits = new List<Unit>();
 }
 
 public class EnemyArmyManager : MonoBehaviour
 {
-    public static List<EnemyUnit> AllEnemyUnits;
+    public static List<EnemyUnit> AllEnemyUnits = new List<EnemyUnit>();
 
     private void Start()
     {
@@ -29,7 +29,7 @@ public class EnemyArmyManager : MonoBehaviour
     public void AddEnemyArmy()
     {
         AllEnemyArmy.EnemyArmy.Add(CreateEnemyArmy("GoblinArmy", 
-            CreateRow(CreateColumn(FindUnit(""), FindUnit(""), FindUnit(""), FindUnit(""), FindUnit(""), FindUnit("")), CreateColumn(FindUnit(""), FindUnit(""), FindUnit(""), FindUnit(""), FindUnit(""), FindUnit(""))), 
+            CreateRow(CreateColumn(FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin")), CreateColumn(FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"))), 
             CreateRow(), 
             CreateRow(), 
             CreateRow(), 
@@ -97,8 +97,8 @@ public class EnemyArmyManager : MonoBehaviour
         if (unit.Race != null)
         {
             newUnit.unitCharacteristics.RaceName = unit.Race.Base.Name;
-            newUnit.UnitMainImage.sprite = unit.Race.Base.MainUnitSprite;
-            newUnit.UnitRaceImage.sprite = unit.Race.Base.ItemSprite;
+            newUnit.unitCharacteristics.MainSprite = unit.Race.Base.MainUnitSprite;
+            newUnit.unitCharacteristics.RaceSprite = unit.Race.Base.ItemSprite;
 
             ChangeDamagesResists(newUnit, unit.Race);
         }
@@ -106,7 +106,7 @@ public class EnemyArmyManager : MonoBehaviour
         if(unit.Weapon != null)
         {
             newUnit.unitCharacteristics.WeaponName = unit.Weapon.Base.Name;
-            newUnit.UnitWeaponImage.sprite = unit.Weapon.Base.ItemSprite;
+            newUnit.unitCharacteristics.WeaponSprite = unit.Weapon.Base.ItemSprite;
 
             ChangeDamagesResists(newUnit, unit.Weapon);
         }
@@ -114,7 +114,7 @@ public class EnemyArmyManager : MonoBehaviour
         if (unit.Armor != null)
         {
             newUnit.unitCharacteristics.ArmorName = unit.Armor.Base.Name;
-            newUnit.UnitArmorImage.sprite = unit.Armor.Base.ItemSprite;
+            newUnit.unitCharacteristics.ArmorSprite = unit.Armor.Base.ItemSprite;
 
             ChangeDamagesResists(newUnit, unit.Armor);
         }
@@ -122,7 +122,7 @@ public class EnemyArmyManager : MonoBehaviour
         if (unit.Shield != null)
         {
             newUnit.unitCharacteristics.ShieldName = unit.Shield.Base.Name;
-            newUnit.UnitShieldImage.sprite = unit.Shield.Base.ItemSprite;
+            newUnit.unitCharacteristics.ShieldSprite = unit.Shield.Base.ItemSprite;
 
             ChangeDamagesResists(newUnit, unit.Shield);
         }
@@ -130,7 +130,7 @@ public class EnemyArmyManager : MonoBehaviour
         if (unit.Special != null)
         {
             newUnit.unitCharacteristics.SpecialName = unit.Special.Base.Name;
-            newUnit.UnitSpecialImage.sprite = unit.Special.Base.ItemSprite;
+            newUnit.unitCharacteristics.SpecialSprite = unit.Special.Base.ItemSprite;
 
             ChangeDamagesResists(newUnit, unit.Special);
         }
@@ -191,7 +191,8 @@ public class EnemyArmyManager : MonoBehaviour
 
     public void AddUnits()
     {
-        AllEnemyUnits.Add(new EnemyUnit("Skaven Slave", ItemsList.AllRace.Find(i => i.Base.Name == "Skaven"), ItemsList.AllRace.Find(i => i.Base.Name == "Wooden Spear"), null, null, null));
+        AllEnemyUnits.Add(new EnemyUnit("Goblin", ItemsList.AllRace.Find(i => i.Base.Name == "Goblin")));
+        AllEnemyUnits.Add(new EnemyUnit("Skaven Slave", ItemsList.AllRace.Find(i => i.Base.Name == "Skaven")));
     }
 }
 
@@ -205,13 +206,18 @@ public class EnemyUnit
     public Item Shield;
     public Item Special;
 
-    public EnemyUnit(string name, Item race, Item weapon, Item armor, Item shield, Item special)
+    public EnemyUnit(string name, Item race, Item weapon = null, Item armor = null, Item shield = null, Item special = null)
     {
         Name = name;
         Race = race;
-        Weapon = weapon;
-        Armor = armor;
-        Shield = shield;
-        Special = special;
+
+        if(weapon !=null)
+            Weapon = weapon;
+        if (armor != null)
+            Armor = armor;
+        if (shield != null)
+            Shield = shield;
+        if (special != null)
+            Special = special;
     }
 }

@@ -61,13 +61,6 @@ public class CreateUnit : MonoBehaviour
 
     public GameObject UnitPrefab;
 
-    public Image MainUnitImage;
-    public Image RaceUnitImage;
-    public Image WeaponUnitImage;
-    public Image ArmorUnitImage;
-    public Image ShieldUnitImage;
-    public Image SpecialUnitImage;
-
     public bool IsEditUnit;
 
     private void Awake()
@@ -116,8 +109,8 @@ public class CreateUnit : MonoBehaviour
             RaceLink = itemInfo;
             Race.Image.sprite = itemInfo.ThisItem.Base.ItemUISprite;
 
-            createUnit.UnitMainImage.sprite = itemInfo.ThisItem.Base.MainUnitSprite;
-            createUnit.UnitRaceImage.sprite = itemInfo.ThisItem.Base.ItemSprite;
+            createUnit.unitCharacteristics.MainSprite = itemInfo.ThisItem.Base.MainUnitSprite;
+            createUnit.unitCharacteristics.RaceSprite = itemInfo.ThisItem.Base.ItemSprite;
 
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
@@ -133,7 +126,7 @@ public class CreateUnit : MonoBehaviour
             Weapon.ThisItem = itemInfo.ThisItem.Copy();
             WeaponLink = itemInfo;
             Weapon.Image.sprite = itemInfo.ThisItem.Base.ItemUISprite;
-            createUnit.UnitWeaponImage.sprite = itemInfo.ThisItem.Base.ItemSprite;
+            createUnit.unitCharacteristics.WeaponSprite = itemInfo.ThisItem.Base.ItemSprite;
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
         }
@@ -148,7 +141,7 @@ public class CreateUnit : MonoBehaviour
             Armor.ThisItem = itemInfo.ThisItem.Copy();
             ArmorLink = itemInfo;
             Armor.Image.sprite = itemInfo.ThisItem.Base.ItemUISprite;
-            createUnit.UnitArmorImage.sprite = itemInfo.ThisItem.Base.ItemSprite;
+            createUnit.unitCharacteristics.ArmorSprite = itemInfo.ThisItem.Base.ItemSprite;
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
         }
@@ -163,7 +156,7 @@ public class CreateUnit : MonoBehaviour
             Shield.ThisItem = itemInfo.ThisItem.Copy();
             ShieldLink = itemInfo;
             Shield.Image.sprite = itemInfo.ThisItem.Base.ItemUISprite;
-            createUnit.UnitShieldImage.sprite = itemInfo.ThisItem.Base.ItemSprite;
+            createUnit.unitCharacteristics.ShieldSprite = itemInfo.ThisItem.Base.ItemSprite;
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
         }
@@ -178,7 +171,7 @@ public class CreateUnit : MonoBehaviour
             Special.ThisItem = itemInfo.ThisItem.Copy();
             SpecialLink = itemInfo;
             Special.Image.sprite = itemInfo.ThisItem.Base.ItemUISprite;
-            createUnit.UnitSpecialImage.sprite = itemInfo.ThisItem.Base.ItemSprite;
+            createUnit.unitCharacteristics.SpecialSprite = itemInfo.ThisItem.Base.ItemSprite;
             ChangeStats(itemInfo.ThisItem, true);
             ChangeUI(createUnit);
         }
@@ -337,51 +330,53 @@ public class CreateUnit : MonoBehaviour
 
     public void ChangeUI(Unit unit)
     {
-        if (Race.ThisItem != null)
-        {
-            MainUnitImage.gameObject.SetActive(true);
-            MainUnitImage.sprite = unit.UnitMainImage.sprite;
+        //if (Race.ThisItem != null)
+        //{
+        //    MainUnitImage.gameObject.SetActive(true);
+        //    MainUnitImage.sprite = unit.UnitMainImage.sprite;
 
-            RaceUnitImage.gameObject.SetActive(true);
-            RaceUnitImage.sprite = unit.UnitRaceImage.sprite;
-        }
-        else
-        {
-            MainUnitImage.gameObject.SetActive(false);
-            RaceUnitImage.gameObject.SetActive(false);
-        }
+        //    RaceUnitImage.gameObject.SetActive(true);
+        //    RaceUnitImage.sprite = unit.UnitRaceImage.sprite;
+        //}
+        //else
+        //{
+        //    MainUnitImage.gameObject.SetActive(false);
+        //    RaceUnitImage.gameObject.SetActive(false);
+        //}
 
-        if (Weapon.ThisItem != null)
-        {
-            WeaponUnitImage.gameObject.SetActive(true);
-            WeaponUnitImage.sprite = unit.UnitWeaponImage.sprite;
-        }
-        else
-            WeaponUnitImage.gameObject.SetActive(false);
+        //if (Weapon.ThisItem != null)
+        //{
+        //    WeaponUnitImage.gameObject.SetActive(true);
+        //    WeaponUnitImage.sprite = unit.UnitWeaponImage.sprite;
+        //}
+        //else
+        //    WeaponUnitImage.gameObject.SetActive(false);
 
-        if (Armor.ThisItem != null)
-        {
-            ArmorUnitImage.gameObject.SetActive(true);
-            ArmorUnitImage.sprite = unit.UnitArmorImage.sprite;
-        }
-        else
-            ArmorUnitImage.gameObject.SetActive(false);
+        //if (Armor.ThisItem != null)
+        //{
+        //    ArmorUnitImage.gameObject.SetActive(true);
+        //    ArmorUnitImage.sprite = unit.UnitArmorImage.sprite;
+        //}
+        //else
+        //    ArmorUnitImage.gameObject.SetActive(false);
 
-        if (Shield.ThisItem != null)
-        {
-            ShieldUnitImage.gameObject.SetActive(true);
-            ShieldUnitImage.sprite = unit.UnitShieldImage.sprite;
-        }
-        else
-            ShieldUnitImage.gameObject.SetActive(false);
+        //if (Shield.ThisItem != null)
+        //{
+        //    ShieldUnitImage.gameObject.SetActive(true);
+        //    ShieldUnitImage.sprite = unit.UnitShieldImage.sprite;
+        //}
+        //else
+        //    ShieldUnitImage.gameObject.SetActive(false);
 
-        if (Special.ThisItem != null)
-        {
-            SpecialUnitImage.gameObject.SetActive(true);
-            SpecialUnitImage.sprite = unit.UnitSpecialImage.sprite;
-        }
-        else
-            SpecialUnitImage.gameObject.SetActive(false);
+        //if (Special.ThisItem != null)
+        //{
+        //    SpecialUnitImage.gameObject.SetActive(true);
+        //    SpecialUnitImage.sprite = unit.UnitSpecialImage.sprite;
+        //}
+        //else
+        //    SpecialUnitImage.gameObject.SetActive(false);
+
+        unit.ActiveUI();
 
         Value.text = unit.unitCharacteristics.Value.ToString();
         Points.text = unit.unitCharacteristics.Points.ToString();
@@ -596,40 +591,39 @@ public class CreateUnit : MonoBehaviour
             if (Race.ThisItem != null)
             {
                 newUnit.unitCharacteristics.RaceLink = RaceLink;
-                newUnit.UnitMainImage.gameObject.SetActive(true);
-                newUnit.UnitMainImage.sprite = createUnit.UnitMainImage.sprite;
-                newUnit.UnitRaceImage.gameObject.SetActive(true);
-                newUnit.UnitRaceImage.sprite = createUnit.UnitRaceImage.sprite;
+                //newUnit.UnitMainImage.gameObject.SetActive(true);
+                //newUnit.UnitMainImage.sprite = createUnit.UnitMainImage.sprite;
+                //newUnit.UnitRaceImage.gameObject.SetActive(true);
+                //newUnit.UnitRaceImage.sprite = createUnit.UnitRaceImage.sprite;
             }
             if (Weapon.ThisItem != null)
             {
                 newUnit.unitCharacteristics.WeaponLink = WeaponLink;
-                newUnit.UnitWeaponImage.gameObject.SetActive(true);
-                newUnit.UnitWeaponImage.sprite = createUnit.UnitWeaponImage.sprite;
-
+                //newUnit.UnitWeaponImage.gameObject.SetActive(true);
+                //newUnit.UnitWeaponImage.sprite = createUnit.UnitWeaponImage.sprite;
             }
             if (Armor.ThisItem != null)
             {
                 newUnit.unitCharacteristics.ArmorLink = ArmorLink;
-                newUnit.UnitArmorImage.gameObject.SetActive(true);
-                newUnit.UnitArmorImage.sprite = createUnit.UnitArmorImage.sprite;
-
+                //newUnit.UnitArmorImage.gameObject.SetActive(true);
+                //newUnit.UnitArmorImage.sprite = createUnit.UnitArmorImage.sprite;
             }
             if (Shield.ThisItem != null)
             {
                 newUnit.unitCharacteristics.ShieldLink = ShieldLink;
-                newUnit.UnitShieldImage.gameObject.SetActive(true);
-                newUnit.UnitShieldImage.sprite = createUnit.UnitShieldImage.sprite;
+                //newUnit.UnitShieldImage.gameObject.SetActive(true);
+                //newUnit.UnitShieldImage.sprite = createUnit.UnitShieldImage.sprite;
 
             }
             if (Special.ThisItem != null)
             {
                 newUnit.unitCharacteristics.SpecialLink = SpecialLink;
-                newUnit.UnitSpecialImage.gameObject.SetActive(true);
-                newUnit.UnitSpecialImage.sprite = createUnit.UnitSpecialImage.sprite;
+                //newUnit.UnitSpecialImage.gameObject.SetActive(true);
+               // newUnit.UnitSpecialImage.sprite = createUnit.UnitSpecialImage.sprite;
 
             }
 
+            newUnit.ActiveUI();
             PrepareManager.Instance.Units.Add(newUnit);
 
             newUnit.GetComponent<RectTransform>().localPosition = Vector3.zero;

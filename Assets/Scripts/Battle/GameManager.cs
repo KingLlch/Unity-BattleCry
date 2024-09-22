@@ -116,43 +116,43 @@ public class GameManager : MonoBehaviour
         newUnit.Value.gameObject.SetActive(false);
         newUnit.UnitChosenImage.gameObject.SetActive(false);
 
-        ShowUnit(newUnit, unit);
+        newUnit.ActiveUI();
     }
 
-    private void ShowUnit(Unit newUnit, Unit unit)
-    {
-        if (newUnit.unitCharacteristics.Race != null)
-        {
-            newUnit.UnitMainImage.gameObject.SetActive(true);
-            newUnit.UnitMainImage.sprite = unit.UnitMainImage.sprite;
-            newUnit.UnitRaceImage.gameObject.SetActive(true);
-            newUnit.UnitRaceImage.sprite = unit.UnitRaceImage.sprite;
-        }
-        if (newUnit.unitCharacteristics.Weapon != null)
-        {
-            newUnit.UnitWeaponImage.gameObject.SetActive(true);
-            newUnit.UnitWeaponImage.sprite = unit.UnitWeaponImage.sprite;
+    //private void ShowUnit(Unit newUnit, Unit unit)
+    //{
+    //    if (newUnit.unitCharacteristics.Race != null)
+    //    {
+    //        newUnit.UnitMainImage.gameObject.SetActive(true);
+    //        newUnit.UnitMainImage.sprite = unit.UnitMainImage.sprite;
+    //        newUnit.UnitRaceImage.gameObject.SetActive(true);
+    //        newUnit.UnitRaceImage.sprite = unit.UnitRaceImage.sprite;
+    //    }
+    //    if (newUnit.unitCharacteristics.Weapon != null)
+    //    {
+    //        newUnit.UnitWeaponImage.gameObject.SetActive(true);
+    //        newUnit.UnitWeaponImage.sprite = unit.UnitWeaponImage.sprite;
 
-        }
-        if (newUnit.unitCharacteristics.Armor != null)
-        {
-            newUnit.UnitArmorImage.gameObject.SetActive(true);
-            newUnit.UnitArmorImage.sprite = unit.UnitArmorImage.sprite;
+    //    }
+    //    if (newUnit.unitCharacteristics.Armor != null)
+    //    {
+    //        newUnit.UnitArmorImage.gameObject.SetActive(true);
+    //        newUnit.UnitArmorImage.sprite = unit.UnitArmorImage.sprite;
 
-        }
-        if (newUnit.unitCharacteristics.Shield != null)
-        {
-            newUnit.UnitShieldImage.gameObject.SetActive(true);
-            newUnit.UnitShieldImage.sprite = unit.UnitShieldImage.sprite;
+    //    }
+    //    if (newUnit.unitCharacteristics.Shield != null)
+    //    {
+    //        newUnit.UnitShieldImage.gameObject.SetActive(true);
+    //        newUnit.UnitShieldImage.sprite = unit.UnitShieldImage.sprite;
 
-        }
-        if (newUnit.unitCharacteristics.Special != null)
-        {
-            newUnit.UnitSpecialImage.gameObject.SetActive(true);
-            newUnit.UnitSpecialImage.sprite = unit.UnitSpecialImage.sprite;
+    //    }
+    //    if (newUnit.unitCharacteristics.Special != null)
+    //    {
+    //        newUnit.UnitSpecialImage.gameObject.SetActive(true);
+    //        newUnit.UnitSpecialImage.sprite = unit.UnitSpecialImage.sprite;
 
-        }
-    }
+    //    }
+    //}
 
     private void Centralize(RectTransform rectTransform)
     {
