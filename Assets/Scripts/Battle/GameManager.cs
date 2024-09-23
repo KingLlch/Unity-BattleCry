@@ -99,12 +99,12 @@ public class GameManager : MonoBehaviour
                         if (unit == null)
                             continue;
 
-                        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity,EnemyArmyRows[rowIndex].Columns[columnIndex].Cells[unitIndex].transform).GetComponent<UnitUI>();
+                        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, EnemyArmyRows[rowIndex].Columns[columnIndex].Cells[unitIndex].transform).GetComponent<UnitUI>();
 
                         newUnit.Unit.BattleUnit = newUnit.AddComponent<BattleUnit>();
                         newUnit.Unit.BattleUnit.Army = army;
                         newUnit.Unit.BattleUnit.Unit = newUnit.Unit;
-                        newUnit.GetComponent<RectTransform>().rotation = Quaternion.Euler(new Vector3(0,180,0));
+                        newUnit.UnitMainImage.transform.parent.GetComponent<RectTransform>().rotation = Quaternion.Euler(new Vector3(0,180,0));
                         newUnit.GetComponent<UnitMove>().IsDraggable = false;
                         LoadUnit(newUnit, unit);
 

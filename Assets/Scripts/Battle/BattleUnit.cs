@@ -11,7 +11,7 @@ public class BattleUnit : MonoBehaviour
 
     private void Awake()
     {
-        Unit = gameObject.GetComponentInParent<Unit>();
+        Unit = gameObject.GetComponentInParent<UnitUI>().Unit;
     }
 
     public void StartAttack()
