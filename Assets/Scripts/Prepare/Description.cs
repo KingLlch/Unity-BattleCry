@@ -3,7 +3,6 @@ using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Description : MonoBehaviour
 {
@@ -47,12 +46,21 @@ public class Description : MonoBehaviour
     public TextMeshProUGUI AttackInterval;
     public TextMeshProUGUI AttackRange;
 
+    private int distanceX = 220;
+    private int distanceY = -150;
+
+    private float descriptionSizeX;
+    private float descriptionSizeY;
+
     private void Awake()
     {
         if (_instance == null)
         {
             _instance = this;
         }
+
+        descriptionSizeX = gameObject.GetComponent<RectTransform>().rect.width;
+        descriptionSizeY = gameObject.GetComponent<RectTransform>().rect.height;
     }
 
     public void ShowDescriptionUnit(UnitUI unit, Vector3 position)
@@ -212,7 +220,19 @@ public class Description : MonoBehaviour
 
     public void ChangePositionDescription(Vector3 position)
     {
-        DescriptionGameObject.transform.localPosition = position + new Vector3(170 - Screen.width / 2, 0 - Screen.height / 2, 0);
+        if ((position.x + descriptionSizeX + 50 < Screen.width) && (position.y - descriptionSizeY > 0))
+        {
+            DescriptionGameObject.transform.localPosition = position + new Vector3(distanceX , distanceY, 0) + new Vector3(-Screen.width / 2, -Screen.height / 2, 0);
+        }
+        else 
+        {
+            if ((position.x + descriptionSizeX + 50 > Screen.width) && (position.y - descriptionSizeY < 0))
+                DescriptionGameObject.transform.localPosition = position + new Vector3(-descriptionSizeX + 100, descriptionSizeY - position.y + distanceY, 0) + new Vector3(-Screen.width / 2, -Screen.height / 2, 0);
+            else if(position.x + descriptionSizeX + 50 > Screen.width)
+                DescriptionGameObject.transform.localPosition = position + new Vector3(-descriptionSizeX + 100, distanceY, 0) + new Vector3(-Screen.width / 2, -Screen.height / 2, 0);
+            else
+                DescriptionGameObject.transform.localPosition = position + new Vector3(distanceX, descriptionSizeY - position.y + distanceY, 0) + new Vector3(-Screen.width / 2, -Screen.height / 2, 0);
+        }
     }
 
     public void HideDescription()
