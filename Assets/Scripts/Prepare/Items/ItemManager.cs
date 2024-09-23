@@ -270,33 +270,61 @@ public class ItemManager : MonoBehaviour
 
 
         //Weapon
-        ItemsList.AllItems.Add(new Item("Iron Sword", ItemType.Weapon, Rare.Common, 5, 2, "Weapons/Sword",  attackRange: 1, slashDamage: 1));
-        ItemsList.AllItems.Add(new Item("Iron Spear", ItemType.Weapon, Rare.Common, 5, 2, "Weapons/Spear",  attackRange: 2, pierceDamage: 1));
-        ItemsList.AllItems.Add(new Item("Iron Mace", ItemType.Weapon, Rare.Common, 5, 2, "Weapons/Mace",  attackRange: 1, bluntDamage: 1));
+        ItemsList.AllItems.Add(new Item("Steel Sword", ItemType.Weapon, Rare.Uncommon, 7, 3, "Weapons/SteelSword", attackRange: 1, slashDamage: 2));
+        ItemsList.AllItems.Add(new Item("Steel Spear", ItemType.Weapon, Rare.Uncommon, 7, 3, "Weapons/SteelSpear", attackRange: 2, pierceDamage: 2));
+        ItemsList.AllItems.Add(new Item("Steel Mace", ItemType.Weapon, Rare.Uncommon, 7, 3, "Weapons/SteelMace", attackRange: 1, bluntDamage: 2));
+        ItemsList.AllItems.Add(new Item("Golden Sword", ItemType.Weapon, Rare.Rare, 10, 4, "Weapons/GoldenSword", attackRange: 1, slashDamage: 3));
+        ItemsList.AllItems.Add(new Item("Golden Spear", ItemType.Weapon, Rare.Rare, 10, 4, "Weapons/GoldenSpear", attackRange: 2, pierceDamage: 3));
+        ItemsList.AllItems.Add(new Item("Golden Mace", ItemType.Weapon, Rare.Rare, 10, 4, "Weapons/GoldenMace", attackRange: 1, bluntDamage: 3));
+        ItemsList.AllItems.Add(new Item("Bronze Dagger", ItemType.Weapon, Rare.Common, 4, 1, "Weapons/BronzeDagger", attackRange: 1, pierceDamage: 1));
+        ItemsList.AllItems.Add(new Item("War Hammer", ItemType.Weapon, Rare.Uncommon, 8, 3, "Weapons/WarHammer", attackRange: 1, bluntDamage: 3));
+        ItemsList.AllItems.Add(new Item("Elven Bow", ItemType.Weapon, Rare.Rare, 12, 4, "Weapons/ElvenBow", attackRange: 5, pierceDamage: 4));
+        ItemsList.AllItems.Add(new Item("Flaming Sword", ItemType.Weapon, Rare.Epic, 15, 5, "Weapons/FlamingSword", attackRange: 1, slashDamage: 4, fireDamage: 3));
+        ItemsList.AllItems.Add(new Item("Shadow Dagger", ItemType.Weapon, Rare.Legendary, 18, 5, "Weapons/ShadowDagger", attackRange: 1, pierceDamage: 5, darknessDamage: 3));
+        ItemsList.AllItems.Add(new Item("Frost Axe", ItemType.Weapon, Rare.Mythical, 25, 6, "Weapons/FrostAxe", attackRange: 1, slashDamage: 5, iceDamage: 4));
+
 
         //Armor
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/WhiteArmor"));
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/YellowArmor"));
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/PurpleArmor"));
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/RedArmor"));
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/GreenArmor"));
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/GreyArmor"));
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/BlueArmor"));
-        ItemsList.AllItems.Add(new Item("Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/BrownArmor"));
+        ItemsList.AllItems.Add(new Item("Iron Armor", ItemType.Armor, Rare.Common, 5, 3, "Armors/IronArmor"));
+        ItemsList.AllItems.Add(new Item("Leather Armor", ItemType.Armor, Rare.Common, 5, 2, "Armors/LeatherArmor"));
+        ItemsList.AllItems.Add(new Item("Steel Armor", ItemType.Armor, Rare.Uncommon, 7, 4, "Armors/SteelArmor"));
+        ItemsList.AllItems.Add(new Item("Golden Armor", ItemType.Armor, Rare.Rare, 10, 5, "Armors/GoldenArmor"));
+        ItemsList.AllItems.Add(new Item("Dragon Scale Armor", ItemType.Armor, Rare.Epic, 15, 7, "Armors/DragonScaleArmor"));
+        ItemsList.AllItems.Add(new Item("Chainmail Armor", ItemType.Armor, Rare.Uncommon, 7, 3, "Armors/ChainmailArmor"));
+        ItemsList.AllItems.Add(new Item("Heavy Plate Armor", ItemType.Armor, Rare.Rare, 10, 5, "Armors/HeavyPlateArmor"));
+        ItemsList.AllItems.Add(new Item("Enchanted Robe", ItemType.Armor, Rare.Epic, 12, 6, "Armors/EnchantedRobe", fireResist: 3, iceResist: 3));
+        ItemsList.AllItems.Add(new Item("Dragon Bone Armor", ItemType.Armor, Rare.Legendary, 20, 7, "Armors/DragonBoneArmor", pierceResist: 5, slashResist: 4));
+        ItemsList.AllItems.Add(new Item("Mystic Cloth", ItemType.Armor, Rare.Mythical, 25, 8, "Armors/MysticCloth", lightResist: 4, darknessResist: 4));
+        ItemsList.AllItems.Add(new Item("Golden Chainmail", ItemType.Armor, Rare.Rare, 10, 4, "Armors/GoldenChainmail"));
+
 
         //Shield
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/WhiteShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/YellowShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/PurpleShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/RedShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/GreenShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/BlueShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/DarkBlueShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/GreyShield"));
-        ItemsList.AllItems.Add(new Item("Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/BrownShield"));
+        ItemsList.AllItems.Add(new Item("Wooden Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/WoodenShield"));
+        ItemsList.AllItems.Add(new Item("Iron Shield", ItemType.Shield, Rare.Uncommon, 7, 3, "Shields/IronShield"));
+        ItemsList.AllItems.Add(new Item("Steel Shield", ItemType.Shield, Rare.Rare, 10, 4, "Shields/SteelShield"));
+        ItemsList.AllItems.Add(new Item("Golden Shield", ItemType.Shield, Rare.Rare, 10, 5, "Shields/GoldenShield"));
+        ItemsList.AllItems.Add(new Item("Dragon Shield", ItemType.Shield, Rare.Epic, 15, 7, "Shields/DragonShield"));
+        ItemsList.AllItems.Add(new Item("Buckler Shield", ItemType.Shield, Rare.Common, 5, 2, "Shields/BucklerShield"));
+        ItemsList.AllItems.Add(new Item("Tower Shield", ItemType.Shield, Rare.Uncommon, 7, 4, "Shields/TowerShield", bluntResist: 2));
+        ItemsList.AllItems.Add(new Item("Silver Shield", ItemType.Shield, Rare.Rare, 10, 5, "Shields/SilverShield", fireResist: 2));
+        ItemsList.AllItems.Add(new Item("Aegis", ItemType.Shield, Rare.Epic, 15, 6, "Shields/AegisShield", lightResist: 3, slashResist: 3));
+        ItemsList.AllItems.Add(new Item("Guardian Shield", ItemType.Shield, Rare.Legendary, 20, 7, "Shields/GuardianShield", pierceResist: 4, bluntResist: 3));
+        ItemsList.AllItems.Add(new Item("Shadow Shield", ItemType.Shield, Rare.Mythical, 25, 8, "Shields/ShadowShield", darknessResist: 5));
+
 
         //Special
-        ItemsList.AllItems.Add(new Item("Special", ItemType.Special, Rare.Common, 5, 2, "Specials/Special"));
+        ItemsList.AllItems.Add(new Item("Ring of Health", ItemType.Special, Rare.Uncommon, 8, 3, "Specials/RingOfHealth"));
+        ItemsList.AllItems.Add(new Item("Amulet of Power", ItemType.Special, Rare.Rare, 12, 4, "Specials/AmuletOfPower", slashDamage: 2));
+        ItemsList.AllItems.Add(new Item("Cape of Invisibility", ItemType.Special, Rare.Epic, 20, 5, "Specials/CapeOfInvisibility", pierceResist: 3));
+        ItemsList.AllItems.Add(new Item("Boots of Speed", ItemType.Special, Rare.Legendary, 25, 6, "Specials/BootsOfSpeed", attackTime: 0.5f));
+        ItemsList.AllItems.Add(new Item("Crown of Wisdom", ItemType.Special, Rare.Mythical, 30, 7, "Specials/CrownOfWisdom", lightDamage: 5));
+        ItemsList.AllItems.Add(new Item("Ring of Mana", ItemType.Special, Rare.Common, 6, 3, "Specials/RingOfMana"));
+        ItemsList.AllItems.Add(new Item("Stone of Fortitude", ItemType.Special, Rare.Uncommon, 8, 4, "Specials/StoneOfFortitude"));
+        ItemsList.AllItems.Add(new Item("Pendant of Fire", ItemType.Special, Rare.Rare, 12, 5, "Specials/PendantOfFire", fireDamage: 3));
+        ItemsList.AllItems.Add(new Item("Amulet of Shadows", ItemType.Special, Rare.Epic, 18, 6, "Specials/AmuletOfShadows", darknessDamage: 4));
+        ItemsList.AllItems.Add(new Item("Cloak of Immortality", ItemType.Special, Rare.Legendary, 25, 7, "Specials/CloakOfImmortality"));
+        ItemsList.AllItems.Add(new Item("Phoenix Feather", ItemType.Special, Rare.Mythical, 30, 8, "Specials/PhoenixFeather", fireResist: 5));
+
     }
 
     public void SortingItems()
