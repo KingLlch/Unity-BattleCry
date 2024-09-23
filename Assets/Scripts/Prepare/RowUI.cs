@@ -6,7 +6,7 @@ public class RowUI : MonoBehaviour
 {
     public int IndexRow;
 
-    public List<GameObject> Columns;
+    public List<ColumnUI> Columns;
 
     public Button[] SpeedChange;
 

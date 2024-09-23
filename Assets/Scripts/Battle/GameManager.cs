@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -19,10 +20,10 @@ public class GameManager : MonoBehaviour
     }
 
     public Army PlayerArmy;
-    public List<GameObject> PlayerArmyRows;
+    public List<RowUI> PlayerArmyRows;
 
     public Army EnemyArmy;
-    public List<GameObject> EnemyArmyRows;
+    public List<RowUI> EnemyArmyRows;
 
     public GameObject UnitPrefab;
 
@@ -42,6 +43,8 @@ public class GameManager : MonoBehaviour
 
         LoadArmy(PlayerArmy, true);
         LoadArmy(EnemyArmy, false);
+
+
     }
 
     private void LoadArmy(Army army, bool isPlayer)
@@ -63,12 +66,15 @@ public class GameManager : MonoBehaviour
                         if (unit == null)
                             continue;
 
-                        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity,PlayerArmyRows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform).GetComponent<UnitUI>();
+                        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity,PlayerArmyRows[rowIndex].Columns[columnIndex].Cells[unitIndex].transform).GetComponent<UnitUI>();
 
+                        newUnit.Unit.BattleUnit = newUnit.AddComponent<BattleUnit>();
+                        newUnit.Unit.BattleUnit.Army = army;
+                        newUnit.Unit.BattleUnit.Unit = newUnit.Unit;
                         newUnit.GetComponent<UnitMove>().IsDraggable = false;
                         LoadUnit(newUnit, unit);
 
-                        PlayerArmyRows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].GetComponent<CellUI>().unit = newUnit;
+                        PlayerArmyRows[rowIndex].Columns[columnIndex].Cells[unitIndex].unit = newUnit;
 
                         Centralize(newUnit.GetComponent<RectTransform>());
                         newUnit.IsInArmy = true;
@@ -93,13 +99,16 @@ public class GameManager : MonoBehaviour
                         if (unit == null)
                             continue;
 
-                        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity,EnemyArmyRows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform).GetComponent<UnitUI>();
+                        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity,EnemyArmyRows[rowIndex].Columns[columnIndex].Cells[unitIndex].transform).GetComponent<UnitUI>();
 
+                        newUnit.Unit.BattleUnit = newUnit.AddComponent<BattleUnit>();
+                        newUnit.Unit.BattleUnit.Army = army;
+                        newUnit.Unit.BattleUnit.Unit = newUnit.Unit;
                         newUnit.GetComponent<RectTransform>().rotation = Quaternion.Euler(new Vector3(0,180,0));
                         newUnit.GetComponent<UnitMove>().IsDraggable = false;
                         LoadUnit(newUnit, unit);
 
-                        EnemyArmyRows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].GetComponent<CellUI>().unit = newUnit;
+                        EnemyArmyRows[rowIndex].Columns[columnIndex].Cells[unitIndex].unit = newUnit;
 
                         Centralize(newUnit.GetComponent<RectTransform>());
                         newUnit.IsInArmy = true;

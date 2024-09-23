@@ -5,5 +5,5 @@ public class ColumnUI : MonoBehaviour
 {
     public int IndexColumn;
 
-    public List<GameObject> Cells;
+    public List<CellUI> Cells;
 }

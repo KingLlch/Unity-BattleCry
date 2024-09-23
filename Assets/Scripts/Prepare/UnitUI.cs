@@ -66,14 +66,6 @@ public class UnitUI : MonoBehaviour
         copy.IsInArmy = IsInArmy;
         copy.Unit = Unit.Copy();
 
-
-        //copy.UnitMainImage = UnitMainImage;
-        //copy.UnitRaceImage = UnitRaceImage; 
-        //copy.UnitWeaponImage = UnitWeaponImage; 
-        //copy.UnitArmorImage = UnitArmorImage; 
-        //copy.UnitShieldImage = UnitShieldImage; 
-        //copy.UnitSpecialImage = UnitSpecialImage;
-
         return copy;
     }
 }
@@ -120,6 +112,8 @@ public class Unit
     public float AttackTime;
     public int AttackRange;
     public bool IsMeleeAttack;
+
+    public BattleUnit BattleUnit;
 
     public Unit Copy()
     {

@@ -2,7 +2,6 @@ using System;
 using System.Reflection;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CreateUnit : MonoBehaviour
 {
@@ -330,52 +329,6 @@ public class CreateUnit : MonoBehaviour
 
     public void ChangeUI(UnitUI unit)
     {
-        //if (Race.ThisItem != null)
-        //{
-        //    MainUnitImage.gameObject.SetActive(true);
-        //    MainUnitImage.sprite = unit.UnitMainImage.sprite;
-
-        //    RaceUnitImage.gameObject.SetActive(true);
-        //    RaceUnitImage.sprite = unit.UnitRaceImage.sprite;
-        //}
-        //else
-        //{
-        //    MainUnitImage.gameObject.SetActive(false);
-        //    RaceUnitImage.gameObject.SetActive(false);
-        //}
-
-        //if (Weapon.ThisItem != null)
-        //{
-        //    WeaponUnitImage.gameObject.SetActive(true);
-        //    WeaponUnitImage.sprite = unit.UnitWeaponImage.sprite;
-        //}
-        //else
-        //    WeaponUnitImage.gameObject.SetActive(false);
-
-        //if (Armor.ThisItem != null)
-        //{
-        //    ArmorUnitImage.gameObject.SetActive(true);
-        //    ArmorUnitImage.sprite = unit.UnitArmorImage.sprite;
-        //}
-        //else
-        //    ArmorUnitImage.gameObject.SetActive(false);
-
-        //if (Shield.ThisItem != null)
-        //{
-        //    ShieldUnitImage.gameObject.SetActive(true);
-        //    ShieldUnitImage.sprite = unit.UnitShieldImage.sprite;
-        //}
-        //else
-        //    ShieldUnitImage.gameObject.SetActive(false);
-
-        //if (Special.ThisItem != null)
-        //{
-        //    SpecialUnitImage.gameObject.SetActive(true);
-        //    SpecialUnitImage.sprite = unit.UnitSpecialImage.sprite;
-        //}
-        //else
-        //    SpecialUnitImage.gameObject.SetActive(false);
-
         unit.ActiveUI();
 
         Value.text = unit.Unit.Value.ToString();

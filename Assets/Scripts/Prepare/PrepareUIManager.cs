@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PrepareUIManager : MonoBehaviour
 {
@@ -29,7 +27,7 @@ public class PrepareUIManager : MonoBehaviour
     public TextMeshProUGUI ArmyPointsRemaning;
     public TextMeshProUGUI GoldText;
 
-    public List<GameObject> Rows;
+    public List<RowUI> Rows;
     public GameObject UnitPrefab;
 
     public UnitUI DruggableUnit;
@@ -51,7 +49,7 @@ public class PrepareUIManager : MonoBehaviour
         int columnIndex = cell.transform.parent.GetComponent<ColumnUI>().IndexColumn;
         int unitIndex = cell.transform.GetComponent<CellUI>().IndexCell;
 
-        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform).GetComponent<UnitUI>();
+        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, Rows[rowIndex].Columns[columnIndex].Cells[unitIndex].transform).GetComponent<UnitUI>();
 
         newUnit.Unit = unitUI.Unit;
         newUnit.UnitMainImage.sprite = unitUI.Unit.MainSprite;
@@ -82,7 +80,7 @@ public class PrepareUIManager : MonoBehaviour
                 {
                     Unit unit = column.Units[unitIndex];
 
-                    UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].transform).GetComponent<UnitUI>();
+                    UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, Rows[rowIndex].Columns[columnIndex].Cells[unitIndex].transform).GetComponent<UnitUI>();
 
                     newUnit.Unit = unit;
                     newUnit.UnitMainImage.sprite = unit.MainSprite;
@@ -90,7 +88,7 @@ public class PrepareUIManager : MonoBehaviour
 
                     UnitInArmyUI(newUnit);
 
-                    Rows[rowIndex].GetComponentInChildren<RowUI>().Columns[columnIndex].GetComponent<ColumnUI>().Cells[unitIndex].GetComponent<CellUI>().unit = newUnit;
+                    Rows[rowIndex].Columns[columnIndex].Cells[unitIndex].unit = newUnit;
 
                     Centralize(newUnit.GetComponent<RectTransform>());
 
@@ -155,15 +153,15 @@ public class PrepareUIManager : MonoBehaviour
 
     public void ResetArmy()
     {
-        foreach (GameObject row in Rows)
+        foreach (RowUI row in Rows)
         {
-            foreach (GameObject column in row.GetComponentInChildren<RowUI>().Columns)
+            foreach (ColumnUI column in row.Columns)
             {
-                foreach (GameObject cell in column.GetComponent<ColumnUI>().Cells)
+                foreach (CellUI cell in column.Cells)
                 {
-                    if (cell.GetComponent<CellUI>().unit != null)
+                    if (cell.unit != null)
                     {
-                        PrepareManager.Instance.RemoveUnitFromArmy(cell.GetComponent<CellUI>().unit, cell.GetComponent<CellUI>());
+                        PrepareManager.Instance.RemoveUnitFromArmy(cell.unit, cell);
                     }
                 }
             }
