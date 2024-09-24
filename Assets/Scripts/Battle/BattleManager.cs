@@ -45,9 +45,9 @@ public class BattleManager : MonoBehaviour
         unit.BattleUnit.Army.Rows[hz].Columns[hz].Units[hz] = null;
 
         if (unit.BattleUnit.Army == GameManager.Instance.PlayerArmy)
-            Destroy(GameManager.Instance.PlayerArmyRows[hz].Columns[hz].Cells[hz].unit.gameObject);
+            Destroy(BattleField.Instance.RowsUI[hz].Columns[hz].Cells[hz].unit.gameObject);
         else if (unit.BattleUnit.Army == GameManager.Instance.EnemyArmy)
-            Destroy(GameManager.Instance.EnemyArmyRows[hz].Columns[hz].Cells[hz].unit.gameObject);
+            Destroy(BattleField.Instance.RowsUI[hz].Columns[hz].Cells[hz].unit.gameObject);
     }
 
     public int TakeDamage(Unit startUnit, Unit targetUnit)
