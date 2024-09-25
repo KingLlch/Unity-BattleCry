@@ -147,7 +147,7 @@ public class Unit
             copy.SpecialSprite = SpecialSprite;
         }
 
-        if(copy != null)
+        if (copy != null)
         {
             copy.Damages = Damages.Copy();
             copy.Resists = Resists.Copy();

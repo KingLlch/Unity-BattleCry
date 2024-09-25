@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class BattleField : MonoBehaviour
 {
@@ -63,11 +62,18 @@ public class BattleField : MonoBehaviour
                             continue;
 
                         Rows[rowIndex].Columns[columnIndex].Units[unitIndex] = unit;
+                        Rows[rowIndex].CountUnitInRow++;
+
                         UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, RowsUI[rowIndex].Columns[columnIndex].Cells[unitIndex].transform).GetComponent<UnitUI>();
 
                         newUnit.Unit.BattleUnit = newUnit.AddComponent<BattleUnit>();
-                        newUnit.Unit.BattleUnit.Army = army;
+                        newUnit.Unit.BattleUnit.IsPlayerUnit = true;
                         newUnit.Unit.BattleUnit.Unit = newUnit.Unit;
+
+                        newUnit.Unit.BattleUnit.RowIndex = rowIndex;
+                        newUnit.Unit.BattleUnit.ColumnIndex = columnIndex;
+                        newUnit.Unit.BattleUnit.CellIndex = unitIndex;
+
                         newUnit.GetComponent<UnitMove>().IsDraggable = false;
                         LoadUnit(newUnit, unit);
 
@@ -99,11 +105,17 @@ public class BattleField : MonoBehaviour
                         int reversedColumnIndex = 2 - columnIndex;
 
                         Rows[rowIndex + 7].Columns[reversedColumnIndex].Units[unitIndex] = unit;
+                        Rows[rowIndex + 7].CountUnitInRow++;
+
                         UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, RowsUI[rowIndex + 7].Columns[reversedColumnIndex].Cells[unitIndex].transform).GetComponent<UnitUI>();
 
                         newUnit.Unit.BattleUnit = newUnit.AddComponent<BattleUnit>();
-                        newUnit.Unit.BattleUnit.Army = army;
                         newUnit.Unit.BattleUnit.Unit = newUnit.Unit;
+
+                        newUnit.Unit.BattleUnit.RowIndex = rowIndex + 7;
+                        newUnit.Unit.BattleUnit.ColumnIndex = columnIndex;
+                        newUnit.Unit.BattleUnit.CellIndex = unitIndex;
+
                         newUnit.UnitMainImage.transform.parent.GetComponent<RectTransform>().rotation = Quaternion.Euler(new Vector3(0, 180, 0));
                         newUnit.GetComponent<UnitMove>().IsDraggable = false;
                         LoadUnit(newUnit, unit);

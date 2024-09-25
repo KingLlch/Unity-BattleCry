@@ -16,10 +16,10 @@ public class CellUI : MonoBehaviour, IDropHandler, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData pointer)
     {
-        if(FindAnyObjectByType<PrepareUIManager>() == null)
+        if (FindAnyObjectByType<PrepareUIManager>() == null)
             return;
 
-        if  (PrepareUIManager.Instance.DruggableUnit == null)
+        if (PrepareUIManager.Instance.DruggableUnit == null)
             return;
 
         AddUnitInCell(PrepareUIManager.Instance.DruggableUnit);

@@ -572,7 +572,7 @@ public class CreateUnit : MonoBehaviour
             {
                 newUnit.Unit.SpecialLink = SpecialLink;
                 //newUnit.UnitSpecialImage.gameObject.SetActive(true);
-               // newUnit.UnitSpecialImage.sprite = createUnit.UnitSpecialImage.sprite;
+                // newUnit.UnitSpecialImage.sprite = createUnit.UnitSpecialImage.sprite;
 
             }
 

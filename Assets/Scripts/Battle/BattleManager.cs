@@ -27,45 +27,67 @@ public class BattleManager : MonoBehaviour
         }
     }
 
-    public void Attack(Unit startUnit, Unit targetUnit)
+    public void Attack(Unit attacker, Unit defender)
     {
-        targetUnit.Health -= TakeDamage(startUnit, targetUnit);
-
-        if(targetUnit.Health <= 0)
+        if (defender == null)
         {
-            DeadUnit(targetUnit);
+            return;
         }
 
+        int damage = CalculateDamage(attacker, defender);
+        defender.Health -= damage;
+
+        if (defender.Health <= 0)
+        {
+            KillUnit(defender);
+        }
     }
 
-    public void DeadUnit(Unit unit)
-    {
-        int hz = 0;
-
-        unit.BattleUnit.Army.Rows[hz].Columns[hz].Units[hz] = null;
-
-        if (unit.BattleUnit.Army == GameManager.Instance.PlayerArmy)
-            Destroy(BattleField.Instance.RowsUI[hz].Columns[hz].Cells[hz].unit.gameObject);
-        else if (unit.BattleUnit.Army == GameManager.Instance.EnemyArmy)
-            Destroy(BattleField.Instance.RowsUI[hz].Columns[hz].Cells[hz].unit.gameObject);
-    }
-
-    public int TakeDamage(Unit startUnit, Unit targetUnit)
+    public int CalculateDamage(Unit attacker, Unit defender)
     {
         int damage = 0;
 
-        damage += Mathf.Max(startUnit.Damages.PierceDamage - targetUnit.Resists.PierceResist, 0);
-        damage += Mathf.Max(startUnit.Damages.SlashDamage - targetUnit.Resists.SlashResist, 0);
-        damage += Mathf.Max(startUnit.Damages.BluntDamage - targetUnit.Resists.BluntResist, 0);
-        damage += Mathf.Max(startUnit.Damages.FireDamage - targetUnit.Resists.FireResist, 0);
-        damage += Mathf.Max(startUnit.Damages.IceDamage - targetUnit.Resists.IceResist, 0);
-        damage += Mathf.Max(startUnit.Damages.EarthDamage - targetUnit.Resists.EarthResist, 0);
-        damage += Mathf.Max(startUnit.Damages.PoisonDamage - targetUnit.Resists.PoisonResist, 0);
-        damage += Mathf.Max(startUnit.Damages.WaterDamage - targetUnit.Resists.WaterResist, 0);
-        damage += Mathf.Max(startUnit.Damages.LightDamage - targetUnit.Resists.LightResist, 0);
-        damage += Mathf.Max(startUnit.Damages.DarknessDamage - targetUnit.Resists.DarknessResist, 0);
+        damage += Mathf.Max(attacker.Damages.PierceDamage - defender.Resists.PierceResist, 0);
+        damage += Mathf.Max(attacker.Damages.SlashDamage - defender.Resists.SlashResist, 0);
+        damage += Mathf.Max(attacker.Damages.BluntDamage - defender.Resists.BluntResist, 0);
+        damage += Mathf.Max(attacker.Damages.FireDamage - defender.Resists.FireResist, 0);
+        damage += Mathf.Max(attacker.Damages.IceDamage - defender.Resists.IceResist, 0);
+        damage += Mathf.Max(attacker.Damages.EarthDamage - defender.Resists.EarthResist, 0);
+        damage += Mathf.Max(attacker.Damages.PoisonDamage - defender.Resists.PoisonResist, 0);
+        damage += Mathf.Max(attacker.Damages.WaterDamage - defender.Resists.WaterResist, 0);
+        damage += Mathf.Max(attacker.Damages.LightDamage - defender.Resists.LightResist, 0);
+        damage += Mathf.Max(attacker.Damages.DarknessDamage - defender.Resists.DarknessResist, 0);
 
-        damage = Mathf.Max(1, damage);
-        return damage;
+        return Mathf.Max(1, damage);
+    }
+
+    public void KillUnit(Unit unit)
+    {
+        if (unit == null || unit.BattleUnit == null)
+            return;
+
+        Army army = new Army();
+
+        if (unit.BattleUnit.IsPlayerUnit == true)
+        {
+            army = GameManager.Instance.PlayerArmy;
+        }
+        else
+        {
+            army = GameManager.Instance.EnemyArmy;
+        }
+
+        army.Rows[unit.BattleUnit.RowIndex].Columns[unit.BattleUnit.ColumnIndex].Units[unit.BattleUnit.CellIndex] = null;
+        army.CountUnitInArmy--;
+        army.Rows[unit.BattleUnit.RowIndex].CountUnitInRow--;
+        Destroy(BattleField.Instance.RowsUI[unit.BattleUnit.RowIndex].Columns[unit.BattleUnit.ColumnIndex].Cells[unit.BattleUnit.CellIndex].unit.gameObject);
+
+        if (army.CountUnitInArmy <= 0)
+        {
+            if (army == GameManager.Instance.PlayerArmy)
+                GameManager.Instance.Lose();
+            else
+                GameManager.Instance.Win();
+        }
     }
 }

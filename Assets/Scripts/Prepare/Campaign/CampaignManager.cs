@@ -46,7 +46,7 @@ public class CampaignManager : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            Campaigns.Add(new Campaign {Missions = new List<MissionUI>()});
+            Campaigns.Add(new Campaign { Missions = new List<MissionUI>() });
         }
 
         foreach (Mission mission in MissionList.AllMission)

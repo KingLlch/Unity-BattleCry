@@ -222,13 +222,13 @@ public class Description : MonoBehaviour
     {
         if ((position.x + descriptionSizeX + 50 < Screen.width) && (position.y - descriptionSizeY > 0))
         {
-            DescriptionGameObject.transform.localPosition = position + new Vector3(distanceX , distanceY, 0) + new Vector3(-Screen.width / 2, -Screen.height / 2, 0);
+            DescriptionGameObject.transform.localPosition = position + new Vector3(distanceX, distanceY, 0) + new Vector3(-Screen.width / 2, -Screen.height / 2, 0);
         }
-        else 
+        else
         {
             if ((position.x + descriptionSizeX + 50 > Screen.width) && (position.y - descriptionSizeY < 0))
                 DescriptionGameObject.transform.localPosition = position + new Vector3(-descriptionSizeX + 100, descriptionSizeY - position.y + distanceY, 0) + new Vector3(-Screen.width / 2, -Screen.height / 2, 0);
-            else if(position.x + descriptionSizeX + 50 > Screen.width)
+            else if (position.x + descriptionSizeX + 50 > Screen.width)
                 DescriptionGameObject.transform.localPosition = position + new Vector3(-descriptionSizeX + 100, distanceY, 0) + new Vector3(-Screen.width / 2, -Screen.height / 2, 0);
             else
                 DescriptionGameObject.transform.localPosition = position + new Vector3(distanceX, descriptionSizeY - position.y + distanceY, 0) + new Vector3(-Screen.width / 2, -Screen.height / 2, 0);

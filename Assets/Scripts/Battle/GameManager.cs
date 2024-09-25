@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,7 +29,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     private void Start()
     {
         PlayerArmy = BattleInfo.Instance.PlayerArmy;
@@ -36,5 +36,17 @@ public class GameManager : MonoBehaviour
 
         BattleField.Instance.LoadArmy(PlayerArmy, true);
         BattleField.Instance.LoadArmy(EnemyArmy, false);
+    }
+
+    public void Lose()
+    {
+        BattleInfo.Instance.IsWin = false;
+        BattleUIManager.Instance.EndBattle(false);
+    }
+
+    public void Win()
+    {
+        BattleInfo.Instance.IsWin = true;
+        BattleUIManager.Instance.EndBattle(true);
     }
 }

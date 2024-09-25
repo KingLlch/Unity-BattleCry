@@ -7,6 +7,8 @@ public class Army
     public int Points;
     public int UnitNameNumber;
 
+    public int CountUnitInArmy;
+
     public Army()
     {
         Rows = new List<Row>(5);
@@ -63,6 +65,8 @@ public class Row
 {
     public List<Column> Columns;
     public SpeedRow SpeedRow;
+
+    public int CountUnitInRow;
 
     public Row()
     {

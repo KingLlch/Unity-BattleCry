@@ -6,12 +6,60 @@ using UnityEngine.SceneManagement;
 
 public class BattleUIManager : MonoBehaviour
 {
+    private static BattleUIManager _instance;
+
+    public static BattleUIManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<BattleUIManager>();
+            }
+
+            return _instance;
+        }
+    }
+
     public TextMeshProUGUI TimeText;
     public int TimeSpeed = 1;
 
+    public GameObject EndBattlePanel;
+    public TextMeshProUGUI EndBattlePanelHeader;
+    public TextMeshProUGUI EndBattlePanelDescription;
+
     private void Awake()
     {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+    }
+
+    private void Start()
+    {
         StartTimer();
+    }
+
+    public void EndBattle(bool isWin)
+    {
+        EndBattlePanel.SetActive(true);
+
+        if (isWin)
+        {
+            EndBattlePanelHeader.text = "Win";
+            EndBattlePanelDescription.text = "Ёту победу будут помнить веками командир!";
+        }
+        else
+        {
+            EndBattlePanelHeader.text = "Lose";
+            EndBattlePanelDescription.text = "¬раг оказалс€ сильнее. Ќам нужно перегруппироватьс€ и попробоват снова!";
+        }
+    }
+
+    public void LoadScenePrepare()
+    {
+        SceneManager.LoadScene("Prepare");
     }
 
     public void x4Speed()

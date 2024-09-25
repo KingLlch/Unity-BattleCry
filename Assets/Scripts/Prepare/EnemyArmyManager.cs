@@ -29,11 +29,11 @@ public class EnemyArmyManager : MonoBehaviour
     public void AddEnemyArmy()
     {
 
-        AllEnemyArmy.EnemyArmy.Add(CreateEnemyArmy("GoblinArmy", 
-            CreateRow(CreateColumn(FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin")), CreateColumn(FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"))), 
-            CreateRow(), 
-            CreateRow(), 
-            CreateRow(), 
+        AllEnemyArmy.EnemyArmy.Add(CreateEnemyArmy("GoblinArmy",
+            CreateRow(CreateColumn(FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin")), CreateColumn(FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"), FindUnit("Goblin"))),
+            CreateRow(),
+            CreateRow(),
+            CreateRow(),
             CreateRow()
             ));
     }
@@ -61,7 +61,7 @@ public class EnemyArmyManager : MonoBehaviour
     {
         Row newRow = new Row();
 
-        if(column1 != null)
+        if (column1 != null)
             newRow.Columns[0] = column1;
         else
             newRow.Columns[0] = new Column();
@@ -113,7 +113,7 @@ public class EnemyArmyManager : MonoBehaviour
 
         ChangeDamagesResists(newUnit, unit.Race);
 
-        if(unit.Weapon != null)
+        if (unit.Weapon != null)
         {
             newUnit.Weapon = unit.Weapon;
             newUnit.WeaponName = unit.Weapon.Base.Name;
@@ -224,7 +224,7 @@ public class EnemyUnit
         Name = name;
         Race = race;
 
-        if(weapon !=null)
+        if (weapon != null)
             Weapon = weapon;
         if (armor != null)
             Armor = armor;

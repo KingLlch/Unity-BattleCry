@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class BattleUnit : MonoBehaviour
 {
-    public Army Army;
-
     public Unit Unit;
     public Coroutine Coroutine;
+
+    public int RowIndex;
+    public int ColumnIndex;
+    public int CellIndex;
+
+    public bool IsPlayerUnit;
 
     private void Awake()
     {
         Unit = gameObject.GetComponentInParent<UnitUI>().Unit;
     }
 
-    public void StartAttack()
+    public void StartAttack(Unit targetUnit)
     {
-        Coroutine = StartCoroutine(AttackCoroutine());
+        Coroutine = StartCoroutine(AttackCoroutine(targetUnit));
     }
 
-    public IEnumerator AttackCoroutine()
+    public IEnumerator AttackCoroutine(Unit targetUnit)
     {
-        //BattleManager.Instance.Attack(Unit);
+        BattleManager.Instance.Attack(Unit, targetUnit);
         yield return new WaitForSeconds(Unit.AttackTime);
     }
 }
