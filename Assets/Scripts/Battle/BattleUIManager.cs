@@ -38,7 +38,7 @@ public class BattleUIManager : MonoBehaviour
 
     private void Start()
     {
-        StartTimer();
+
     }
 
     public void EndBattle(bool isWin)

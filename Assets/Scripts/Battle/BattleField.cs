@@ -22,6 +22,9 @@ public class BattleField : MonoBehaviour
     public List<Row> Rows = new List<Row>(12);
     public List<RowUI> RowsUI = new List<RowUI>(12);
 
+    public List<Row> FirstPlayerRow;
+    public List<Row> FirstEnemyRow;
+
     public GameObject UnitPrefab;
 
     private void Awake()
@@ -40,6 +43,18 @@ public class BattleField : MonoBehaviour
         {
             Rows.Add(new Row());
         }
+    }
+
+    public bool IsRowNear()
+    {
+        bool isNear = false;
+
+        if (true)
+        {
+            isNear = true;
+        }
+
+        return isNear;
     }
 
     public void LoadArmy(Army army, bool isPlayer)
@@ -61,26 +76,35 @@ public class BattleField : MonoBehaviour
                         if (unit == null)
                             continue;
 
-                        Rows[rowIndex].Columns[columnIndex].Units[unitIndex] = unit;
-                        Rows[rowIndex].CountUnitInRow++;
+                        if (FirstPlayerRow == null)
+                            FirstPlayerRow.Add(Rows[rowIndex]);
 
-                        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, RowsUI[rowIndex].Columns[columnIndex].Cells[unitIndex].transform).GetComponent<UnitUI>();
+                        int reversedRowIndex = 5 - rowIndex;
+
+                        Rows[reversedRowIndex].Columns[columnIndex].Units[unitIndex] = unit;
+                        Rows[reversedRowIndex].CountUnitInRow++;
+
+                        UnitUI newUnit = Instantiate(UnitPrefab, Vector3.zero, Quaternion.identity, RowsUI[reversedRowIndex].Columns[columnIndex].Cells[unitIndex].transform).GetComponent<UnitUI>();
 
                         newUnit.Unit.BattleUnit = newUnit.AddComponent<BattleUnit>();
                         newUnit.Unit.BattleUnit.IsPlayerUnit = true;
                         newUnit.Unit.BattleUnit.Unit = newUnit.Unit;
+                        newUnit.Unit.BattleUnit.UnitUI = newUnit;
 
-                        newUnit.Unit.BattleUnit.RowIndex = rowIndex;
+                        newUnit.Unit.BattleUnit.RowIndex = reversedRowIndex;
                         newUnit.Unit.BattleUnit.ColumnIndex = columnIndex;
                         newUnit.Unit.BattleUnit.CellIndex = unitIndex;
 
                         newUnit.GetComponent<UnitMove>().IsDraggable = false;
                         LoadUnit(newUnit, unit);
 
-                        RowsUI[rowIndex].Columns[columnIndex].Cells[unitIndex].unit = newUnit;
+                        RowsUI[reversedRowIndex].Columns[columnIndex].Cells[unitIndex].unit = newUnit;
 
                         Centralize(newUnit.GetComponent<RectTransform>());
                         newUnit.IsInArmy = true;
+
+                        GameManager.Instance.PlayerArmy.CountUnitInArmy++;
+                        Rows[reversedRowIndex].CountUnitInRow++;
                     }
                 }
             }
@@ -102,6 +126,9 @@ public class BattleField : MonoBehaviour
                         if (unit == null)
                             continue;
 
+                        if (FirstEnemyRow == null)
+                            FirstEnemyRow.Add(Rows[rowIndex]);
+
                         int reversedColumnIndex = 2 - columnIndex;
 
                         Rows[rowIndex + 7].Columns[reversedColumnIndex].Units[unitIndex] = unit;
@@ -111,6 +138,7 @@ public class BattleField : MonoBehaviour
 
                         newUnit.Unit.BattleUnit = newUnit.AddComponent<BattleUnit>();
                         newUnit.Unit.BattleUnit.Unit = newUnit.Unit;
+                        newUnit.Unit.BattleUnit.UnitUI = newUnit;
 
                         newUnit.Unit.BattleUnit.RowIndex = rowIndex + 7;
                         newUnit.Unit.BattleUnit.ColumnIndex = columnIndex;
@@ -124,6 +152,9 @@ public class BattleField : MonoBehaviour
 
                         Centralize(newUnit.GetComponent<RectTransform>());
                         newUnit.IsInArmy = true;
+
+                        GameManager.Instance.EnemyArmy.CountUnitInArmy++;
+                        Rows[rowIndex].CountUnitInRow++;
                     }
                 }
             }

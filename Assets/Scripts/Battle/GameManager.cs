@@ -38,6 +38,12 @@ public class GameManager : MonoBehaviour
         BattleField.Instance.LoadArmy(EnemyArmy, false);
     }
 
+    public void StartBattle()
+    {
+        BattleUIManager.Instance.StartTimer();
+
+    }
+
     public void Lose()
     {
         BattleInfo.Instance.IsWin = false;

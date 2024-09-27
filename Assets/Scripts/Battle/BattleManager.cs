@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class BattleManager : MonoBehaviour
 {
@@ -19,12 +21,121 @@ public class BattleManager : MonoBehaviour
         }
     }
 
+    public bool IsFight;
+
     private void Awake()
     {
         if (_instance == null)
         {
             _instance = this;
         }
+    }
+
+    public void StartBattle()
+    {
+        StartCoroutine(Battle());
+    }
+
+    public IEnumerator Battle()
+    {
+        while (true)
+        {
+            if (!IsFight)
+            {
+                RowMove(BattleField.Instance.FirstPlayerRow[0]);
+                RowMove(BattleField.Instance.FirstEnemyRow[0]);
+            }
+
+            if (BattleField.Instance.IsRowNear())
+            {
+                IsFight = true;
+
+
+            }
+
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+    public void RowMove(Row row) 
+    {
+        for (int i = 0; i < row.Columns.Count; i++)
+        {
+            ColumnMove(row.Columns[i]);
+        }
+    }
+
+    public void ColumnMove(Column column)
+    {
+        for (int i = 0; i < column.Units.Count; i++)
+        {
+            UnitMove(column.Units[i]);
+        }
+    }
+
+    public void UnitMove(Unit unit)
+    {
+        int rowIndex = unit.BattleUnit.RowIndex;
+        int columnIndex = unit.BattleUnit.ColumnIndex;
+        int cellIndex = unit.BattleUnit.CellIndex;
+
+        int nextColumnIndex = 2 - columnIndex;
+        int nextRowIndex = 0;
+
+        BattleField.Instance.Rows[rowIndex].Columns[columnIndex].Units[cellIndex] = null;
+
+        if (unit.BattleUnit.IsPlayerUnit)
+        {
+            if (columnIndex == 0)
+                nextRowIndex = rowIndex + 1;
+            else
+                nextRowIndex = rowIndex;
+
+            BattleField.Instance.Rows[nextRowIndex].Columns[nextColumnIndex].Units[cellIndex] = unit;
+            MoveUnitUI(unit.BattleUnit.UnitUI, BattleField.Instance.RowsUI[nextRowIndex].Columns[nextColumnIndex].Cells[cellIndex]);
+        }
+        else
+        {
+            if (columnIndex == 2)
+                nextRowIndex = rowIndex - 1;
+            else
+                nextRowIndex = rowIndex;
+
+            BattleField.Instance.Rows[nextRowIndex].Columns[nextColumnIndex].Units[cellIndex] = unit;
+            MoveUnitUI(unit.BattleUnit.UnitUI, BattleField.Instance.RowsUI[nextRowIndex].Columns[nextColumnIndex].Cells[cellIndex]);
+        }
+    }
+
+    public void MoveUnitUI(UnitUI unitUI, CellUI cell)
+    {
+        unitUI.transform.SetParent(cell.transform);
+    }
+
+    public void RowFight(Row row)
+    {
+        for (int i = 0; i < row.Columns.Count; i++)
+        {
+            ColumnFight(row.Columns[i]);
+        }
+    }
+
+    public void ColumnFight(Column column)
+    {
+        for (int i = 0; i < column.Units.Count; i++)
+        {
+            UnitFight(column.Units[i]);
+        }
+    }
+
+    public void UnitFight(Unit unit)
+    {
+        //Attack(unit, );
+        UnitFightUI();
+    }
+
+    public void UnitFightUI()
+    {
+
     }
 
     public void Attack(Unit attacker, Unit defender)
@@ -77,9 +188,18 @@ public class BattleManager : MonoBehaviour
             army = GameManager.Instance.EnemyArmy;
         }
 
-        army.Rows[unit.BattleUnit.RowIndex].Columns[unit.BattleUnit.ColumnIndex].Units[unit.BattleUnit.CellIndex] = null;
+        BattleField.Instance.Rows[unit.BattleUnit.RowIndex].Columns[unit.BattleUnit.ColumnIndex].Units[unit.BattleUnit.CellIndex] = null;
         army.CountUnitInArmy--;
         army.Rows[unit.BattleUnit.RowIndex].CountUnitInRow--;
+
+        if (army.Rows[unit.BattleUnit.RowIndex].CountUnitInRow <= 0)
+        {
+            if(army == GameManager.Instance.PlayerArmy)
+                BattleField.Instance.FirstPlayerRow.Remove(army.Rows[unit.BattleUnit.RowIndex]);
+            else
+                BattleField.Instance.FirstEnemyRow.Remove(army.Rows[unit.BattleUnit.RowIndex]);
+        }
+
         Destroy(BattleField.Instance.RowsUI[unit.BattleUnit.RowIndex].Columns[unit.BattleUnit.ColumnIndex].Cells[unit.BattleUnit.CellIndex].unit.gameObject);
 
         if (army.CountUnitInArmy <= 0)

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BattleUnit : MonoBehaviour
 {
+    public UnitUI UnitUI;
     public Unit Unit;
     public Coroutine Coroutine;
 
